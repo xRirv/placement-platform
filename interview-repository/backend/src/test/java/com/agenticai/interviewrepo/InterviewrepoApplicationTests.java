@@ -1,13 +1,13 @@
-package com.agenticai.questionrepo;
+package com.agenticai.interviewrepo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuestionrepoApplicationTests {
+class InterviewrepoApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
