@@ -1,5 +1,6 @@
 package com.agenticai.interviewrepo.controller;
 
+import com.agenticai.interviewrepo.dto.UserProfileResponse;
 import com.agenticai.interviewrepo.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
