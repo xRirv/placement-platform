@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: placement_intelligence
+      POSTGRES_USER: placement
+      POSTGRES_PASSWORD: placement
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://placement:placement@postgres:5432/placement_intelligence
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      INTERNAL_API_KEY: change-me
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  worker:
+    build: .
+    command: ["python", "-m", "app.mq.consumers.ingestion_worker"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://placement:placement@postgres:5432/placement_intelligence
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      INTERNAL_API_KEY: change-me
+    depends_on:
+      - postgres
+      - rabbitmq
+
+volumes:
+  postgres_data:
