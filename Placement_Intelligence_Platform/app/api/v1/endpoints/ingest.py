@@ -1,30 +1,31 @@
-from pydantic import BaseModel, Field
-from fastapi import APIRouter, Depends, status
-from sqlalchemy.orm import Session
-
-from app.core.database import get_db
-from app.core.security import require_internal_api_key
-from app.db.repositories import create_job
-from app.mq.producer import enqueue_ingestion
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
+from app.mq.producer import push_exp_id  # cite: 1
+from app.db.repositories import JobRepository  # cite: 3
 
 router = APIRouter()
 
-
 class IngestRequest(BaseModel):
-    raw_text: str = Field(min_length=1)
+    experience_id: str
 
+@router.post("/internal/ingest", status_code=status.HTTP_202_ACCEPTED)
+async def ingest_experience(payload: IngestRequest):
+    try:
+        JobRepository.update_job_status(
+            payload.experience_id,
+            status="QUEUED",
+            stage="INGESTION",
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database update failed: {str(e)}")
 
-class IngestResponse(BaseModel):
-    job_id: str
-    status: str
+    is_queued = push_exp_id(payload.experience_id)
 
+    if not is_queued:
+        raise HTTPException(status_code=500, detail="Failed to queue experience_id")
 
-@router.post("/ingest", response_model=IngestResponse, status_code=status.HTTP_202_ACCEPTED)
-def ingest(
-    request: IngestRequest,
-    db: Session = Depends(get_db),
-    _: None = Depends(require_internal_api_key),
-) -> IngestResponse:
-    job = create_job(db, request.raw_text)
-    enqueue_ingestion(job.id)
-    return IngestResponse(job_id=job.id, status=job.status)
+    return {
+        "experience_id": payload.experience_id,
+        "status": "QUEUED",
+        "message": "Experience queued for AI processing"
+    }

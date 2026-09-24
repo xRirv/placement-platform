@@ -1,15 +1,17 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1.router import api_router  # cite: 2
 
-from app.api.v1.router import api_router
-from app.core.config import settings
-from app.core.database import Base, engine
+app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
+# Enable CORS for browser requests (handles OPTIONS preflight automatically)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows requests from local HTML files and any domain
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows POST, GET, OPTIONS, etc.
+    allow_headers=["*"],  # Allows all headers
+)
 
-app = FastAPI(title=settings.app_name, version="0.1.0")
+# Mount your API router
 app.include_router(api_router, prefix="/api/v1")
-
-
-@app.get("/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}

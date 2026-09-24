@@ -1,19 +1,24 @@
+from pydantic import BaseModel
+from typing import Optional, Any, Dict, List
 from datetime import datetime
-from uuid import uuid4
 
-from sqlalchemy import JSON, DateTime, String, Text, func
-from sqlalchemy.orm import Mapped, mapped_column
-
-from app.core.database import Base
-
-
-class IngestionJob(Base):
-    __tablename__ = "ingestion_jobs"
-
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
-    raw_text: Mapped[str] = mapped_column(Text)
-    status: Mapped[str] = mapped_column(String(32), default="queued")
-    result: Mapped[dict | None] = mapped_column(JSON, nullable=True)
-    error: Mapped[str | None] = mapped_column(Text, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now())
+class ExperienceJob(BaseModel):
+    experience_id: str
+    company_id: Optional[str] = None
+    role: Optional[str] = None
+    interview_date: Optional[str] = None
+    experience_text: Optional[str] = None
+    submitted_at: Optional[str] = None
+    
+    # Status tracking
+    status: str = "QUEUED"
+    stage: str = "INGESTION"
+    error: Optional[str] = None
+    
+    # Extraction outcomes
+    questions_summary: Optional[str] = None
+    tips: Optional[str] = None
+    questions: Optional[Any] = None  # Accepts List or Dict; Supabase inserts this as JSONB
+    
+    created_at: Optional[str] = None
+    completed_at: Optional[str] = None

@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 placement_intelligence.db
 .pytest_cache/
+PIP

@@ -1,45 +1,27 @@
-import json
+import time
+from app.mq.client import get_channel  # cite: 1
+from app.db.repositories import JobRepository  # cite: 3
 
-import pika
-from sqlalchemy.orm import Session
+def process_message(ch, method, properties, body):
+    # Decode raw byte string to plain string variable
+    experience_id = body.decode('utf-8')
+    print(f"[*] Worker picked up experience_id: {experience_id}")
 
-from app.ai_pipeline.runner import run_pipeline
-from app.core.config import settings
-from app.core.database import SessionLocal
-from app.db.repositories import get_job, update_job
-
-
-def process_job(job_id: str, db: Session) -> None:
-    job = get_job(db, job_id)
-    if job is None:
-        return
-    update_job(db, job_id, status="processing", error=None)
     try:
-        result = run_pipeline(job.raw_text)
-        update_job(db, job_id, status="completed", result=result)
-    except Exception as exc:
-        update_job(db, job_id, status="failed", error=str(exc))
-        raise
+        JobRepository.update_job_status(experience_id, "PROCESSING", stage="INGESTION")
+        # Perform your processing/AI tasks using experience_id...
+        time.sleep(2)
+        JobRepository.update_job_status(experience_id, "COMPLETED", stage="EMBEDDING")
+        print(f"[v] Completed experience_id: {experience_id}")
 
+    except Exception as err:
+        JobRepository.update_job_status(
+            experience_id,
+            "FAILED",
+            stage="INGESTION",
+            error=str(err),
+        )
+        print(f"[!] Processing failed for experience_id {experience_id}: {err}")
 
-def start_worker() -> None:
-    connection = pika.BlockingConnection(pika.URLParameters(settings.rabbitmq_url))
-    channel = connection.channel()
-    channel.queue_declare(queue=settings.rabbitmq_queue, durable=True)
-    channel.basic_qos(prefetch_count=1)
-
-    def callback(channel, method, properties, body) -> None:
-        message = json.loads(body)
-        db = SessionLocal()
-        try:
-            process_job(message["job_id"], db)
-            channel.basic_ack(delivery_tag=method.delivery_tag)
-        finally:
-            db.close()
-
-    channel.basic_consume(queue=settings.rabbitmq_queue, on_message_callback=callback)
-    channel.start_consuming()
-
-
-if __name__ == "__main__":
-    start_worker()
+    finally:
+        ch.basic_ack(delivery_tag=method.delivery_tag)
