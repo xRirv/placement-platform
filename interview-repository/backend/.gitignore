@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### Environmnet Files ###
+.env.env.ps1
 .env

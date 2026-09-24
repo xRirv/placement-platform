@@ -1,5 +1,6 @@
 package com.agenticai.interviewrepo.security;
-
+import com.agenticai.interviewrepo.repository.UserRepository;
+import com.agenticai.interviewrepo.repository.ModerationLogRepository;   
 import com.agenticai.interviewrepo.model.Role;
 import com.agenticai.interviewrepo.model.User;
 import com.agenticai.interviewrepo.repository.UserRepository;
