@@ -1,0 +1,32 @@
+# User documentation & plans
+mydocs/
+
+# Agent permissions and instruction artifacts
+PERMISSIONS.md
+permissions.txt
+.permissions
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+
+# Backend build and IDE
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/.idea/
+backend/*.iml
+
+# Frontend build and dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE and OS artifacts
+.idea/
+.vscode/
+*.swp
+*.DS_Store
+Thumbs.db

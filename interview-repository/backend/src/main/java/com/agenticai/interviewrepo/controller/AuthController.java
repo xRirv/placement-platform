@@ -1,22 +1,34 @@
 package com.agenticai.interviewrepo.controller;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.agenticai.interviewrepo.dto.UserProfileResponse;
+import com.agenticai.interviewrepo.service.AuthService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
 public class AuthController {
-    @GetMapping("/me")
-    public Map<String, Object> currentUser(@AuthenticationPrincipal Jwt jwt) {
-        return Map.of(
-                "id", jwt.getSubject(),
-                "email", jwt.getClaimAsString("email"),
-                "role", jwt.getClaimAsString("role")
-        );
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> healthCheck() {
+        return ResponseEntity.ok(Map.of("status", "UP", "service", "interviewrepo-security"));
+    }
+
+    @GetMapping("/api/auth/me")
+    public ResponseEntity<UserProfileResponse> getCurrentUser() {
+        return ResponseEntity.ok(authService.getCurrentProfile());
+    }
+
+    @PostMapping("/api/auth/sync")
+    public ResponseEntity<UserProfileResponse> syncUserProfile(
+            @RequestParam(required = false) String name) {
+        return ResponseEntity.ok(authService.syncProfile(name));
     }
 }
