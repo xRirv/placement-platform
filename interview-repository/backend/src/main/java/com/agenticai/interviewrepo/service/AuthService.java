@@ -1,6 +1,5 @@
 package com.agenticai.interviewrepo.service;
 
-import com.agenticai.interviewrepo.dto.UserProfileResponse;
 import com.agenticai.interviewrepo.model.Role;
 import com.agenticai.interviewrepo.model.User;
 import com.agenticai.interviewrepo.repository.UserRepository;

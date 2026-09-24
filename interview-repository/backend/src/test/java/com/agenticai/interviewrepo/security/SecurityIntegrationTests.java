@@ -1,10 +1,7 @@
 package com.agenticai.interviewrepo.security;
 
-import com.agenticai.interviewrepo.dto.AdminModerationRequest;
-import com.agenticai.interviewrepo.model.ModerationLog;
 import com.agenticai.interviewrepo.model.Role;
 import com.agenticai.interviewrepo.model.User;
-import com.agenticai.interviewrepo.repository.ModerationLogRepository;
 import com.agenticai.interviewrepo.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
