@@ -8,12 +8,12 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${SUPABASE_ISSUER_URI:https://your-project.supabase.co/auth/v1}
-          jwk-set-uri: ${SUPABASE_JWK_SET_URI:https://your-project.supabase.co/auth/v1/.well-known/jwks.json}
+          issuer-uri: ${SUPABASE_ISSUER_URI}
+          jwk-set-uri: ${SUPABASE_JWK_SET_URI}
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/interviewrepo}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
