@@ -34,4 +34,3 @@ build/
 
 ### Environmnet Files ###
 .env
-application.yaml
