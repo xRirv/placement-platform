@@ -41,6 +41,9 @@ public class Student {
     private String githubUrl;
 
     @Column(columnDefinition = "TEXT")
+    private String skills;
+
+    @Column(columnDefinition = "TEXT")
     private String bio;
 
     @ManyToOne
@@ -91,4 +94,6 @@ public class Student {
     public void setAdmin(Administrator admin) { this.admin = admin; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public String getSkills() {return this.skills;}
+    public void setSkills(String skills) {this.skills=skills;}
 }
