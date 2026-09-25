@@ -8,5 +8,5 @@ import java.util.Optional;
 import com.agenticai.interviewrepo.model.User;
 
 public interface AlumniRepository extends JpaRepository<PlacedAlumni, UUID> {
-    Optional<PlacedAlumni> findByLogin(User login);
+    public Optional<PlacedAlumni> findByLogin(User login);
 }
