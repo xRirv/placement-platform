@@ -1,9 +1,10 @@
 import pika
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-AMQP_URL = 'amqps://azrlltxi:***REMOVED***@warthog.lmq.cloudamqp.com/azrlltxi'
+AMQP_URL = os.getenv("AMQP_URL")
 
 # CloudAMQP URL
 def get_channel():
