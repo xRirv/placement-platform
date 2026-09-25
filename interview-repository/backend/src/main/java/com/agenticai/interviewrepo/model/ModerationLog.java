@@ -12,9 +12,8 @@ public class ModerationLog {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private Administrator admin;
+    @Column(name = "admin_id", nullable = false)
+    private UUID adminId;
 
     @Column(name = "entity_type", length = 50, nullable = false)
     private String entityType;
@@ -39,8 +38,8 @@ public class ModerationLog {
     public UUID getId() { return id; }
     public void setId(UUID id) { this.id = id; }
 
-    public Administrator getAdmin() { return admin; }
-    public void setAdmin(Administrator admin) { this.admin = admin; }
+    public UUID getAdminId() { return adminId; }
+    public void setAdminId(UUID adminId) { this.adminId = adminId; }
 
     public String getEntityType() { return entityType; }
     public void setEntityType(String entityType) { this.entityType = entityType; }
