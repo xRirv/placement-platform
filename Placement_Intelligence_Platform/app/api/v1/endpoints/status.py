@@ -1,21 +1,26 @@
 from fastapi import APIRouter, HTTPException
-from app.db.repositories import JobRepository  # cite: 3
+
+from app.db.models import ExperienceStatus
+from app.db.repositories import JobRepository
 
 router = APIRouter()
 
-@router.get("/internal/experiences/{experience_id}")
-async def get_experience_status(experience_id: str):
-    job = JobRepository.get_experience_by_id(experience_id)
 
-    if not job:
+# Retrieve the current processing state and extracted results for an experience
+@router.get("/internal/experiences/{experience_id}", response_model=ExperienceStatus)
+async def get_experience_status(experience_id: str):
+    # Look up the experience row in Supabase
+    record = JobRepository.get_experience_by_id(experience_id)
+    if not record:
         raise HTTPException(status_code=404, detail="Experience ID not found")
 
-    return {
-        "experience_id": job.get("experience_id"),
-        "status": job.get("status"),
-        "stage": job.get("stage"),
-        "error": job.get("error"),
-        "questions_summary": job.get("questions_summary"),
-        "tips": job.get("tips"),
-        "questions": job.get("questions")
-    }
+    # Map the Supabase row dict to the typed response schema
+    return ExperienceStatus(
+        experience_id=record.get("experience_id"),
+        status=record.get("status"),
+        stage=record.get("stage"),
+        error=record.get("error"),
+        questions_summary=record.get("questions_summary"),
+        tips=record.get("tips"),
+        questions=record.get("questions"),
+    )

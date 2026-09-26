@@ -1,17 +1,15 @@
 import pika
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+from app.core.config import settings
 
-AMQP_URL = os.getenv("AMQP_URL")
 
-# CloudAMQP URL
+# Open a fresh RabbitMQ connection and channel with the work queue declared
 def get_channel():
-    parameters = pika.URLParameters(AMQP_URL)
+    # Parse the AMQP URL into connection parameters
+    parameters = pika.URLParameters(settings.amqp_url)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
-    
-    # Declare the queue so it exists before publishing or consuming
-    channel.queue_declare(queue='exp_queue')
+
+    # Ensure the queue exists before any publish or consume
+    channel.queue_declare(queue=settings.amqp_queue)
     return connection, channel

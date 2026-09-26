@@ -1,31 +1,28 @@
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel
-from app.mq.producer import push_exp_id  # cite: 1
-from app.db.repositories import JobRepository  # cite: 3
+
+from app.db.models import IngestRequest, IngestResponse
+from app.db.repositories import JobRepository
+from app.mq.producer import publish_experience_id
 
 router = APIRouter()
 
-class IngestRequest(BaseModel):
-    experience_id: str
 
-@router.post("/internal/ingest", status_code=status.HTTP_202_ACCEPTED)
+# Accept an experience submission, write it to Supabase, and queue it for processing
+@router.post("/internal/ingest", status_code=status.HTTP_202_ACCEPTED, response_model=IngestResponse)
 async def ingest_experience(payload: IngestRequest):
+    # Write (or overwrite) the experience row in Supabase with QUEUED status
     try:
-        JobRepository.update_job_status(
-            payload.experience_id,
-            status="QUEUED",
-            stage="INGESTION",
-        )
+        JobRepository.queue_experience(payload.experience_id)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database update failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database write failed: {e}")
 
-    is_queued = push_exp_id(payload.experience_id)
+    # Publish the experience ID to RabbitMQ so a worker can pick it up
+    queued = publish_experience_id(payload.experience_id)
+    if not queued:
+        raise HTTPException(status_code=500, detail="Failed to publish to message queue")
 
-    if not is_queued:
-        raise HTTPException(status_code=500, detail="Failed to queue experience_id")
-
-    return {
-        "experience_id": payload.experience_id,
-        "status": "QUEUED",
-        "message": "Experience queued for AI processing"
-    }
+    return IngestResponse(
+        experience_id=payload.experience_id,
+        status="QUEUED",
+        message="Experience queued for AI processing",
+    )
