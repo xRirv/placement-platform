@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     # RabbitMQ / CloudAMQP connection
     amqp_url: str = "amqp://guest:guest@localhost:5672/"
     amqp_queue: str = "exp_queue"
+    dry_run: bool = False
 
     # Reserved for security and AI pipeline modules (wired up in a later pass)
     internal_api_key: str = "change-me"

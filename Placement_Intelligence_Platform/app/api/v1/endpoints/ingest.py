@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.db.models import IngestRequest, IngestResponse
-from app.db.repositories import JobRepository
+from app.db.repositories import DatabaseError, SupabaseRepository
 from app.mq.producer import publish_experience_id
 
 router = APIRouter()
@@ -12,8 +12,8 @@ router = APIRouter()
 async def ingest_experience(payload: IngestRequest):
     # Write (or overwrite) the experience row in Supabase with QUEUED status
     try:
-        JobRepository.queue_experience(payload.experience_id)
-    except Exception as e:
+        SupabaseRepository().update_raw_status(payload.experience_id, "QUEUED", stage="INGESTION", error=None)
+    except DatabaseError as e:
         raise HTTPException(status_code=500, detail=f"Database write failed: {e}")
 
     # Publish the experience ID to RabbitMQ so a worker can pick it up
