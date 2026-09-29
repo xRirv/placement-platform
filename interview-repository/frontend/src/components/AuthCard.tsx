@@ -8,7 +8,6 @@ import {
   ArrowRight,
   AlertCircle,
   CheckCircle2,
-  Settings,
 } from 'lucide-react';
 import type { AuthMode, FormErrors } from '../types/auth';
 import { calculatePasswordStrength } from '../lib/passwordStrength';
@@ -17,14 +16,12 @@ import { getSupabaseClient, getStoredConfig } from '../lib/supabaseClient';
 interface AuthCardProps {
   mode: AuthMode;
   onModeChange: (mode: AuthMode) => void;
-  onOpenConfig: () => void;
   onShowToast: (type: 'success' | 'error' | 'info', message: string, title?: string) => void;
 }
 
 export const AuthCard: React.FC<AuthCardProps> = ({
   mode,
   onModeChange,
-  onOpenConfig,
   onShowToast,
 }) => {
   const [fullName, setFullName] = useState('');
@@ -75,13 +72,12 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 
     if (!config.isConfigured) {
       setErrors({
-        general:
-          'Supabase is not configured yet. Click "Configure Supabase" below or in the top right to set your project credentials.',
+        general: 'Authentication service is currently unavailable. Please try again later.',
       });
       onShowToast(
         'error',
-        'Please enter your Supabase URL & Anon Key to test live authentication.',
-        'Credentials Missing'
+        'Authentication service is currently unavailable. Please try again later.',
+        'Service Unavailable'
       );
       return;
     }
@@ -142,9 +138,9 @@ export const AuthCard: React.FC<AuthCardProps> = ({
   const handleOAuthLogin = async (provider: 'google' | 'github') => {
     if (!config.isConfigured) {
       setErrors({
-        general: 'Please configure your Supabase credentials first to use OAuth sign-in.',
+        general: 'Authentication service is temporarily unavailable. Please try again later.',
       });
-      onShowToast('info', 'Supabase credentials needed for OAuth.');
+      onShowToast('error', 'Authentication service is temporarily unavailable.');
       return;
     }
 
@@ -172,26 +168,8 @@ export const AuthCard: React.FC<AuthCardProps> = ({
 
   return (
     <div className="auth-card-wrap">
-      {/* Top Config Status Pill */}
-      <div className="auth-status-bar">
-        <button
-          type="button"
-          className={`status-indicator-badge ${
-            config.isConfigured ? 'status-indicator-ok' : 'status-indicator-warn'
-          }`}
-          onClick={onOpenConfig}
-          title="Click to configure or test Supabase connection"
-        >
-          <span className="status-dot" />
-          <span className="status-text">
-            {config.isConfigured ? 'Supabase Connected' : 'Supabase Not Configured'}
-          </span>
-          <Settings size={13} className="status-gear" />
-        </button>
-      </div>
-
-      {/* Mode Switcher Tabs */}
-      <div className="auth-tabs" role="tablist">
+      {/* Mode Switcher Segmented Tabs */}
+      <div className="auth-tabs" role="tablist" aria-label="Authentication Mode">
         <button
           type="button"
           role="tab"
@@ -225,8 +203,8 @@ export const AuthCard: React.FC<AuthCardProps> = ({
         </h2>
         <p className="auth-subheading">
           {isSignUp
-            ? 'Create an account to browse questions and contribute peer interview insights.'
-            : 'Enter your credentials to access your interview workspace and insights.'}
+            ? 'Create an account to browse interview questions and contribute verified peer insights.'
+            : 'Enter your email and password to access your interview workspace and insights.'}
         </p>
       </div>
 
@@ -237,8 +215,9 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           className="btn-social"
           onClick={() => handleOAuthLogin('google')}
           disabled={Boolean(oauthLoading) || loading}
+          aria-label="Continue with Google"
         >
-          <svg className="social-icon" viewBox="0 0 24 24" width="18" height="18">
+          <svg className="social-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
             <path
               fill="#4285F4"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -264,8 +243,9 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           className="btn-social"
           onClick={() => handleOAuthLogin('github')}
           disabled={Boolean(oauthLoading) || loading}
+          aria-label="Continue with GitHub"
         >
-          <svg className="social-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <svg className="social-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -288,7 +268,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
         </div>
       )}
 
-      {/* Main Auth Form */}
+      {/* Main Authentication Form */}
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         {isSignUp && (
           <div className="form-group animate-slide-down">
@@ -380,7 +360,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           {isSignUp && password.length > 0 && (
             <div className="password-strength-box animate-fade-in">
               <div className="strength-header">
-                <span className="strength-label">Security strength:</span>
+                <span className="strength-label">Password strength:</span>
                 <span className="strength-score" style={{ color: strength.color }}>
                   {strength.label}
                 </span>
@@ -470,7 +450,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           </label>
         </div>
 
-        {/* Submit Button */}
+        {/* Primary CTA Submit Button */}
         <button
           type="submit"
           className="btn btn-primary btn-block btn-lg submit-btn"
@@ -479,7 +459,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           {loading ? (
             <span className="btn-loading-content">
               <span className="spin-dot" />
-              {isSignUp ? 'Creating Account...' : 'Authenticating...'}
+              {isSignUp ? 'Creating Account...' : 'Signing in...'}
             </span>
           ) : (
             <span className="btn-content">
@@ -490,7 +470,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
         </button>
       </form>
 
-      {/* Switch mode footer */}
+      {/* Switch Mode Footer */}
       <div className="auth-card-footer">
         {isSignUp ? (
           <p>

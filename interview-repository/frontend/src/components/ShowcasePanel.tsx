@@ -1,27 +1,64 @@
 import React, { useState } from 'react';
-import { Terminal, Shield, Zap, Sparkles, Building2, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import {
+  Sparkles,
+  Code2,
+  Layers,
+  Users,
+  TrendingUp,
+  Building2,
+  CheckCircle2,
+  ArrowUpRight,
+} from 'lucide-react';
+
+interface IntelligenceModule {
+  id: string;
+  icon: React.ElementType;
+  title: string;
+  category: string;
+  desc: string;
+  tag: string;
+  animationClass: string;
+}
 
 export const ShowcasePanel: React.FC = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeModule, setActiveModule] = useState<string | null>(null);
 
-  const features = [
+  const modules: IntelligenceModule[] = [
     {
-      icon: Terminal,
-      title: 'Real Interview Breakdowns',
-      desc: 'Coding, System Design, and Behavioral rounds from FAANG & top tier tech.',
-      tag: '5,200+ experiences',
+      id: 'coding',
+      icon: Code2,
+      category: 'Coding Rounds',
+      title: 'Algorithms & Data Structures',
+      desc: 'Real candidate problems, DP patterns, graph optimizations, and optimal time-space trade-offs.',
+      tag: '3,200+ Problems',
+      animationClass: 'card-float-1',
     },
     {
-      icon: Shield,
-      title: 'Zero-Trust Verification',
-      desc: 'End-to-end encrypted identity backed by Supabase Auth and Spring Security RBAC.',
-      tag: 'Zero Password Storage',
+      id: 'system-design',
+      icon: Layers,
+      category: 'System Design',
+      title: 'High-Scale Architecture',
+      desc: 'Distributed event caching, horizontal scaling, partition tolerance, and trade-off rubrics.',
+      tag: 'Scale & Reliability',
+      animationClass: 'card-float-2',
     },
     {
-      icon: Zap,
-      title: 'Instant Profile Sync',
-      desc: 'Seamless token exchange with backend microservices and instant role validation.',
-      tag: 'Sub-millisecond sync',
+      id: 'behavioral',
+      icon: Users,
+      category: 'Behavioral Rounds',
+      title: 'Leadership & Culture Fit',
+      desc: 'STAR framework breakdowns, cross-functional collaboration stories, and executive presence.',
+      tag: 'STAR Framework',
+      animationClass: 'card-float-3',
+    },
+    {
+      id: 'insights',
+      icon: TrendingUp,
+      category: 'Candidate Experience',
+      title: 'Verified Offers & Levels',
+      desc: 'Compensation rubrics, level mapping, negotiation leverage, and authentic interview timelines.',
+      tag: 'Candidate Insights',
+      animationClass: 'card-float-4',
     },
   ];
 
@@ -29,67 +66,73 @@ export const ShowcasePanel: React.FC = () => {
 
   return (
     <div className="showcase-container">
-      {/* Ambient background glow orbs */}
-      <div className="ambient-glow glow-1" />
-      <div className="ambient-glow glow-2" />
+      {/* Subtle radiant background accents */}
+      <div className="ambient-mesh" aria-hidden="true" />
+      <div className="ambient-orb orb-1" aria-hidden="true" />
+      <div className="ambient-orb orb-2" aria-hidden="true" />
 
       <div className="showcase-content">
-        {/* Brand header */}
+        {/* Brand Header */}
         <div className="brand-header">
           <div className="brand-logo-mark">
-            <Sparkles size={20} className="brand-icon-anim" />
+            <Sparkles size={18} className="brand-icon-sparkle" />
           </div>
           <div className="brand-text">
             <span className="brand-name">InterviewRepo</span>
-            <span className="brand-badge">SECURE PORTAL</span>
+            <span className="brand-badge">INTERVIEW INTELLIGENCE</span>
           </div>
         </div>
 
-        {/* Main headline */}
+        {/* Main Headline & Supporting Value Statement */}
         <div className="showcase-headline-section">
           <h1 className="showcase-title">
             Unlock Verified <span className="text-gradient">Interview Intelligence</span>
           </h1>
           <p className="showcase-description">
-            Access thousands of real candidate rounds, system design rubrics, and salary breakdowns.
-            Protected by enterprise-grade Supabase authentication.
+            Explore thousands of real candidate rounds, system design rubrics, and verified
+            compensation breakdowns from top-tier engineering organizations.
           </p>
         </div>
 
-        {/* Interactive Feature Cards */}
-        <div className="feature-cards-grid">
-          {features.map((feat, index) => {
-            const Icon = feat.icon;
-            const isHovered = activeCard === index;
+        {/* Floating Interactive "Interview Intelligence" Graphics Grid */}
+        <div className="intelligence-grid" role="region" aria-label="Interview Modules">
+          {modules.map((item) => {
+            const Icon = item.icon;
+            const isHovered = activeModule === item.id;
             return (
               <div
-                key={feat.title}
-                className={`feature-card ${isHovered ? 'feature-card-hovered' : ''}`}
-                onMouseEnter={() => setActiveCard(index)}
-                onMouseLeave={() => setActiveCard(null)}
+                key={item.id}
+                className={`intelligence-card ${item.animationClass} ${
+                  isHovered ? 'intelligence-card-hovered' : ''
+                }`}
+                onMouseEnter={() => setActiveModule(item.id)}
+                onMouseLeave={() => setActiveModule(null)}
               >
-                <div className="feature-card-header">
-                  <div className="feature-icon-wrapper">
-                    <Icon size={18} />
+                <div className="intelligence-card-header">
+                  <div className="intelligence-icon-box">
+                    <Icon size={17} />
                   </div>
-                  <span className="feature-tag">{feat.tag}</span>
+                  <span className="intelligence-tag">{item.tag}</span>
                 </div>
-                <h2 className="feature-title">{feat.title}</h2>
-                <p className="feature-desc">{feat.desc}</p>
-                <div className="feature-hover-indicator">
-                  <span>Explore module</span>
-                  <ArrowUpRight size={14} className="feature-arrow" />
+
+                <div className="intelligence-category">{item.category}</div>
+                <h2 className="intelligence-title">{item.title}</h2>
+                <p className="intelligence-desc">{item.desc}</p>
+
+                <div className="intelligence-action">
+                  <span>Explore round insights</span>
+                  <ArrowUpRight size={13} className="intelligence-arrow" />
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Social Proof / Stats Strip */}
+        {/* Social Proof / Targeted Teams Strip */}
         <div className="company-strip">
           <div className="company-strip-label">
             <Building2 size={14} />
-            <span>Targeting teams at</span>
+            <span>Targeting engineering teams at</span>
           </div>
           <div className="company-pills">
             {companies.map((company) => (
@@ -100,16 +143,21 @@ export const ShowcasePanel: React.FC = () => {
           </div>
         </div>
 
-        {/* Trust badge */}
+        {/* Community Trust Signals */}
         <div className="trust-footer">
           <div className="trust-item">
             <CheckCircle2 size={15} className="text-emerald" />
-            <span>Strict privacy & blind verification</span>
+            <span>5,200+ Verified Experiences</span>
           </div>
           <div className="trust-divider" />
           <div className="trust-item">
             <CheckCircle2 size={15} className="text-emerald" />
-            <span>OAuth 2.0 / JWT Standard</span>
+            <span>100% Peer-Reviewed</span>
+          </div>
+          <div className="trust-divider" />
+          <div className="trust-item">
+            <CheckCircle2 size={15} className="text-emerald" />
+            <span>Candidate-First Transparency</span>
           </div>
         </div>
       </div>

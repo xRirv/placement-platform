@@ -171,7 +171,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
             </button>
           </div>
           <p className="backend-sync-desc">
-            Sends your Supabase JWT to Spring Boot's OAuth2 Resource Server to sync your profile into the PostgreSQL database.
+            Syncs your authenticated session token with the Spring Boot backend API to persist your profile into the database.
           </p>
 
           {syncResult && (
@@ -207,7 +207,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
           <div className="token-inspector-header">
             <div className="token-inspector-title">
               <Key size={14} />
-              <span>Supabase Access Token (JWT)</span>
+              <span>Session Access Token (JWT)</span>
             </div>
             <div className="token-inspector-actions">
               <button

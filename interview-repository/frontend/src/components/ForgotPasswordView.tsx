@@ -27,7 +27,8 @@ export const ForgotPasswordView: React.FC<ForgotPasswordViewProps> = ({
 
     const config = getStoredConfig();
     if (!config.isConfigured) {
-      setErrorMsg('Supabase is not configured yet. Please configure your project credentials.');
+      setErrorMsg('Authentication service is currently unavailable. Please try again later.');
+      onShowToast('error', 'Authentication service is currently unavailable. Please try again later.', 'Service Unavailable');
       return;
     }
 
