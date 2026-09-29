@@ -1,9 +1,10 @@
 package com.agenticai.interviewrepo.repository;
 
+import com.agenticai.interviewrepo.model.Role;
 import com.agenticai.interviewrepo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,4 +18,15 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     boolean existsByEmail(String email);
 
     boolean existsByAuthUserId(String authUserId);
+
+    List<User> findByRole(Role role);
+
+    List<User> findByRoleOrderByCreatedAtDesc(Role role);
+
+    List<User> findByNameContainingIgnoreCase(String name);
+
+    List<User> findByRoleAndNameContainingIgnoreCase(
+            Role role,
+            String name
+    );
 }
