@@ -1,75 +1,50 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + TypeScript + Vite application with Supabase Authentication and Spring Boot integration.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Environment Setup (`.env`)
 
-## React Compiler
+The frontend communicates with Supabase for client-side authentication and calls the backend `/api/auth/sync` and resource endpoints.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
 
-## Expanding the ESLint configuration
+2. Add your Supabase project keys:
+   ```properties
+   # Supabase Project URL (Dashboard -> Project Settings -> API)
+   VITE_SUPABASE_URL=https://<your-project-ref>.supabase.co
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   # Supabase Anon Public Key (Dashboard -> Project Settings -> API -> anon)
+   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6...
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   # Backend API Endpoint
+   VITE_BACKEND_URL=http://localhost:8080
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+For detailed instructions on obtaining these values from Supabase, see the root [README.md](../README.md).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+*(Note: If `.env` is omitted, the frontend includes a runtime fallback configuration modal allowing developers to input their Supabase credentials directly in the UI, stored in `localStorage`.)*
 
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start Vite dev server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Run linter
+pnpm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+- Dev Server URL: `http://localhost:5173`
