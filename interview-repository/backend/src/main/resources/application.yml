@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL:${SUPABASE_DB_URL:}}
+    username: ${SPRING_DATASOURCE_USERNAME:${SUPABASE_DB_USER:postgres}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${SUPABASE_DB_PASSWORD:}}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:none}
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: false
     open-in-view: false
     properties:
@@ -17,8 +17,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${SUPABASE_ISSUER_URI}
-          jwk-set-uri: ${SUPABASE_JWK_SET_URI}
+          issuer-uri: ${SUPABASE_ISSUER_URI:${SUPABASE_AUTH_ISSUER_URI:}}
+          jwk-set-uri: ${SUPABASE_JWK_SET_URI:${SUPABASE_AUTH_JWKS_URI:}}
 server:
   port: 8080
 app:
