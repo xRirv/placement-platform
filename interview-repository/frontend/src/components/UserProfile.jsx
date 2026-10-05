@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import {
   LogOut,
   Mail,
@@ -13,22 +12,7 @@ import {
 } from 'lucide-react';
 import { syncUserWithBackend } from '../lib/supabaseClient';
 
-interface UserProfileProps {
-  user: SupabaseUser;
-  session: Session | null;
-  onSignOut: () => Promise<void>;
-  onShowToast: (type: 'success' | 'error' | 'info', message: string, title?: string) => void;
-}
-
-interface SyncResponse {
-  authUserId?: string;
-  id?: string;
-  role?: string;
-  active?: boolean;
-  error?: string;
-}
-
-export const UserProfile: React.FC<UserProfileProps> = ({
+export const UserProfile = ({
   user,
   session,
   onSignOut,
@@ -36,20 +20,20 @@ export const UserProfile: React.FC<UserProfileProps> = ({
 }) => {
   const [copiedToken, setCopiedToken] = useState(false);
   const [syncing, setSyncing] = useState(false);
-  const [syncResult, setSyncResult] = useState<SyncResponse | null>(null);
+  const [syncResult, setSyncResult] = useState(null);
   const [showToken, setShowToken] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
 
   const fullName =
-    user.user_metadata?.full_name ||
-    user.user_metadata?.name ||
-    user.email?.split('@')[0] ||
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name ||
+    user?.email?.split('@')[0] ||
     'Authenticated User';
 
-  const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture;
+  const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture;
   const initials = fullName
     .split(' ')
-    .map((w: string) => w[0])
+    .map((w) => w[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);
@@ -74,10 +58,10 @@ export const UserProfile: React.FC<UserProfileProps> = ({
     setSyncing(false);
 
     if (res.success) {
-      setSyncResult((res.data as SyncResponse) ?? null);
+      setSyncResult(res.data ?? null);
       onShowToast(
         'success',
-        `Synced with Spring Boot backend! Role: ${(res.data?.role as string) || 'STUDENT'}`,
+        `Synced with Spring Boot backend! Role: ${res.data?.role || 'STUDENT'}`,
         'Sync Successful'
       );
     } else {
@@ -100,7 +84,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
     }
   };
 
-  const formattedDate = user.created_at
+  const formattedDate = user?.created_at
     ? new Date(user.created_at).toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'short',
@@ -108,7 +92,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
       })
     : 'Recent';
 
-  const provider = user.app_metadata?.provider || 'email';
+  const provider = user?.app_metadata?.provider || 'email';
 
   return (
     <div className="profile-card">
@@ -128,8 +112,8 @@ export const UserProfile: React.FC<UserProfileProps> = ({
           <h2 className="profile-name">{fullName}</h2>
           <div className="profile-email-badge">
             <Mail size={13} />
-            <span>{user.email}</span>
-            {user.email_confirmed_at && (
+            <span>{user?.email}</span>
+            {user?.email_confirmed_at && (
               <span className="verified-pill" title="Email Verified">
                 Verified
               </span>

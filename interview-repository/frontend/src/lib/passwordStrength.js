@@ -1,6 +1,4 @@
-import type { PasswordStrength } from '../types/auth';
-
-export function calculatePasswordStrength(password: string): PasswordStrength {
+export function calculatePasswordStrength(password) {
   const hasMinLength = password.length >= 8;
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
@@ -15,8 +13,8 @@ export function calculatePasswordStrength(password: string): PasswordStrength {
     if (hasSpecial) score += 1;
   }
 
-  let label: PasswordStrength['label'];
-  let color: string;
+  let label;
+  let color;
 
   switch (score) {
     case 1:

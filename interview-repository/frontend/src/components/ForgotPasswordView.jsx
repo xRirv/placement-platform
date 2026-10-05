@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Mail, ArrowLeft, Send, CheckCircle2, ShieldAlert } from 'lucide-react';
 import { getSupabaseClient, getStoredConfig } from '../lib/supabaseClient';
 
-interface ForgotPasswordViewProps {
-  onBackToSignIn: () => void;
-  onShowToast: (type: 'success' | 'error' | 'info', message: string, title?: string) => void;
-}
-
-export const ForgotPasswordView: React.FC<ForgotPasswordViewProps> = ({
+export const ForgotPasswordView = ({
   onBackToSignIn,
   onShowToast,
 }) => {
@@ -16,7 +11,7 @@ export const ForgotPasswordView: React.FC<ForgotPasswordViewProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleReset = async (e: React.FormEvent) => {
+  const handleReset = async (e) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -50,7 +45,7 @@ export const ForgotPasswordView: React.FC<ForgotPasswordViewProps> = ({
           'Email Sent'
         );
       }
-    } catch (err: unknown) {
+    } catch (err) {
       const message = err instanceof Error ? err.message : 'An unexpected error occurred.';
       setErrorMsg(message);
     } finally {

@@ -1,12 +1,6 @@
 import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
-import type { ToastMessage } from '../types/auth';
 
-interface ToastProps {
-  toasts: ToastMessage[];
-  onDismiss: (id: string) => void;
-}
-
-export const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss }) => {
+export const ToastContainer = ({ toasts = [], onDismiss }) => {
   if (toasts.length === 0) return null;
 
   return (

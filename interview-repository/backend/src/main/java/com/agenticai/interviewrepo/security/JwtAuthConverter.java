@@ -30,6 +30,19 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         String authUserId = jwt.getSubject();
 
         Optional<User> userOptional = userRepository.findByAuthUserId(authUserId);
+        if (userOptional.isEmpty()) {
+            String email = jwt.getClaimAsString("email");
+            if (email != null && !email.isBlank()) {
+                userOptional = userRepository.findByEmail(email);
+                if (userOptional.isPresent()) {
+                    User user = userOptional.get();
+                    if (user.getAuthUserId() == null || !user.getAuthUserId().equals(authUserId)) {
+                        user.setAuthUserId(authUserId);
+                        userRepository.save(user);
+                    }
+                }
+            }
+        }
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
