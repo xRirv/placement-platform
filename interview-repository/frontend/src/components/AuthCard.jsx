@@ -9,20 +9,14 @@ import {
   AlertCircle,
   CheckCircle2,
 } from 'lucide-react';
-import type { AuthMode, FormErrors } from '../types/auth';
 import { calculatePasswordStrength } from '../lib/passwordStrength';
 import { getSupabaseClient, getStoredConfig } from '../lib/supabaseClient';
 
-interface AuthCardProps {
-  mode: AuthMode;
-  onModeChange: (mode: AuthMode) => void;
-  onShowToast: (type: 'success' | 'error' | 'info', message: string, title?: string) => void;
-}
-
-export const AuthCard: React.FC<AuthCardProps> = ({
+export const AuthCard = ({
   mode,
   onModeChange,
   onShowToast,
+  onLoginSuccess,
 }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,15 +26,15 @@ export const AuthCard: React.FC<AuthCardProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [oauthLoading, setOauthLoading] = useState<'google' | 'github' | null>(null);
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [oauthLoading, setOauthLoading] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const isSignUp = mode === 'signup';
   const strength = calculatePasswordStrength(password);
   const config = getStoredConfig();
 
-  const validate = (): boolean => {
-    const newErrors: FormErrors = {};
+  const validate = () => {
+    const newErrors = {};
 
     if (isSignUp && !fullName.trim()) {
       newErrors.name = 'Full name is required';
@@ -66,7 +60,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
@@ -112,9 +106,12 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           onModeChange('signin');
         } else {
           onShowToast('success', `Welcome to InterviewRepo, ${fullName}!`, 'Account Created');
+          if (onLoginSuccess && data.session) {
+            onLoginSuccess(data.session);
+          }
         }
       } else {
-        const { error } = await client.auth.signInWithPassword({
+        const { data, error } = await client.auth.signInWithPassword({
           email: email.trim(),
           password,
         });
@@ -124,9 +121,12 @@ export const AuthCard: React.FC<AuthCardProps> = ({
           onShowToast('error', error.message, 'Sign In Error');
         } else {
           onShowToast('success', 'Authenticated successfully! Loading your session...', 'Welcome Back');
+          if (onLoginSuccess && data?.session) {
+            onLoginSuccess(data.session);
+          }
         }
       }
-    } catch (err: unknown) {
+    } catch (err) {
       const message = err instanceof Error ? err.message : 'An unexpected connection error occurred.';
       setErrors({ general: message });
       onShowToast('error', message, 'Connection Error');
@@ -135,33 +135,38 @@ export const AuthCard: React.FC<AuthCardProps> = ({
     }
   };
 
-  const handleOAuthLogin = async (provider: 'google' | 'github') => {
-    if (!config.isConfigured) {
-      setErrors({
-        general: 'Authentication service is temporarily unavailable. Please try again later.',
-      });
-      onShowToast('error', 'Authentication service is temporarily unavailable.');
-      return;
-    }
-
+  const handleOAuthLogin = async (provider) => {
     setOauthLoading(provider);
+    setErrors({});
     try {
       const client = getSupabaseClient();
-      const { error } = await client.auth.signInWithOAuth({
+      const redirectUrl = `${window.location.origin}/login`;
+      console.log(`[OAuth] Initiating ${provider} login with redirectTo: ${redirectUrl}`);
+
+      const { data, error } = await client.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: window.location.origin,
+          redirectTo: redirectUrl,
+          skipBrowserRedirect: true,
         },
       });
 
       if (error) {
+        console.error(`[OAuth] ${provider} error:`, error);
         setErrors({ general: error.message });
         onShowToast('error', error.message, 'OAuth Error');
+        setOauthLoading(null);
+      } else if (data?.url) {
+        console.log(`[OAuth] Redirecting to URL:`, data.url);
+        window.location.href = data.url;
+      } else {
+        setOauthLoading(null);
       }
-    } catch (err: unknown) {
+    } catch (err) {
+      console.error(`[OAuth] Exception during ${provider} login:`, err);
       const message = err instanceof Error ? err.message : 'OAuth initialization failed';
       setErrors({ general: message });
-    } finally {
+      onShowToast('error', message, 'OAuth Error');
       setOauthLoading(null);
     }
   };
@@ -235,7 +240,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
             />
           </svg>
-          <span>{oauthLoading === 'google' ? 'Connecting...' : 'Google'}</span>
+          <span>{oauthLoading === 'google' ? 'Redirecting to Google...' : 'Google'}</span>
         </button>
 
         <button

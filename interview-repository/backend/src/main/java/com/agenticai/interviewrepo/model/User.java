@@ -14,13 +14,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "app_users")
+@Table(name = "login")
 public class User {
 
     @Id
     private UUID id;
 
-    @Column(name = "auth_user_id", unique = true, nullable = false)
+    @Column(name = "auth_user_id", unique = true)
     private String authUserId;
 
     @Column(unique = true, nullable = false)

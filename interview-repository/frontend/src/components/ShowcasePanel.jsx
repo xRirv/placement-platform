@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Sparkles,
   Code2,
@@ -10,20 +10,10 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 
-interface IntelligenceModule {
-  id: string;
-  icon: React.ElementType;
-  title: string;
-  category: string;
-  desc: string;
-  tag: string;
-  animationClass: string;
-}
+export const ShowcasePanel = () => {
+  const [activeModule, setActiveModule] = useState(null);
 
-export const ShowcasePanel: React.FC = () => {
-  const [activeModule, setActiveModule] = useState<string | null>(null);
-
-  const modules: IntelligenceModule[] = [
+  const modules = [
     {
       id: 'coding',
       icon: Code2,

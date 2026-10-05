@@ -38,7 +38,31 @@ public class CurrentUserService {
     }
 
     public Optional<User> getCurrentUserOptional() {
-        return getCurrentAuthUserId().flatMap(userRepository::findByAuthUserId);
+        Optional<String> authUserIdOpt = getCurrentAuthUserId();
+        if (authUserIdOpt.isEmpty()) {
+            return Optional.empty();
+        }
+        Optional<User> byAuth = userRepository.findByAuthUserId(authUserIdOpt.get());
+        if (byAuth.isPresent()) {
+            return byAuth;
+        }
+        // Fallback: match pre-seeded account by email from JWT
+        Optional<Jwt> jwtOpt = getCurrentJwt();
+        if (jwtOpt.isPresent()) {
+            String email = jwtOpt.get().getClaimAsString("email");
+            if (email != null && !email.isBlank()) {
+                Optional<User> byEmail = userRepository.findByEmail(email);
+                if (byEmail.isPresent()) {
+                    User user = byEmail.get();
+                    if (user.getAuthUserId() == null || !user.getAuthUserId().equals(authUserIdOpt.get())) {
+                        user.setAuthUserId(authUserIdOpt.get());
+                        userRepository.save(user);
+                    }
+                    return Optional.of(user);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     public User getCurrentUser() {

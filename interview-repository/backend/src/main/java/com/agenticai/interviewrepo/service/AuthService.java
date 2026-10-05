@@ -21,7 +21,7 @@ public class AuthService {
         this.currentUserService = currentUserService;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public UserProfileResponse getCurrentProfile() {
         Optional<User> userOptional = currentUserService.getCurrentUserOptional();
         if (userOptional.isPresent()) {
@@ -54,6 +54,7 @@ public class AuthService {
 
         final String finalEmail = email;
         User user = userRepository.findByAuthUserId(authUserId)
+                .or(() -> userRepository.findByEmail(finalEmail))
                 .orElseGet(() -> User.builder()
                         .authUserId(authUserId)
                         .email(finalEmail)
@@ -61,6 +62,8 @@ public class AuthService {
                         .role(Role.STUDENT)
                         .isActive(true)
                         .build());
+
+        user.setAuthUserId(authUserId);
 
         if (preferredName != null && !preferredName.isBlank()) {
             user.setName(preferredName);

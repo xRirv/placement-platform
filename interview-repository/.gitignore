@@ -7,7 +7,6 @@ permissions.txt
 .permissions
 
 # Environment and secrets
-.env
 .env.*
 !.env.example
 application-local.properties
@@ -30,3 +29,6 @@ frontend/.vite/
 *.swp
 *.DS_Store
 Thumbs.db
+
+# Added by ggshield
+.cache_ggshield
