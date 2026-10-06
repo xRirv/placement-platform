@@ -25,4 +25,25 @@ export function fetchExperienceStatus(experienceId) {
   return request(`/api/v1/internal/experiences/${encodeURIComponent(experienceId)}`)
 }
 
+export function sendChatMessage(message, sessionId) {
+  return request('/api/v1/agents/chat', {
+    method: 'POST',
+    body: JSON.stringify({ message, session_id: sessionId }),
+  })
+}
+
+export function searchKnowledge(payload) {
+  return request('/api/v1/search', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
+export function requestPreparation(company, role, message) {
+  return request('/api/v1/agents/preparation', {
+    method: 'POST',
+    body: JSON.stringify({ company, role, message }),
+  })
+}
+
 export { API_BASE_URL }

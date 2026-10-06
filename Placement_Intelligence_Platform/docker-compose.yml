@@ -1,29 +1,68 @@
 services:
+
+  # ── RabbitMQ ───────────────────────────────────────────────────────────────
   rabbitmq:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
-      - "15672:15672"
+      - "15672:15672"    # management UI → http://localhost:15672 (guest/guest)
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
+  # ── FastAPI backend ────────────────────────────────────────────────────────
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
     environment:
-      SUPABASE_URL: https://your-project.supabase.co
-      SUPABASE_KEY: your-anon-or-service-role-key
+      # Override AMQP_URL to use the compose service name instead of localhost
       AMQP_URL: amqp://guest:guest@rabbitmq:5672/
-      INTERNAL_API_KEY: change-me
     ports:
       - "8000:8000"
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: on-failure
 
+  # ── Ingestion worker ───────────────────────────────────────────────────────
   worker:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: ["python", "-m", "app.mq.consumers.ingestion_worker"]
+    env_file: .env
     environment:
-      SUPABASE_URL: https://your-project.supabase.co
-      SUPABASE_KEY: your-anon-or-service-role-key
       AMQP_URL: amqp://guest:guest@rabbitmq:5672/
-      INTERNAL_API_KEY: change-me
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    restart: on-failure
+
+  # ── React / Vite frontend ──────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        # When opened from a browser the request goes to localhost, not the
+        # compose network name, so keep this as localhost.
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: on-failure

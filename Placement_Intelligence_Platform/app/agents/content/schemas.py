@@ -1,8 +1,4 @@
-"""Schemas for the content agent."""
+"""Content agent schemas – re-export shared contracts."""
+from app.schemas.content import ContentItem, ContentRequest, ContentResult
 
-
-class ContentRequest:
-    """Input schema for content tasks."""
-
-    def __init__(self, source: str):
-        self.source = source
+__all__ = ["ContentRequest", "ContentItem", "ContentResult"]

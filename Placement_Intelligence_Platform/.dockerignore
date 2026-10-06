@@ -1,0 +1,27 @@
+# Python
+PIP/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+
+# Node / frontend build artefacts
+frontend/node_modules/
+frontend/dist/
+
+# Secrets and local config
+.env
+*.db
+*.sqlite
+
+# Dev tooling
+.git/
+.gitignore
+*.md
+awscliv2.zip
+output.json

@@ -1,8 +1,4 @@
-"""Schemas for the search agent."""
+"""Search agent schemas – re-export shared contracts."""
+from app.schemas.search import QuestionResult, SearchFilters, SearchRequest, SearchResult
 
-
-class SearchRequest:
-    """Input schema for search tasks."""
-
-    def __init__(self, query: str):
-        self.query = query
+__all__ = ["SearchFilters", "SearchRequest", "QuestionResult", "SearchResult"]

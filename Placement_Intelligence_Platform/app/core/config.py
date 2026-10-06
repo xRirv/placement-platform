@@ -16,9 +16,17 @@ class Settings(BaseSettings):
     amqp_queue: str = "exp_queue"
     dry_run: bool = False
 
-    # Reserved for security and AI pipeline modules (wired up in a later pass)
+    # Security and AI pipeline
     internal_api_key: str = "change-me"
     llm_api_key: str | None = None
+
+    # LLM / embedding configuration
+    llm_model: str = "gemini-3.5-flash-lite"
+    embedding_model: str = "text-embedding-004"
+
+    # Feature flags
+    web_search_enabled: bool = False
+    vector_search_enabled: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

@@ -1,8 +1,14 @@
-"""Schemas for the preparation agent."""
+"""Preparation agent schemas – re-export shared contracts."""
+from app.schemas.preparation import (
+    PreparationRequest,
+    PreparationResult,
+    PreparationRound,
+    TopicPriority,
+)
 
-
-class PreparationRequest:
-    """Input schema for preparation tasks."""
-
-    def __init__(self, item: str):
-        self.item = item
+__all__ = [
+    "PreparationRequest",
+    "PreparationResult",
+    "PreparationRound",
+    "TopicPriority",
+]

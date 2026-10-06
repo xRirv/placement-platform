@@ -77,6 +77,9 @@ create table question_canonical (
     topic text,
     subtopic text,
     difficulty text check (difficulty is null or difficulty in ('EASY', 'MEDIUM', 'HARD', 'UNKNOWN')),
+    -- Denormalized count kept in sync by triggers on experience_questions.
+    -- Avoids a COUNT() join on every search query.
+    occurrence_count integer not null default 0,
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );
@@ -170,6 +173,65 @@ create trigger rounds_updated_at before update on rounds
 for each row execute function set_updated_at();
 create trigger questions_updated_at before update on question_canonical
 for each row execute function set_updated_at();
+
+-- ── occurrence_count triggers ─────────────────────────────────────────────
+-- Keep question_canonical.occurrence_count in sync whenever a row is
+-- inserted into or deleted from experience_questions.
+
+create or replace function increment_question_occurrence()
+returns trigger language plpgsql as $$
+begin
+    update question_canonical
+    set occurrence_count = occurrence_count + 1
+    where id = new.question_id;
+    return new;
+end;
+$$;
+
+create or replace function decrement_question_occurrence()
+returns trigger language plpgsql as $$
+begin
+    update question_canonical
+    set occurrence_count = greatest(0, occurrence_count - 1)
+    where id = old.question_id;
+    return old;
+end;
+$$;
+
+create trigger experience_questions_inc_count
+    after insert on experience_questions
+    for each row execute function increment_question_occurrence();
+
+create trigger experience_questions_dec_count
+    after delete on experience_questions
+    for each row execute function decrement_question_occurrence();
+
+-- ── question_with_context view ────────────────────────────────────────────
+-- Joins question_canonical with its associated companies and roles so the
+-- agent layer can retrieve them in a single query instead of a multi-step
+-- Python join.
+
+create or replace view question_with_context as
+select
+    q.id,
+    q.canonical_text,
+    q.normalized_text,
+    q.category,
+    q.topic,
+    q.subtopic,
+    q.difficulty,
+    q.occurrence_count,
+    q.created_at,
+    q.updated_at,
+    array_remove(array_agg(distinct c.name), null)  as companies,
+    array_remove(array_agg(distinct r.name), null)  as roles
+from question_canonical q
+left join experience_questions eq on eq.question_id = q.id
+left join experience_companies ec on ec.experience_id = eq.experience_id
+left join companies c              on c.id = ec.company_id
+left join experience_roles er      on er.experience_id = eq.experience_id
+left join roles r                  on r.id = er.role_id
+group by q.id;
 
 -- Backend workers should connect with the Supabase service-role key.
 -- Add RLS policies separately if browser/client access is introduced.
