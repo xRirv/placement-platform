@@ -19,6 +19,9 @@ public class Student {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @Column(name = "roll_number", length = 50)
+    private String rollNumber;
+
     @Column(length = 20)
     private String phone;
 
@@ -72,6 +75,8 @@ public class Student {
     public void setLogin(User login) { this.login = login; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+    public String getRollNumber() { return rollNumber; }
+    public void setRollNumber(String rollNumber) { this.rollNumber = rollNumber; }
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
     public String getCollege() { return college; }

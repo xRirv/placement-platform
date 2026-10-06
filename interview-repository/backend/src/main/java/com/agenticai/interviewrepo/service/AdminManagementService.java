@@ -309,7 +309,6 @@ public class AdminManagementService {
     // ==================== ALUMNI MANAGEMENT ====================
 
     @Transactional
-    @Transactional
     public AdminAlumniDetailResponse createAlumni(AdminAlumniCreateRequest request) {
         // Auto-generate password if not provided
         String password = request.getPassword();
@@ -515,7 +514,7 @@ public class AdminManagementService {
             }
 
             // Get or create Administrator profile
-            Administrator admin = administratorRepository.findByLogin_Id(currentUser.getId()).orElse(null);
+            Administrator admin = administratorRepository.findByLogin(currentUser).orElse(null);
 
             if (admin == null) {
                 // Auto-create Administrator profile for admin users

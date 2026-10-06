@@ -12,4 +12,8 @@ public interface InterviewExperienceRepository extends JpaRepository<InterviewEx
     Page<InterviewExperience> findByModerationStatus(String moderationStatus, Pageable pageable);
     Page<InterviewExperience> findByModerationStatusAndCompanyId(String moderationStatus, UUID companyId, Pageable pageable);
     Page<InterviewExperience> findByCompanyId(UUID companyId, Pageable pageable);
+    Long countByStudent_Id(UUID studentId);
+    Long countByAlumni_Id(UUID alumniId);
+    Page<InterviewExperience> findByStudent_Id(UUID studentId, Pageable pageable);
+    Page<InterviewExperience> findByAlumni_Id(UUID alumniId, Pageable pageable);
 }

@@ -29,4 +29,6 @@ public interface ApplicationRepository extends JpaRepository<Application, UUID> 
     long countByStudentAndStatus(Student student, String status);
 
     long countByStudent(Student student);
+
+    Long countByStudent_Id(UUID studentId);
 }
