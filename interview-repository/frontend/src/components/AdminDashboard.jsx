@@ -9,11 +9,19 @@ import {
   RefreshCw,
   Search,
   CheckCircle,
+  GraduationCap,
+  Briefcase,
+  Award,
+  Upload,
 } from 'lucide-react';
 import { DashboardLayout } from './DashboardLayout';
+import { StudentManagement } from './admin/StudentManagement';
+import { MentorManagement } from './admin/MentorManagement';
+import { AlumniManagement } from './admin/AlumniManagement';
+import { BatchUpload } from './admin/BatchUpload';
 
 export const AdminDashboard = ({ user, session, userProfile }) => {
-  const [activeTab, setActiveTab] = useState('users');
+  const [activeTab, setActiveTab] = useState('students');
   const [usersList, setUsersList] = useState([]);
   const [logsList, setLogsList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -244,11 +252,43 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
       <div className="tab-nav">
         <button
           type="button"
+          className={`tab-button ${activeTab === 'students' ? 'active' : ''}`}
+          onClick={() => setActiveTab('students')}
+        >
+          <GraduationCap size={16} />
+          <span>Students</span>
+        </button>
+        <button
+          type="button"
+          className={`tab-button ${activeTab === 'mentors' ? 'active' : ''}`}
+          onClick={() => setActiveTab('mentors')}
+        >
+          <Briefcase size={16} />
+          <span>Mentors</span>
+        </button>
+        <button
+          type="button"
+          className={`tab-button ${activeTab === 'alumni' ? 'active' : ''}`}
+          onClick={() => setActiveTab('alumni')}
+        >
+          <Award size={16} />
+          <span>Alumni</span>
+        </button>
+        <button
+          type="button"
+          className={`tab-button ${activeTab === 'upload' ? 'active' : ''}`}
+          onClick={() => setActiveTab('upload')}
+        >
+          <Upload size={16} />
+          <span>Batch Upload</span>
+        </button>
+        <button
+          type="button"
           className={`tab-button ${activeTab === 'users' ? 'active' : ''}`}
           onClick={() => setActiveTab('users')}
         >
           <Users size={16} />
-          <span>User Directory</span>
+          <span>Users</span>
         </button>
         <button
           type="button"
@@ -256,11 +296,19 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
           onClick={() => setActiveTab('logs')}
         >
           <FileText size={16} />
-          <span>Audit Logs</span>
+          <span>Logs</span>
         </button>
       </div>
 
-      {activeTab === 'users' ? (
+      {activeTab === 'students' ? (
+        <StudentManagement session={session} />
+      ) : activeTab === 'mentors' ? (
+        <MentorManagement session={session} />
+      ) : activeTab === 'alumni' ? (
+        <AlumniManagement session={session} />
+      ) : activeTab === 'upload' ? (
+        <BatchUpload session={session} />
+      ) : activeTab === 'users' ? (
         <div className="dashboard-card">
           <div className="card-heading">
             <span>Registered Accounts</span>

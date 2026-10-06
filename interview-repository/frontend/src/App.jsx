@@ -8,6 +8,11 @@ import { MentorDashboard } from './components/MentorDashboard';
 import { AlumniDashboard } from './components/AlumniDashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { ToastContainer } from './components/Toast';
+import { DashboardPage } from './components/admin/DashboardPage';
+import { StudentsPage } from './components/admin/StudentsPage';
+import { MentorsPage } from './components/admin/MentorsPage';
+import { AlumniPage } from './components/admin/AlumniPage';
+import { ModerationPage } from './components/admin/ModerationPage';
 import './components/Auth.css';
 
 function AppContent() {
@@ -43,7 +48,7 @@ function AppContent() {
   const getRoleDestination = (role) => {
     switch (role?.toUpperCase()) {
       case 'ADMIN':
-        return '/admin';
+        return '/admin/dashboard';
       case 'MENTOR':
         return '/mentor';
       case 'ALUMNI':
@@ -150,8 +155,10 @@ function AppContent() {
         />
 
         {/* Role-Based Protected Routes */}
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+
         <Route
-          path="/admin"
+          path="/admin/dashboard"
           element={
             <ProtectedRoute
               user={user}
@@ -159,7 +166,79 @@ function AppContent() {
               initializing={initializing}
               allowedRoles={['ADMIN']}
             >
-              <AdminDashboard
+              <DashboardPage
+                user={user}
+                session={session}
+                userProfile={userProfile}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/students"
+          element={
+            <ProtectedRoute
+              user={user}
+              userProfile={userProfile}
+              initializing={initializing}
+              allowedRoles={['ADMIN']}
+            >
+              <StudentsPage
+                user={user}
+                session={session}
+                userProfile={userProfile}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/mentors"
+          element={
+            <ProtectedRoute
+              user={user}
+              userProfile={userProfile}
+              initializing={initializing}
+              allowedRoles={['ADMIN']}
+            >
+              <MentorsPage
+                user={user}
+                session={session}
+                userProfile={userProfile}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/alumni"
+          element={
+            <ProtectedRoute
+              user={user}
+              userProfile={userProfile}
+              initializing={initializing}
+              allowedRoles={['ADMIN']}
+            >
+              <AlumniPage
+                user={user}
+                session={session}
+                userProfile={userProfile}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/moderation"
+          element={
+            <ProtectedRoute
+              user={user}
+              userProfile={userProfile}
+              initializing={initializing}
+              allowedRoles={['ADMIN']}
+            >
+              <ModerationPage
                 user={user}
                 session={session}
                 userProfile={userProfile}

@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
-    show-sql: false
+    show-sql: true
     open-in-view: false
     properties:
       hibernate:
@@ -24,3 +24,11 @@ server:
 app:
   cors:
     allowed-origins: ${FRONTEND_URL:http://localhost:5173,http://localhost:3000}
+logging:
+  level:
+    root: INFO
+    com.agenticai.interviewrepo: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

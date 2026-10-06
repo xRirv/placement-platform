@@ -19,6 +19,9 @@ public class Mentor {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @Column(name = "faculty_id", length = 50, unique = true)
+    private String facultyId;
+
     @Column(columnDefinition = "TEXT")
     private String bio;
 
@@ -43,6 +46,8 @@ public class Mentor {
     public void setLogin(User login) { this.login = login; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+    public String getFacultyId() { return facultyId; }
+    public void setFacultyId(String facultyId) { this.facultyId = facultyId; }
     public String getBio() { return bio; }
     public void setBio(String bio) { this.bio = bio; }
     public String getExpertise() { return expertise; }

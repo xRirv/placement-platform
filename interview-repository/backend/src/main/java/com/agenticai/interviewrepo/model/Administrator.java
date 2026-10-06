@@ -19,6 +19,9 @@ public class Administrator {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @Column(length = 200)
+    private String college;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -44,6 +47,9 @@ public class Administrator {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getCollege() { return college; }
+    public void setCollege(String college) { this.college = college; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

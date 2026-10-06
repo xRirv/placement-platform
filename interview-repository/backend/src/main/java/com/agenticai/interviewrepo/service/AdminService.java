@@ -6,9 +6,11 @@ import com.agenticai.interviewrepo.dto.AdminProfileResponse;
 import com.agenticai.interviewrepo.dto.AdminRoleUpdateRequest;
 import com.agenticai.interviewrepo.dto.AdminUserResponse;
 import com.agenticai.interviewrepo.dto.AdminUserStatusRequest;
+import com.agenticai.interviewrepo.model.Administrator;
 import com.agenticai.interviewrepo.model.ModerationLog;
 import com.agenticai.interviewrepo.model.Role;
 import com.agenticai.interviewrepo.model.User;
+import com.agenticai.interviewrepo.repository.AdministratorRepository;
 import com.agenticai.interviewrepo.repository.ModerationLogRepository;
 import com.agenticai.interviewrepo.repository.UserRepository;
 import org.springframework.data.domain.Page;
@@ -24,15 +26,18 @@ import java.util.UUID;
 public class AdminService {
 
     private final UserRepository userRepository;
+    private final AdministratorRepository administratorRepository;
     private final ModerationLogRepository moderationLogRepository;
     private final CurrentUserService currentUserService;
 
     public AdminService(
             UserRepository userRepository,
+            AdministratorRepository administratorRepository,
             ModerationLogRepository moderationLogRepository,
             CurrentUserService currentUserService
     ) {
         this.userRepository = userRepository;
+        this.administratorRepository = administratorRepository;
         this.moderationLogRepository = moderationLogRepository;
         this.currentUserService = currentUserService;
     }
@@ -64,6 +69,16 @@ public class AdminService {
         if (request.getName() != null) {
             user.setName(request.getName());
         }
+
+        // Update administrator profile with college
+        Administrator admin = administratorRepository.findByLogin(user)
+                .orElseThrow(() -> new IllegalStateException("Administrator profile not found"));
+
+        if (request.getCollege() != null) {
+            admin.setCollege(request.getCollege());
+        }
+
+        administratorRepository.save(admin);
 
         return toProfileResponse(
                 userRepository.save(user)
@@ -236,19 +251,20 @@ public class AdminService {
     private AdminProfileResponse toProfileResponse(
             User user
     ) {
+        Administrator admin = administratorRepository.findByLogin(user)
+                .orElseThrow(() -> new IllegalStateException("Administrator profile not found"));
 
-        AdminProfileResponse response =
-                new AdminProfileResponse();
-
-        response.setId(user.getId());
-        response.setName(user.getName());
-        response.setEmail(user.getEmail());
-        response.setRole(user.getRole().name());
-        response.setActive(user.isActive());
-        response.setCreatedAt(user.getCreatedAt());
-        response.setUpdatedAt(user.getUpdatedAt());
-
-        return response;
+        return AdminProfileResponse.builder()
+                .id(admin.getId())
+                .loginId(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .college(admin.getCollege())
+                .role(user.getRole())
+                .isActive(user.isActive())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
     }
 
     private AdminUserResponse toUserResponse(
