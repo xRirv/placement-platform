@@ -28,6 +28,15 @@ public class ModerationLog {
     @Column(columnDefinition = "TEXT")
     private String reason;
 
+    @Column(length = 50)
+    private String status = "PENDING"; // PENDING, APPROVED, REJECTED
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
+    @Column(name = "reviewed_at")
+    private LocalDateTime reviewedAt;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -56,6 +65,15 @@ public class ModerationLog {
 
     public String getReason() { return reason; }
     public void setReason(String reason) { this.reason = reason; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    public LocalDateTime getReviewedAt() { return reviewedAt; }
+    public void setReviewedAt(LocalDateTime reviewedAt) { this.reviewedAt = reviewedAt; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
 }

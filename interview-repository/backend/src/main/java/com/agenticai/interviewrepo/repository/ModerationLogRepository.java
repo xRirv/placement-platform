@@ -14,4 +14,8 @@ public interface ModerationLogRepository extends JpaRepository<ModerationLog, UU
 
     @Query("SELECT m FROM ModerationLog m LEFT JOIN FETCH m.admin a LEFT JOIN FETCH a.login ORDER BY m.createdAt DESC")
     Page<ModerationLog> findAllWithAdminOrderByCreatedAtDesc(Pageable pageable);
+
+    Page<ModerationLog> findByStatus(String status, Pageable pageable);
+
+    Page<ModerationLog> findByStatusOrderByCreatedAtDesc(String status, Pageable pageable);
 }

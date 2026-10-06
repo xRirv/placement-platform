@@ -16,6 +16,9 @@ public class PlacedAlumni {
     @JoinColumn(name = "login_id", nullable = false, unique = true)
     private User login;
 
+    @Column(name = "roll_number", length = 50)
+    private String rollNumber;
+
     @Column(length = 100, nullable = false)
     private String name;
 
@@ -70,4 +73,12 @@ public class PlacedAlumni {
     public void setAdvice(String advice) { this.advice = advice; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+
+    public String getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(String rollNumber) {
+        this.rollNumber = rollNumber;
+    }
 }
