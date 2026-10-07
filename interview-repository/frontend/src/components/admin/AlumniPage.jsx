@@ -376,7 +376,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <h3 className="admin-sidebar-title">Graduation Batches</h3>
             <div className="admin-sidebar-list">
               {loadingClasses ? (
-                <div style={{ padding: '1rem', textAlign: 'center', color: '#6766B7' }}>
+                <div style={{ padding: '1rem', textAlign: 'center', color: '#94a3b8' }}>
                   Loading...
                 </div>
               ) : graduationClasses.length > 0 ? (
@@ -396,7 +396,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   </button>
                 ))
               ) : (
-                <div style={{ padding: '1rem', textAlign: 'center', color: '#6766B7' }}>
+                <div style={{ padding: '1rem', textAlign: 'center', color: '#94a3b8' }}>
                   No alumni found
                 </div>
               )}
@@ -409,9 +409,9 @@ export const AlumniPage = ({ user, session, userProfile }) => {
           {message && (
             <div
               style={{
-                background: message.includes('✅') ? '#d1fae5' : '#f8e6ee',
-                border: `1px solid ${message.includes('✅') ? '#3d8c74' : '#b3405f'}`,
-                color: message.includes('✅') ? '#2f6b59' : '#8c2f4a',
+                background: message.includes('✅') ? '#d1fae5' : '#fee2e2',
+                border: `1px solid ${message.includes('✅') ? '#10b981' : '#ef4444'}`,
+                color: message.includes('✅') ? '#065f46' : '#991b1b',
                 padding: '1rem',
                 borderRadius: '8px',
                 marginBottom: '1rem',
@@ -506,12 +506,12 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                           </div>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.875rem', color: '#23304D' }}>
+                          <span style={{ fontSize: '0.875rem', color: '#0f172a' }}>
                             {alumniItem.companyName || '—'}
                           </span>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.875rem', color: '#353454' }}>
+                          <span style={{ fontSize: '0.875rem', color: '#64748b' }}>
                             {alumniItem.position || '—'}
                           </span>
                         </td>
@@ -552,7 +552,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                                 top: '100%',
                                 marginTop: '0.25rem',
                                 background: 'white',
-                                border: '1px solid #C8C7EB',
+                                border: '1px solid #e2e8f0',
                                 borderRadius: '8px',
                                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                                 zIndex: 10,
@@ -573,17 +573,17 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                                   alignItems: 'center',
                                   gap: '0.5rem',
                                   fontSize: '0.875rem',
-                                  color: '#9230E3',
+                                  color: '#6366f1',
                                   fontWeight: 600,
                                   transition: 'background 0.15s'
                                 }}
-                                onMouseEnter={(e) => e.target.style.background = '#F2E1FF'}
+                                onMouseEnter={(e) => e.target.style.background = '#eef2ff'}
                                 onMouseLeave={(e) => e.target.style.background = 'transparent'}
                               >
                                 <Eye size={14} />
                                 View Profile
                               </button>
-                              <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
+                              <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
                               <button
                                 type="button"
                                 onClick={() => openEditModal(alumniItem)}
@@ -597,10 +597,10 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                                   background: 'none',
                                   cursor: 'pointer',
                                   fontSize: '0.875rem',
-                                  color: '#23304D',
+                                  color: '#0f172a',
                                   transition: 'background 0.2s',
                                 }}
-                                onMouseEnter={(e) => (e.currentTarget.style.background = '#EAEAF7')}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
                                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                               >
                                 <Edit2 size={14} />
@@ -620,17 +620,17 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                                   background: 'none',
                                   cursor: 'pointer',
                                   fontSize: '0.875rem',
-                                  color: alumniItem.isActive ? '#9a7a3a' : '#3d8c74',
+                                  color: alumniItem.isActive ? '#f59e0b' : '#10b981',
                                   transition: 'background 0.2s',
                                 }}
-                                onMouseEnter={(e) => (e.currentTarget.style.background = '#EAEAF7')}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
                                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                               >
                                 <Eye size={14} />
                                 <span>{alumniItem.isActive ? 'Deactivate' : 'Activate'}</span>
                               </button>
 
-                              <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
+                              <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
 
                               <button
                                 type="button"
@@ -645,10 +645,10 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                                   background: 'none',
                                   cursor: 'pointer',
                                   fontSize: '0.875rem',
-                                  color: '#b3405f',
+                                  color: '#dc2626',
                                   transition: 'background 0.2s',
                                 }}
-                                onMouseEnter={(e) => (e.currentTarget.style.background = '#f8e6ee')}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = '#fef2f2')}
                                 onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
                               >
                                 <Trash2 size={14} />
@@ -705,13 +705,13 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div
               style={{
                 padding: '1.5rem',
-                borderBottom: '1px solid #C8C7EB',
+                borderBottom: '1px solid #e2e8f0',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#23304D' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a' }}>
                 {modalMode === 'create' ? 'Add New Alumni' : 'Edit Alumni'}
               </h3>
               <button
@@ -734,23 +734,23 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                 {modalMode === 'create' && (
                   <div
                     style={{
-                      background: '#EAEAF7',
-                      border: '1px solid #C8C7EB',
+                      background: '#eff6ff',
+                      border: '1px solid #bfdbfe',
                       borderRadius: '6px',
                       padding: '1rem',
                     }}
                   >
-                    <strong style={{ color: '#6766B7' }}>One-Click Alumni Creation</strong>
+                    <strong style={{ color: '#1e40af' }}>One-Click Alumni Creation</strong>
                     <br />
-                    <span style={{ fontSize: '0.875rem', color: '#6766B7' }}>
+                    <span style={{ fontSize: '0.875rem', color: '#1e40af' }}>
                       This will automatically:
                     </span>
-                    <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#6766B7' }}>
+                    <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#1e40af' }}>
                       <li>✓ Create login credentials in Supabase Auth</li>
                       <li>✓ Generate secure password (12 characters)</li>
                       <li>✓ Create alumni record in database</li>
                     </ul>
-                    <em style={{ fontSize: '0.75rem', color: '#6766B7' }}>
+                    <em style={{ fontSize: '0.75rem', color: '#3b82f6' }}>
                       📧 Email must be unique! 🔐 Password will be shown after creation.
                     </em>
                   </div>
@@ -768,7 +768,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -786,7 +786,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -805,10 +805,10 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                       style={{
                         width: '100%',
                         padding: '0.5rem',
-                        border: '1px solid #C8C7EB',
+                        border: '1px solid #cbd5e1',
                         borderRadius: '6px',
                         fontSize: '0.875rem',
-                        background: '#EAEAF7',
+                        background: '#f1f5f9',
                         cursor: 'not-allowed',
                       }}
                     />
@@ -828,12 +828,12 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                       style={{
                         width: '100%',
                         padding: '0.5rem',
-                        border: '1px solid #C8C7EB',
+                        border: '1px solid #cbd5e1',
                         borderRadius: '6px',
                         fontSize: '0.875rem',
                       }}
                     />
-                    <small style={{ display: 'block', marginTop: '0.25rem', color: '#353454', fontSize: '0.75rem' }}>
+                    <small style={{ display: 'block', marginTop: '0.25rem', color: '#64748b', fontSize: '0.75rem' }}>
                       ℹ️ Password will be auto-generated and displayed after creation
                     </small>
                   </div>
@@ -850,7 +850,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -869,7 +869,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -887,7 +887,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -905,7 +905,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                     }}
@@ -924,7 +924,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     style={{
                       width: '100%',
                       padding: '0.5rem',
-                      border: '1px solid #C8C7EB',
+                      border: '1px solid #cbd5e1',
                       borderRadius: '6px',
                       fontSize: '0.875rem',
                       fontFamily: 'inherit',
@@ -937,7 +937,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
               <div
                 style={{
                   padding: '1.5rem',
-                  borderTop: '1px solid #C8C7EB',
+                  borderTop: '1px solid #e2e8f0',
                   display: 'flex',
                   gap: '0.75rem',
                   justifyContent: 'flex-end',
@@ -948,7 +948,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   onClick={() => setShowModal(false)}
                   style={{
                     padding: '0.5rem 1rem',
-                    border: '1px solid #C8C7EB',
+                    border: '1px solid #cbd5e1',
                     background: 'white',
                     borderRadius: '6px',
                     cursor: 'pointer',
@@ -962,7 +962,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   style={{
                     padding: '0.5rem 1rem',
                     border: 'none',
-                    background: '#9230E3',
+                    background: '#6366f1',
                     color: 'white',
                     borderRadius: '6px',
                     cursor: 'pointer',
@@ -1010,13 +1010,13 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div
               style={{
                 padding: '1.5rem',
-                borderBottom: '1px solid #C8C7EB',
+                borderBottom: '1px solid #e2e8f0',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#23304D' }}>Confirm Delete</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a' }}>Confirm Delete</h3>
               <button
                 onClick={() => setShowDeleteModal(false)}
                 style={{
@@ -1031,14 +1031,14 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             </div>
 
             <div style={{ padding: '1.5rem' }}>
-              <div style={{ marginBottom: '1rem', color: '#b3405f', fontWeight: 600 }}>
+              <div style={{ marginBottom: '1rem', color: '#dc2626', fontWeight: 600 }}>
                 ⚠️ Are you sure you want to delete this alumni?
               </div>
 
               <div
                 style={{
-                  background: '#f8e6ee',
-                  border: '1px solid #ecc5d3',
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
                   borderRadius: '6px',
                   padding: '1rem',
                   marginBottom: '1rem',
@@ -1052,7 +1052,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                 </div>
               </div>
 
-              <div style={{ fontSize: '0.875rem', color: '#353454' }}>
+              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
                 This action cannot be undone. The alumni account and all associated data will be permanently removed.
               </div>
             </div>
@@ -1060,7 +1060,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div
               style={{
                 padding: '1.5rem',
-                borderTop: '1px solid #C8C7EB',
+                borderTop: '1px solid #e2e8f0',
                 display: 'flex',
                 gap: '0.75rem',
                 justifyContent: 'flex-end',
@@ -1070,7 +1070,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                 onClick={() => setShowDeleteModal(false)}
                 style={{
                   padding: '0.5rem 1rem',
-                  border: '1px solid #C8C7EB',
+                  border: '1px solid #cbd5e1',
                   background: 'white',
                   borderRadius: '6px',
                   cursor: 'pointer',
@@ -1084,7 +1084,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                 style={{
                   padding: '0.5rem 1rem',
                   border: 'none',
-                  background: '#b3405f',
+                  background: '#dc2626',
                   color: 'white',
                   borderRadius: '6px',
                   cursor: 'pointer',
@@ -1115,42 +1115,42 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
               {/* Profile Information */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
+                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
                   Profile Information
                 </h4>
-                <div style={{ background: '#EAEAF7', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+                <div style={{ background: '#f8fafc', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Email</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.email}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Email</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.email}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Roll Number</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.rollNumber || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Roll Number</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.rollNumber || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Current Company</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.companyName || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Current Company</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.companyName || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Current Role</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.position || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Current Role</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.position || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Graduation Year</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.graduationYear || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Graduation Year</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.graduationYear || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Experience Years</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{editingAlumni.experienceYears || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Experience Years</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{editingAlumni.experienceYears || 'N/A'}</p>
                   </div>
                   {editingAlumni.linkedinUrl && (
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>LinkedIn</p>
+                      <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>LinkedIn</p>
                       <a
                         href={editingAlumni.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ fontSize: '0.875rem', fontWeight: 500, color: '#9230E3', textDecoration: 'underline' }}
+                        style={{ fontSize: '0.875rem', fontWeight: 500, color: '#6366f1', textDecoration: 'underline' }}
                       >
                         {editingAlumni.linkedinUrl}
                       </a>
@@ -1158,8 +1158,8 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   )}
                   {editingAlumni.advice && (
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Advice for Students</p>
-                      <p style={{ fontSize: '0.875rem', color: '#23304D', lineHeight: '1.5' }}>{editingAlumni.advice}</p>
+                      <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Advice for Students</p>
+                      <p style={{ fontSize: '0.875rem', color: '#0f172a', lineHeight: '1.5' }}>{editingAlumni.advice}</p>
                     </div>
                   )}
                 </div>
@@ -1167,21 +1167,21 @@ export const AlumniPage = ({ user, session, userProfile }) => {
 
               {/* Interview Experiences */}
               <div>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
+                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
                   Interview Experiences ({alumniExperiences.length})
                 </h4>
                 {loadingExperiences ? (
-                  <div style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>Loading experiences...</div>
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>Loading experiences...</div>
                 ) : alumniExperiences.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {alumniExperiences.map((exp) => (
-                      <div key={exp.id} style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '8px', padding: '1rem' }}>
+                      <div key={exp.id} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '1rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.75rem' }}>
                           <div>
-                            <h5 style={{ fontSize: '1rem', fontWeight: 600, color: '#23304D', marginBottom: '0.25rem' }}>
+                            <h5 style={{ fontSize: '1rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.25rem' }}>
                               {exp.companyName || 'Company'} - {exp.role}
                             </h5>
-                            <p style={{ fontSize: '0.75rem', color: '#353454' }}>
+                            <p style={{ fontSize: '0.75rem', color: '#64748b' }}>
                               {exp.interviewDate} • Difficulty: {exp.difficulty}
                             </p>
                           </div>
@@ -1190,18 +1190,18 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                             fontWeight: 600,
                             padding: '0.25rem 0.75rem',
                             borderRadius: '9999px',
-                            background: exp.moderationStatus === 'APPROVED' ? '#DBB0FF' : exp.moderationStatus === 'REJECTED' ? '#f8e6ee' : '#f6eedb',
-                            color: exp.moderationStatus === 'APPROVED' ? '#2f6b59' : exp.moderationStatus === 'REJECTED' ? '#8c2f4a' : '#7a5c22'
+                            background: exp.moderationStatus === 'APPROVED' ? '#dcfce7' : exp.moderationStatus === 'REJECTED' ? '#fee2e2' : '#fef3c7',
+                            color: exp.moderationStatus === 'APPROVED' ? '#166534' : exp.moderationStatus === 'REJECTED' ? '#991b1b' : '#854d0e'
                           }}>
                             {exp.moderationStatus}
                           </span>
                         </div>
                         {exp.experience && (
-                          <p style={{ fontSize: '0.875rem', color: '#353454', lineHeight: '1.5' }}>
+                          <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: '1.5' }}>
                             {exp.experience.substring(0, 200)}{exp.experience.length > 200 ? '...' : ''}
                           </p>
                         )}
-                        <div style={{ marginTop: '0.75rem', display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#353454' }}>
+                        <div style={{ marginTop: '0.75rem', display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#64748b' }}>
                           <span>Result: {exp.interviewResult || 'N/A'}</span>
                           <span>•</span>
                           <span>Rounds: {exp.rounds?.length || 0}</span>
@@ -1210,7 +1210,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                     ))}
                   </div>
                 ) : (
-                  <div style={{ textAlign: 'center', padding: '3rem', background: '#EAEAF7', borderRadius: '8px', color: '#353454' }}>
+                  <div style={{ textAlign: 'center', padding: '3rem', background: '#f8fafc', borderRadius: '8px', color: '#64748b' }}>
                     <Eye size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
                     <p>No interview experiences submitted yet</p>
                   </div>
@@ -1255,13 +1255,13 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div
               style={{
                 padding: '1.5rem',
-                borderBottom: '1px solid #C8C7EB',
+                borderBottom: '1px solid #e2e8f0',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#3d8c74' }}>✅ Alumni Created Successfully!</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#10b981' }}>✅ Alumni Created Successfully!</h3>
               <button
                 onClick={() => setCreatedCredentials(null)}
                 style={{
@@ -1279,24 +1279,24 @@ export const AlumniPage = ({ user, session, userProfile }) => {
               <div
                 style={{
                   background: '#d1fae5',
-                  border: '2px solid #3d8c74',
+                  border: '2px solid #10b981',
                   borderRadius: '8px',
                   padding: '1.5rem',
                   marginBottom: '1rem',
                 }}
               >
                 <div style={{ marginBottom: '1rem' }}>
-                  <strong style={{ color: '#2f6b59' }}>Name:</strong>
+                  <strong style={{ color: '#065f46' }}>Name:</strong>
                   <div style={{ fontSize: '1.125rem', marginTop: '0.25rem' }}>{createdCredentials.name}</div>
                 </div>
 
                 <div style={{ marginBottom: '1rem' }}>
-                  <strong style={{ color: '#2f6b59' }}>Email:</strong>
+                  <strong style={{ color: '#065f46' }}>Email:</strong>
                   <div style={{ fontSize: '1.125rem', marginTop: '0.25rem' }}>{createdCredentials.email}</div>
                 </div>
 
                 <div style={{ marginBottom: '0.5rem' }}>
-                  <strong style={{ color: '#2f6b59' }}>Generated Password:</strong>
+                  <strong style={{ color: '#065f46' }}>Generated Password:</strong>
                   <div
                     style={{
                       background: 'white',
@@ -1307,7 +1307,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                       fontSize: '1.25rem',
                       fontWeight: 600,
                       letterSpacing: '0.05em',
-                      border: '2px dashed #3d8c74',
+                      border: '2px dashed #10b981',
                       textAlign: 'center',
                     }}
                   >
@@ -1323,7 +1323,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    background: '#3d8c74',
+                    background: '#10b981',
                     color: 'white',
                     border: 'none',
                     borderRadius: '6px',
@@ -1339,12 +1339,12 @@ export const AlumniPage = ({ user, session, userProfile }) => {
 
               <div
                 style={{
-                  background: '#f6eedb',
-                  border: '1px solid #9a7a3a',
+                  background: '#fef3c7',
+                  border: '1px solid #fbbf24',
                   borderRadius: '6px',
                   padding: '1rem',
                   fontSize: '0.875rem',
-                  color: '#7a5c22',
+                  color: '#92400e',
                 }}
               >
                 <strong>⚠️ Important:</strong> Save this password now! It will not be shown again. Share these credentials
@@ -1355,7 +1355,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
             <div
               style={{
                 padding: '1.5rem',
-                borderTop: '1px solid #C8C7EB',
+                borderTop: '1px solid #e2e8f0',
                 display: 'flex',
                 justifyContent: 'flex-end',
               }}
@@ -1365,7 +1365,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                 style={{
                   padding: '0.5rem 1.5rem',
                   border: 'none',
-                  background: '#3d8c74',
+                  background: '#10b981',
                   color: 'white',
                   borderRadius: '6px',
                   cursor: 'pointer',

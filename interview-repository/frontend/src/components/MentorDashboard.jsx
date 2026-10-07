@@ -166,7 +166,7 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">Active Mentees</span>
             <span className="stat-num">{mentees.length}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
+          <div className="stat-icon-wrap" style={{ background: '#f0fdf4', color: '#16a34a' }}>
             <Users size={20} />
           </div>
         </div>
@@ -175,29 +175,29 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">Available Candidates</span>
             <span className="stat-num">{availableStudents.length}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
+          <div className="stat-icon-wrap" style={{ background: '#eef2ff', color: '#6366f1' }}>
             <GraduationCap size={20} />
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-content">
             <span className="stat-title">Core Focus</span>
-            <span className="stat-num" style={{ fontSize: '1.05rem', color: '#353454' }}>
+            <span className="stat-num" style={{ fontSize: '1.05rem', color: '#334155' }}>
               {profile.expertise?.split(',')[0] || 'System Design'}
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
+          <div className="stat-icon-wrap" style={{ background: '#faf5ff', color: '#9333ea' }}>
             <Award size={20} />
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-content">
             <span className="stat-title">Guidance Rating</span>
-            <span className="stat-num" style={{ fontSize: '1.35rem', color: '#9230E3' }}>
+            <span className="stat-num" style={{ fontSize: '1.35rem', color: '#16a34a' }}>
               4.9 / 5.0
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#3d8c74' }}>
+          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#059669' }}>
             <MessageSquare size={20} />
           </div>
         </div>
@@ -236,13 +236,13 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '3rem', color: '#353454' }}>
+            <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
               Loading assigned mentees...
             </div>
           ) : mentees.length === 0 ? (
             <div className="empty-state">
               <Users size={40} className="empty-state-icon" />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#23304D', marginBottom: '0.35rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.35rem' }}>
                 No Mentees Currently Assigned
               </h3>
               <p style={{ maxWidth: '420px', margin: '0 auto 1.25rem auto' }}>
@@ -267,14 +267,14 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
                           {(mentee.name || mentee.email || 'M').charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#23304D', margin: 0 }}>
+                          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', margin: 0 }}>
                             {mentee.name || 'Student Candidate'}
                           </h3>
-                          <span style={{ fontSize: '0.8rem', color: '#353454' }}>{mentee.email}</span>
+                          <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{mentee.email}</span>
                         </div>
                       </div>
 
-                      <div style={{ fontSize: '0.825rem', color: '#353454', lineHeight: 1.4, margin: '0.5rem 0' }}>
+                      <div style={{ fontSize: '0.825rem', color: '#475569', lineHeight: 1.4, margin: '0.5rem 0' }}>
                         <div><strong>Degree:</strong> {mentee.degree || 'B.Tech CS'}</div>
                         <div><strong>College:</strong> {mentee.college || 'Engineering College'}</div>
                         <div><strong>Batch:</strong> Class of {mentee.graduationYear || '2025'}</div>
@@ -288,7 +288,7 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
                             </span>
                           ))}
                           {skills.length > 4 && (
-                            <span className="skill-tag" style={{ background: '#C8C7EB' }}>
+                            <span className="skill-tag" style={{ background: '#e2e8f0' }}>
                               +{skills.length - 4}
                             </span>
                           )}
@@ -296,7 +296,7 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
                       )}
                     </div>
 
-                    <div style={{ marginTop: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid #EAEAF7' }}>
+                    <div style={{ marginTop: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid #f1f5f9' }}>
                       <button
                         className="btn btn-sm btn-primary"
                         style={{ width: '100%', justifyContent: 'center' }}
@@ -335,7 +335,7 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
               <tbody>
                 {availableStudents.length === 0 ? (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>
+                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                       No registered students found in the database.
                     </td>
                   </tr>
@@ -350,18 +350,18 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
                               {(st.name || st.email || 'S').charAt(0).toUpperCase()}
                             </div>
                             <div>
-                              <strong style={{ fontSize: '0.9rem', color: '#23304D' }}>
+                              <strong style={{ fontSize: '0.9rem', color: '#0f172a' }}>
                                 {st.name || st.email?.split('@')[0]}
                               </strong>
-                              <div style={{ fontSize: '0.785rem', color: '#353454' }}>{st.email}</div>
+                              <div style={{ fontSize: '0.785rem', color: '#64748b' }}>{st.email}</div>
                             </div>
                           </div>
                         </td>
                         <td>
-                          <div style={{ fontSize: '0.85rem', color: '#23304D' }}>{st.degree || 'B.Tech'}</div>
-                          <div style={{ fontSize: '0.785rem', color: '#353454' }}>{st.college || 'University'}</div>
+                          <div style={{ fontSize: '0.85rem', color: '#1e293b' }}>{st.degree || 'B.Tech'}</div>
+                          <div style={{ fontSize: '0.785rem', color: '#64748b' }}>{st.college || 'University'}</div>
                         </td>
-                        <td style={{ fontSize: '0.85rem', color: '#353454' }}>
+                        <td style={{ fontSize: '0.85rem', color: '#475569' }}>
                           {st.graduationYear || 2025}
                         </td>
                         <td>
@@ -386,7 +386,7 @@ export const MentorDashboard = ({ user, session, userProfile }) => {
                               disabled={assigningId === st.id}
                               style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
                             >
-                              <UserPlus size={13} color="#9230E3" />
+                              <UserPlus size={13} color="#4f46e5" />
                               <span>{assigningId === st.id ? 'Connecting...' : 'Connect as Mentee'}</span>
                             </button>
                           )}

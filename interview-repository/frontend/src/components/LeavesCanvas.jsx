@@ -23,13 +23,13 @@ export const LeavesCanvas = () => {
 
     // Natural leaf palette: Contrasting rich greens, sage, golden amber, and warm earthy browns
     const leafColors = [
-      'rgba(103, 102, 183, 0.82)',   // Forest green
-      'rgba(103, 102, 183, 0.8)',    // Sage green
-      'rgba(103, 102, 183, 0.75)', // Spring green
-      'rgba(70, 31, 101, 0.82)',   // Warm wood brown
-      'rgba(70, 31, 101, 0.8)',   // Golden amber brown
-      'rgba(70, 31, 101, 0.78)',   // Deep russet bark
-      'rgba(103, 102, 183, 0.85)',   // Emerald foliage
+      'rgba(58, 114, 76, 0.82)',   // Forest green
+      'rgba(82, 142, 97, 0.8)',    // Sage green
+      'rgba(112, 168, 118, 0.75)', // Spring green
+      'rgba(142, 88, 48, 0.82)',   // Warm wood brown
+      'rgba(184, 118, 62, 0.8)',   // Golden amber brown
+      'rgba(122, 68, 38, 0.78)',   // Deep russet bark
+      'rgba(75, 125, 88, 0.85)',   // Emerald foliage
     ];
 
     // Particle count
@@ -97,7 +97,7 @@ export const LeavesCanvas = () => {
         context.closePath();
 
         context.fillStyle = this.color;
-        context.shadowColor = 'rgba(35, 48, 77, 0.18)';
+        context.shadowColor = 'rgba(27, 48, 32, 0.18)';
         context.shadowBlur = 4;
         context.shadowOffsetX = 1;
         context.shadowOffsetY = 2;

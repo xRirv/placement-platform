@@ -302,7 +302,7 @@ export const AlumniManagement = ({ session }) => {
                   left: '10px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#6766B7',
+                  color: '#94a3b8',
                 }}
               />
               <input
@@ -345,7 +345,7 @@ export const AlumniManagement = ({ session }) => {
                   <td>
                     <div style={{ fontWeight: 600 }}>{alumniItem.name}</div>
                     {alumniItem.rollNumber && (
-                      <div style={{ fontSize: '0.8rem', color: '#353454' }}>
+                      <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
                         Roll: {alumniItem.rollNumber}
                       </div>
                     )}
@@ -382,7 +382,7 @@ export const AlumniManagement = ({ session }) => {
                           top: '100%',
                           marginTop: '0.25rem',
                           background: 'white',
-                          border: '1px solid #C8C7EB',
+                          border: '1px solid #e2e8f0',
                           borderRadius: '8px',
                           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                           zIndex: 10,
@@ -402,10 +402,10 @@ export const AlumniManagement = ({ session }) => {
                             background: 'none',
                             cursor: 'pointer',
                             fontSize: '0.875rem',
-                            color: '#23304D',
+                            color: '#0f172a',
                             transition: 'background 0.2s',
                           }}
-                          onMouseEnter={(e) => e.currentTarget.style.background = '#EAEAF7'}
+                          onMouseEnter={(e) => e.currentTarget.style.background = '#f1f5f9'}
                           onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
                         >
                           <Edit2 size={14} />
@@ -425,17 +425,17 @@ export const AlumniManagement = ({ session }) => {
                             background: 'none',
                             cursor: 'pointer',
                             fontSize: '0.875rem',
-                            color: alumniItem.isActive ? '#9a7a3a' : '#3d8c74',
+                            color: alumniItem.isActive ? '#f59e0b' : '#10b981',
                             transition: 'background 0.2s',
                           }}
-                          onMouseEnter={(e) => e.currentTarget.style.background = '#EAEAF7'}
+                          onMouseEnter={(e) => e.currentTarget.style.background = '#f1f5f9'}
                           onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
                         >
                           <Eye size={14} />
                           <span>{alumniItem.isActive ? 'Deactivate' : 'Activate'}</span>
                         </button>
 
-                        <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
+                        <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
 
                         <button
                           type="button"
@@ -450,10 +450,10 @@ export const AlumniManagement = ({ session }) => {
                             background: 'none',
                             cursor: 'pointer',
                             fontSize: '0.875rem',
-                            color: '#b3405f',
+                            color: '#dc2626',
                             transition: 'background 0.2s',
                           }}
-                          onMouseEnter={(e) => e.currentTarget.style.background = '#f8e6ee'}
+                          onMouseEnter={(e) => e.currentTarget.style.background = '#fef2f2'}
                           onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
                         >
                           <Trash2 size={14} />
@@ -527,7 +527,7 @@ export const AlumniManagement = ({ session }) => {
                         href={selectedAlumni.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#9230E3' }}
+                        style={{ color: '#6366f1' }}
                       >
                         Profile Link
                       </a>
@@ -557,16 +557,16 @@ export const AlumniManagement = ({ session }) => {
                 <div className="modal-body">
                   {/* Info Box - Only show in create mode */}
                   {modalMode === 'create' && (
-                    <div style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
-                      <strong style={{ color: '#6766B7' }}>One-Click Alumni Creation</strong><br/>
-                      <span style={{ fontSize: '0.875rem', color: '#6766B7' }}>
+                    <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
+                      <strong style={{ color: '#1e40af' }}>One-Click Alumni Creation</strong><br/>
+                      <span style={{ fontSize: '0.875rem', color: '#1e40af' }}>
                         This will automatically create:
                       </span>
-                      <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#6766B7' }}>
+                      <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#1e40af' }}>
                         <li>✓ Login credentials in Supabase Auth</li>
                         <li>✓ Alumni record in database</li>
                       </ul>
-                      <em style={{ fontSize: '0.75rem', color: '#6766B7' }}>Email must be unique!</em>
+                      <em style={{ fontSize: '0.75rem', color: '#3b82f6' }}>Email must be unique!</em>
                     </div>
                   )}
 
@@ -602,7 +602,7 @@ export const AlumniManagement = ({ session }) => {
                           className="text-input"
                           value={formData.email}
                           disabled
-                          style={{ background: '#EAEAF7', cursor: 'not-allowed' }}
+                          style={{ background: '#f1f5f9', cursor: 'not-allowed' }}
                         />
                       </div>
                     )}
@@ -747,11 +747,11 @@ export const AlumniManagement = ({ session }) => {
             </div>
 
             <div className="modal-body">
-              <div style={{ marginBottom: '1rem', color: '#b3405f', fontWeight: 600 }}>
+              <div style={{ marginBottom: '1rem', color: '#dc2626', fontWeight: 600 }}>
                 ⚠️ Are you sure you want to delete this alumni?
               </div>
 
-              <div style={{ background: '#f8e6ee', border: '1px solid #ecc5d3', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
+              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
                   <strong>Name:</strong> {alumniToDelete.name}
                 </div>
@@ -764,13 +764,13 @@ export const AlumniManagement = ({ session }) => {
                   </div>
                 )}
                 {alumniToDelete.interviewExperiencesCount > 0 && (
-                  <div style={{ color: '#b3405f', marginTop: '0.75rem', fontSize: '0.875rem' }}>
+                  <div style={{ color: '#dc2626', marginTop: '0.75rem', fontSize: '0.875rem' }}>
                     ⚠️ This alumni has <strong>{alumniToDelete.interviewExperiencesCount}</strong> interview experience(s) shared.
                   </div>
                 )}
               </div>
 
-              <div style={{ fontSize: '0.875rem', color: '#353454' }}>
+              <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
                 This action cannot be undone. The alumni account and all associated data will be permanently removed.
               </div>
             </div>
@@ -787,7 +787,7 @@ export const AlumniManagement = ({ session }) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={confirmDeleteAlumni}
-                style={{ background: '#b3405f' }}
+                style={{ background: '#dc2626' }}
               >
                 <Trash2 size={16} />
                 <span>Delete Alumni</span>

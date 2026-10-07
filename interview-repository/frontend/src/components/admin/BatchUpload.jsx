@@ -139,7 +139,7 @@ export const BatchUpload = ({ session }) => {
                 onChange={handleFileChange}
                 style={{
                   padding: '0.5rem',
-                  border: '1px solid #C8C7EB',
+                  border: '1px solid #e2e8f0',
                   borderRadius: '8px',
                   width: '100%',
                 }}
@@ -152,7 +152,7 @@ export const BatchUpload = ({ session }) => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  color: '#3d8c74',
+                  color: '#059669',
                 }}
               >
                 <FileSpreadsheet size={16} />
@@ -193,7 +193,7 @@ export const BatchUpload = ({ session }) => {
               style={{
                 marginTop: '1.5rem',
                 padding: '1rem',
-                background: '#EAEAF7',
+                background: '#f1f5f9',
                 borderRadius: '8px',
                 fontSize: '0.875rem',
               }}
@@ -210,7 +210,7 @@ export const BatchUpload = ({ session }) => {
               style={{
                 marginTop: '1.5rem',
                 padding: '1rem',
-                background: '#EAEAF7',
+                background: '#f1f5f9',
                 borderRadius: '8px',
                 fontSize: '0.875rem',
               }}
@@ -223,14 +223,14 @@ export const BatchUpload = ({ session }) => {
         </div>
 
         {result && (
-          <div style={{ padding: '1.5rem', borderTop: '1px solid #C8C7EB' }}>
+          <div style={{ padding: '1.5rem', borderTop: '1px solid #e2e8f0' }}>
             <h4 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: 600 }}>
               Upload Results
             </h4>
 
             <div style={{ display: 'grid', gap: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <CheckCircle size={20} style={{ color: '#3d8c74' }} />
+                <CheckCircle size={20} style={{ color: '#059669' }} />
                 <span>
                   <strong>Success:</strong> {result.successCount} / {result.totalProcessed}
                 </span>
@@ -238,7 +238,7 @@ export const BatchUpload = ({ session }) => {
 
               {result.failureCount > 0 && (
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <XCircle size={20} style={{ color: '#b3405f', marginTop: '0.2rem' }} />
+                  <XCircle size={20} style={{ color: '#dc2626', marginTop: '0.2rem' }} />
                   <div>
                     <strong>Failed:</strong> {result.failureCount}
                     {result.errors && result.errors.length > 0 && (
@@ -247,7 +247,7 @@ export const BatchUpload = ({ session }) => {
                           marginTop: '0.5rem',
                           paddingLeft: '1.5rem',
                           fontSize: '0.875rem',
-                          color: '#353454',
+                          color: '#64748b',
                         }}
                       >
                         {result.errors.map((error, idx) => (
@@ -267,7 +267,7 @@ export const BatchUpload = ({ session }) => {
                       marginTop: '0.5rem',
                       paddingLeft: '1.5rem',
                       fontSize: '0.875rem',
-                      color: '#353454',
+                      color: '#64748b',
                     }}
                   >
                     {result.successRecords.slice(0, 10).map((record, idx) => (

@@ -437,8 +437,8 @@ export const StudentsPage = ({ user, session, userProfile }) => {
             position: 'fixed',
             top: '2rem',
             right: '2rem',
-            background: message.includes('Error') ? '#f8e6ee' : '#DBB0FF',
-            color: message.includes('Error') ? '#8c2f4a' : '#2f6b59',
+            background: message.includes('Error') ? '#fee2e2' : '#dcfce7',
+            color: message.includes('Error') ? '#991b1b' : '#166534',
             padding: '1rem 1.5rem',
             borderRadius: '8px',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -456,7 +456,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
             <h3 className="admin-sidebar-title">Batches</h3>
             <div className="admin-sidebar-list">
               {loadingBatches ? (
-                <div style={{ padding: '1rem', textAlign: 'center', color: '#6766B7' }}>
+                <div style={{ padding: '1rem', textAlign: 'center', color: '#94a3b8' }}>
                   Loading...
                 </div>
               ) : batches.length > 0 ? (
@@ -476,7 +476,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                   </button>
                 ))
               ) : (
-                <div style={{ padding: '1rem', textAlign: 'center', color: '#6766B7' }}>
+                <div style={{ padding: '1rem', textAlign: 'center', color: '#94a3b8' }}>
                   No batches found
                 </div>
               )}
@@ -575,12 +575,12 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                           </div>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.875rem', color: '#353454' }}>
+                          <span style={{ fontSize: '0.875rem', color: '#64748b' }}>
                             {student.rollNumber || '—'}
                           </span>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.875rem', color: '#23304D' }}>
+                          <span style={{ fontSize: '0.875rem', color: '#0f172a' }}>
                             {student.interviewExperiencesCount || 0}
                           </span>
                         </td>
@@ -612,7 +612,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                                 right: 0,
                                 top: '100%',
                                 background: 'white',
-                                border: '1px solid #C8C7EB',
+                                border: '1px solid #e2e8f0',
                                 borderRadius: '8px',
                                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                                 minWidth: '160px',
@@ -632,17 +632,17 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#9230E3',
+                                    color: '#6366f1',
                                     fontWeight: 600,
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#F2E1FF'}
+                                  onMouseEnter={(e) => e.target.style.background = '#eef2ff'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Eye size={14} />
                                   View Profile
                                 </button>
-                                <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
+                                <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
                                 <button
                                   onClick={() => handleEditStudent(student)}
                                   style={{
@@ -656,10 +656,10 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#23304D',
+                                    color: '#0f172a',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#EAEAF7'}
+                                  onMouseEnter={(e) => e.target.style.background = '#f1f5f9'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Edit2 size={14} />
@@ -678,10 +678,10 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: student.isActive ? '#9a7a3a' : '#3d8c74',
+                                    color: student.isActive ? '#f59e0b' : '#10b981',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#EAEAF7'}
+                                  onMouseEnter={(e) => e.target.style.background = '#f1f5f9'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Eye size={14} />
@@ -694,17 +694,17 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                                     padding: '0.75rem 1rem',
                                     textAlign: 'left',
                                     border: 'none',
-                                    borderTop: '1px solid #C8C7EB',
+                                    borderTop: '1px solid #e2e8f0',
                                     background: 'transparent',
                                     cursor: 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#b3405f',
+                                    color: '#dc2626',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#f8e6ee'}
+                                  onMouseEnter={(e) => e.target.style.background = '#fef2f2'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Trash2 size={14} />
@@ -744,13 +744,13 @@ export const StudentsPage = ({ user, session, userProfile }) => {
               <div className="modal-body">
                 {/* Info Box */}
                 <div style={{
-                  background: '#EAEAF7',
-                  border: '1px solid #C8C7EB',
+                  background: '#eff6ff',
+                  border: '1px solid #bfdbfe',
                   borderRadius: '8px',
                   padding: '0.75rem',
                   marginBottom: '1rem',
                   fontSize: '0.875rem',
-                  color: '#6766B7'
+                  color: '#1e40af'
                 }}>
                   <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'start' }}>
                     <span style={{ fontSize: '1.25rem' }}>ℹ️</span>
@@ -761,7 +761,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                         <li>✓ Login credentials in Supabase Auth</li>
                         <li>✓ Student record in database</li>
                       </ul>
-                      <em style={{ fontSize: '0.8125rem', color: '#6766B7' }}>Email must be unique!</em>
+                      <em style={{ fontSize: '0.8125rem', color: '#3b82f6' }}>Email must be unique!</em>
                     </div>
                   </div>
                 </div>
@@ -776,7 +776,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -787,7 +787,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.rollNumber}
                       onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -799,7 +799,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -811,7 +811,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -823,7 +823,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                         type="text"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                        style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                       />
                     </div>
                     <div>
@@ -834,20 +834,20 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                         type="number"
                         value={formData.graduationYear}
                         onChange={(e) => setFormData({ ...formData, graduationYear: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                        style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                       />
                     </div>
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, marginBottom: '0.5rem' }}>
-                      College {userProfile?.college && <span style={{ color: '#353454', fontSize: '0.75rem' }}>(Auto-filled from your profile)</span>}
+                      College {userProfile?.college && <span style={{ color: '#64748b', fontSize: '0.75rem' }}>(Auto-filled from your profile)</span>}
                     </label>
                     <input
                       type="text"
                       value={formData.college}
                       readOnly
                       disabled={!!userProfile?.college}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px', background: userProfile?.college ? '#EAEAF7' : 'white', cursor: userProfile?.college ? 'not-allowed' : 'text' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px', background: userProfile?.college ? '#f8fafc' : 'white', cursor: userProfile?.college ? 'not-allowed' : 'text' }}
                     />
                   </div>
                   <div>
@@ -858,7 +858,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.degree}
                       onChange={(e) => setFormData({ ...formData, degree: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -869,7 +869,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       rows={3}
                       value={formData.skills}
                       onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                 </div>
@@ -899,17 +899,17 @@ export const StudentsPage = ({ user, session, userProfile }) => {
               </button>
             </div>
             <div className="modal-body">
-              <p style={{ fontSize: '0.875rem', color: '#353454', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem' }}>
                 Upload an Excel file (.xlsx) with columns: Name, RollNumber, Email, Password, Phone, College, Degree, GraduationYear, Skills
               </p>
               <input
                 type="file"
                 accept=".xlsx"
                 onChange={(e) => setBatchFile(e.target.files[0])}
-                style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
               />
               {batchFile && (
-                <p style={{ fontSize: '0.875rem', color: '#3d8c74', marginTop: '0.5rem' }}>
+                <p style={{ fontSize: '0.875rem', color: '#059669', marginTop: '0.5rem' }}>
                   Selected: {batchFile.name}
                 </p>
               )}
@@ -949,7 +949,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -960,7 +960,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.rollNumber}
                       onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -971,7 +971,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="email"
                       value={formData.email}
                       disabled
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px', background: '#EAEAF7', cursor: 'not-allowed' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px', background: '#f1f5f9', cursor: 'not-allowed' }}
                     />
                   </div>
                   <div>
@@ -982,7 +982,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -993,7 +993,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.college}
                       disabled
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px', background: '#EAEAF7', cursor: 'not-allowed' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px', background: '#f1f5f9', cursor: 'not-allowed' }}
                     />
                   </div>
                   <div>
@@ -1004,7 +1004,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.degree}
                       onChange={(e) => setFormData({ ...formData, degree: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -1015,7 +1015,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       type="number"
                       value={formData.graduationYear}
                       onChange={(e) => setFormData({ ...formData, graduationYear: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -1026,7 +1026,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                       rows={3}
                       value={formData.skills}
                       onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
                       placeholder="e.g., Java, Python, React, Node.js"
                     />
                   </div>
@@ -1057,18 +1057,18 @@ export const StudentsPage = ({ user, session, userProfile }) => {
               </button>
             </div>
             <div className="modal-body">
-              <p style={{ fontSize: '0.875rem', color: '#353454', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem' }}>
                 Are you sure you want to delete this student?
               </p>
-              <div style={{ background: '#f8e6ee', border: '1px solid #ecc5d3', borderRadius: '6px', padding: '1rem' }}>
-                <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#8c2f4a', marginBottom: '0.25rem' }}>
+              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px', padding: '1rem' }}>
+                <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#991b1b', marginBottom: '0.25rem' }}>
                   {selectedStudent.name}
                 </p>
-                <p style={{ fontSize: '0.75rem', color: '#8c2f4a' }}>
+                <p style={{ fontSize: '0.75rem', color: '#b91c1c' }}>
                   {selectedStudent.email}
                 </p>
               </div>
-              <p style={{ fontSize: '0.75rem', color: '#b3405f', marginTop: '1rem' }}>
+              <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '1rem' }}>
                 ⚠️ This action cannot be undone. The student will be removed from the database.
               </p>
             </div>
@@ -1080,7 +1080,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                 className="admin-btn-primary"
                 onClick={confirmDeleteStudent}
                 disabled={uploading}
-                style={{ background: '#b3405f' }}
+                style={{ background: '#dc2626' }}
               >
                 <Trash2 size={16} />
                 {uploading ? 'Deleting...' : 'Delete Student'}
@@ -1103,44 +1103,44 @@ export const StudentsPage = ({ user, session, userProfile }) => {
             <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
               {/* Profile Information */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
+                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
                   Profile Information
                 </h4>
-                <div style={{ background: '#EAEAF7', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+                <div style={{ background: '#f8fafc', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Email</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.email}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Email</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.email}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Roll Number</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.rollNumber || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Roll Number</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.rollNumber || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Phone</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.phone || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Phone</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.phone || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>College</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.college || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>College</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.college || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Degree</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.degree || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Degree</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.degree || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Graduation Year</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{selectedStudent.graduationYear || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Graduation Year</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{selectedStudent.graduationYear || 'N/A'}</p>
                   </div>
                   {selectedStudent.mentorName && (
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Mentor</p>
-                      <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#9230E3' }}>{selectedStudent.mentorName}</p>
+                      <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Mentor</p>
+                      <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#6366f1' }}>{selectedStudent.mentorName}</p>
                     </div>
                   )}
                   {selectedStudent.skills && (
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Skills</p>
-                      <p style={{ fontSize: '0.875rem', color: '#23304D' }}>{selectedStudent.skills}</p>
+                      <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Skills</p>
+                      <p style={{ fontSize: '0.875rem', color: '#0f172a' }}>{selectedStudent.skills}</p>
                     </div>
                   )}
                 </div>
@@ -1148,21 +1148,21 @@ export const StudentsPage = ({ user, session, userProfile }) => {
 
               {/* Interview Experiences */}
               <div>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
+                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
                   Interview Experiences ({studentExperiences.length})
                 </h4>
                 {loadingExperiences ? (
-                  <div style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>Loading experiences...</div>
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>Loading experiences...</div>
                 ) : studentExperiences.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {studentExperiences.map((exp) => (
-                      <div key={exp.id} style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '8px', padding: '1rem' }}>
+                      <div key={exp.id} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '1rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.75rem' }}>
                           <div>
-                            <h5 style={{ fontSize: '1rem', fontWeight: 600, color: '#23304D', marginBottom: '0.25rem' }}>
+                            <h5 style={{ fontSize: '1rem', fontWeight: 600, color: '#0f172a', marginBottom: '0.25rem' }}>
                               {exp.companyName || 'Company'} - {exp.role}
                             </h5>
-                            <p style={{ fontSize: '0.75rem', color: '#353454' }}>
+                            <p style={{ fontSize: '0.75rem', color: '#64748b' }}>
                               {exp.interviewDate} • Difficulty: {exp.difficulty}
                             </p>
                           </div>
@@ -1171,18 +1171,18 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                             fontWeight: 600,
                             padding: '0.25rem 0.75rem',
                             borderRadius: '9999px',
-                            background: exp.moderationStatus === 'APPROVED' ? '#DBB0FF' : exp.moderationStatus === 'REJECTED' ? '#f8e6ee' : '#f6eedb',
-                            color: exp.moderationStatus === 'APPROVED' ? '#2f6b59' : exp.moderationStatus === 'REJECTED' ? '#8c2f4a' : '#7a5c22'
+                            background: exp.moderationStatus === 'APPROVED' ? '#dcfce7' : exp.moderationStatus === 'REJECTED' ? '#fee2e2' : '#fef3c7',
+                            color: exp.moderationStatus === 'APPROVED' ? '#166534' : exp.moderationStatus === 'REJECTED' ? '#991b1b' : '#854d0e'
                           }}>
                             {exp.moderationStatus}
                           </span>
                         </div>
                         {exp.experience && (
-                          <p style={{ fontSize: '0.875rem', color: '#353454', lineHeight: '1.5' }}>
+                          <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: '1.5' }}>
                             {exp.experience.substring(0, 200)}{exp.experience.length > 200 ? '...' : ''}
                           </p>
                         )}
-                        <div style={{ marginTop: '0.75rem', display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#353454' }}>
+                        <div style={{ marginTop: '0.75rem', display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#64748b' }}>
                           <span>Result: {exp.interviewResult || 'N/A'}</span>
                           <span>•</span>
                           <span>Rounds: {exp.rounds?.length || 0}</span>
@@ -1191,7 +1191,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                     ))}
                   </div>
                 ) : (
-                  <div style={{ textAlign: 'center', padding: '3rem', background: '#EAEAF7', borderRadius: '8px', color: '#353454' }}>
+                  <div style={{ textAlign: 'center', padding: '3rem', background: '#f8fafc', borderRadius: '8px', color: '#64748b' }}>
                     <Eye size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
                     <p>No interview experiences submitted yet</p>
                   </div>

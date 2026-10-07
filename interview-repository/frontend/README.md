@@ -73,27 +73,12 @@ src/
     admin/, AdminDashboard.jsx, MentorDashboard.jsx, AlumniDashboard.jsx
 ```
 
-## Brand palette & themes
+## Themes
 
-The whole app is built on one palette, defined once in `src/styles/palette.css`:
-
-| Token | Color | Role |
-|---|---|---|
-| `--color-navy` | `#23304D` | dark surfaces, navigation, headings |
-| `--color-deep-purple` | `#461F65` | secondary dark surfaces, accents |
-| `--color-purple` | `#9230E3` | **main brand accent**: primary buttons, active nav, links, focus, progress |
-| `--color-light-purple` | `#DBB0FF` | hover states, highlights |
-| `--color-pale-purple` | `#F2E1FF` | soft accent backgrounds, selected states |
-| `--color-dark-secondary` | `#282845` | dark-mode background |
-| `--color-dark-surface` | `#353454` | dark-mode secondary surface, secondary text |
-| `--color-lavender-purple` | `#6766B7` | secondary accent, muted text |
-| `--color-soft-lavender` | `#C8C7EB` | borders |
-| `--color-pale-lavender` | `#EAEAF7` | light-mode background |
-
-The student workspace maps these onto theme tokens (`--ws-*` in `styles/workspace.css`) with a **light** and a
-**dark** theme; students switch with the *Auto / Light / Dark* toggle in the sidebar (saved per browser, *Auto*
-follows the OS). Success / warning / error colors exist but are muted so the purple/navy identity stays dominant.
-Login, admin, mentor and alumni screens use the same palette.
+The student workspace uses the original green identity (tokens `--ws-*` in `styles/workspace.css`: warm
+off-white background, dark green text, green accent). It has a **light** and a **dark** theme in the same
+green family; students switch with the *Auto / Light / Dark* toggle in the sidebar (saved per browser,
+*Auto* follows the OS). The submit / edit experience form follows the selected theme.
 
 ## AI Assistant conversation
 

@@ -118,7 +118,7 @@ export const DashboardPage = ({ user, session, userProfile }) => {
                 padding: '0.5rem 1rem',
                 background: 'transparent',
                 border: 'none',
-                color: '#9230E3',
+                color: '#4F46E5',
                 fontSize: '0.875rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -141,23 +141,23 @@ export const DashboardPage = ({ user, session, userProfile }) => {
                       alignItems: 'flex-start',
                       gap: '1rem',
                       padding: '1rem',
-                      background: '#EAEAF7',
+                      background: '#f8fafc',
                       borderRadius: '8px',
                       cursor: 'pointer',
                       transition: 'background 0.2s',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#EAEAF7';
+                      e.currentTarget.style.background = '#f1f5f9';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '#EAEAF7';
+                      e.currentTarget.style.background = '#f8fafc';
                     }}
                   >
                     <div
                       style={{
                         width: '8px',
                         height: '8px',
-                        background: '#b3405f',
+                        background: '#ef4444',
                         borderRadius: '50%',
                         marginTop: '0.5rem',
                         flexShrink: 0,
@@ -167,24 +167,24 @@ export const DashboardPage = ({ user, session, userProfile }) => {
                       <div
                         style={{
                           fontWeight: 600,
-                          color: '#23304D',
+                          color: '#0f172a',
                           marginBottom: '0.25rem',
                         }}
                       >
                         {log.entityType || 'Student Name'}
                       </div>
-                      <div style={{ fontSize: '0.875rem', color: '#353454' }}>
+                      <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
                         {log.reason || 'Inconsistent responses detected in Mock round 2'}
                       </div>
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#6766B7', flexShrink: 0 }}>
+                    <div style={{ fontSize: '0.75rem', color: '#94a3b8', flexShrink: 0 }}>
                       {new Date(log.createdAt).toLocaleTimeString()}
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div style={{ textAlign: 'center', padding: '2rem', color: '#6766B7' }}>
+              <div style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>
                 <p>No high-risk moderation logs at the moment.</p>
               </div>
             )}
@@ -198,18 +198,18 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             style={{
               padding: '1.5rem',
               background: 'white',
-              border: '1px solid #C8C7EB',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               cursor: 'pointer',
               textAlign: 'left',
               transition: 'all 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#9230E3';
+              e.currentTarget.style.borderColor = '#4F46E5';
               e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#C8C7EB';
+              e.currentTarget.style.borderColor = '#e2e8f0';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -217,7 +217,7 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', fontWeight: 600 }}>
               Manage Students
             </h3>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: '#353454' }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: '#64748b' }}>
               Add, edit, or remove student records
             </p>
           </button>
@@ -227,18 +227,18 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             style={{
               padding: '1.5rem',
               background: 'white',
-              border: '1px solid #C8C7EB',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               cursor: 'pointer',
               textAlign: 'left',
               transition: 'all 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#9230E3';
+              e.currentTarget.style.borderColor = '#4F46E5';
               e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#C8C7EB';
+              e.currentTarget.style.borderColor = '#e2e8f0';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -246,7 +246,7 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', fontWeight: 600 }}>
               Manage Mentors
             </h3>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: '#353454' }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: '#64748b' }}>
               Oversee mentor assignments
             </p>
           </button>
@@ -256,18 +256,18 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             style={{
               padding: '1.5rem',
               background: 'white',
-              border: '1px solid #C8C7EB',
+              border: '1px solid #e2e8f0',
               borderRadius: '12px',
               cursor: 'pointer',
               textAlign: 'left',
               transition: 'all 0.2s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#9230E3';
+              e.currentTarget.style.borderColor = '#4F46E5';
               e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#C8C7EB';
+              e.currentTarget.style.borderColor = '#e2e8f0';
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
@@ -275,7 +275,7 @@ export const DashboardPage = ({ user, session, userProfile }) => {
             <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', fontWeight: 600 }}>
               Manage Alumni
             </h3>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: '#353454' }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: '#64748b' }}>
               Connect with alumni network
             </p>
           </button>

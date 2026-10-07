@@ -3,198 +3,144 @@
    Scoped under .ws so admin / mentor / alumni screens keep their own styles.
    ========================================================================== */
 
-/* Theme tokens for the student workspace. Built only from the brand palette (styles/palette.css);
-   semantic colors are muted so the purple/navy identity stays dominant. */
-.ws {
-  /* Surfaces & text (light) */
-  --ws-bg: var(--color-pale-lavender);
-  --ws-surface: rgba(255, 255, 255, 0.78);
-  --ws-surface-solid: #ffffff;
+:root {
   --ws-field-bg: #ffffff;
-  --ws-surface-muted: rgba(234, 234, 247, 0.7);
-  --ws-surface-tint: var(--color-pale-purple);
-  --ws-border: rgba(103, 102, 183, 0.22);
-  --ws-border-strong: rgba(103, 102, 183, 0.42);
-  --ws-text: var(--color-navy);
-  --ws-text-2: var(--color-dark-surface);
-  --ws-text-3: var(--color-lavender-purple);
-  --ws-hover: rgba(242, 225, 255, 0.65);
-  --ws-topbar-bg: rgba(234, 234, 247, 0.92);
-  --ws-overlay: rgba(35, 48, 77, 0.45);
+  --ws-hover: #fbfaf7;
+  --ws-topbar-bg: rgba(247, 246, 242, 0.92);
+  --ws-overlay: rgba(23, 34, 28, 0.35);
+  --ws-focus-ring: rgba(31, 107, 70, 0.12);
+  --ws-accent-border: rgba(31, 107, 70, 0.12);
+  --ws-skeleton-a: #ece9e1;
+  --ws-skeleton-b: #f5f3ee;
+  --ws-danger-border: #efd0cb;
+  --ws-danger-bg: #fffaf9;
+  --ws-success-border: #cfe6d8;
+  --ws-warning-border: #f0dfbd;
 
-  /* Brand */
-  --ws-accent: var(--color-purple);
-  --ws-accent-hover: var(--color-deep-purple);
-  --ws-accent-soft: var(--color-pale-purple);
-  --ws-accent-text: var(--color-deep-purple);
-  --ws-accent-border: rgba(146, 48, 227, 0.22);
-  --ws-focus-ring: rgba(146, 48, 227, 0.22);
-  --ws-violet: var(--color-lavender-purple);
-  --ws-violet-soft: var(--color-pale-lavender);
-  --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.16) 0%, rgba(146, 48, 227, 0) 62%),
-    radial-gradient(900px 520px at -5% -10%, rgba(35, 48, 77, 0.1) 0%, rgba(35, 48, 77, 0) 58%),
-    radial-gradient(800px 600px at 50% 110%, rgba(219, 176, 255, 0.22) 0%, rgba(219, 176, 255, 0) 60%);
-  --ws-glass-blur: blur(14px) saturate(140%);
+  --ws-bg: #f7f6f2;
+  --ws-surface: #ffffff;
+  --ws-surface-muted: #f1efe9;
+  --ws-border: #e6e3da;
+  --ws-border-strong: #d6d2c6;
 
-  /* Navigation (navy panel in both themes) */
-  --ws-nav-bg: var(--color-navy);
-  --ws-nav-text: var(--color-soft-lavender);
-  --ws-nav-muted: rgba(200, 199, 235, 0.55);
-  --ws-nav-hover: rgba(219, 176, 255, 0.1);
-  --ws-nav-active-bg: var(--color-purple);
-  --ws-nav-active-text: #ffffff;
-  --ws-nav-border: rgba(200, 199, 235, 0.14);
+  --ws-text: #17221c;
+  --ws-text-2: #5b665f;
+  --ws-text-3: #8a938d;
 
-  /* Hero */
-  --ws-hero-bg:
-    radial-gradient(120% 140% at 100% 0%, rgba(146, 48, 227, 0.45) 0%, rgba(146, 48, 227, 0) 55%),
-    linear-gradient(135deg, var(--color-navy) 0%, var(--color-deep-purple) 100%);
-  --ws-hero-text: var(--color-pale-purple);
-  --ws-hero-sub: var(--color-soft-lavender);
+  --ws-accent: #1f6b46;
+  --ws-accent-hover: #185638;
+  --ws-accent-soft: #e7f1ea;
+  --ws-accent-text: #165236;
 
-  /* Semantic (muted, subordinate to the brand) */
-  --ws-success: var(--color-deep-purple);
-  --ws-success-soft: var(--color-pale-purple);
-  --ws-success-border: var(--color-light-purple);
-  --ws-warning: var(--color-lavender-purple);
-  --ws-warning-soft: var(--color-pale-lavender);
-  --ws-warning-border: var(--color-soft-lavender);
-  --ws-danger: #a63a59;
-  --ws-danger-soft: #f8e6ee;
-  --ws-danger-border: #ecc5d3;
-  --ws-danger-bg: #fdf6f9;
+  --ws-violet: #5b4bb7;
+  --ws-violet-soft: #eeebfa;
 
-  --ws-skeleton-a: var(--color-pale-lavender);
-  --ws-skeleton-b: var(--color-pale-purple);
-
-  --ws-shadow-sm: 0 1px 2px rgba(35, 48, 77, 0.05), 0 4px 14px rgba(70, 31, 101, 0.05);
-  --ws-shadow: 0 2px 4px rgba(35, 48, 77, 0.06), 0 10px 28px rgba(70, 31, 101, 0.1);
-  --ws-shadow-lg: 0 16px 48px rgba(35, 48, 77, 0.22);
+  --ws-success: #1f7a4c;
+  --ws-success-soft: #e6f3eb;
+  --ws-warning: #9a6512;
+  --ws-warning-soft: #fbf1df;
+  --ws-danger: #a8362a;
+  --ws-danger-soft: #fbecea;
 
   --ws-radius-sm: 8px;
   --ws-radius: 12px;
   --ws-radius-lg: 16px;
+
+  --ws-shadow-sm: 0 1px 2px rgba(23, 34, 28, 0.04);
+  --ws-shadow: 0 1px 2px rgba(23, 34, 28, 0.04), 0 4px 16px rgba(23, 34, 28, 0.04);
+  --ws-shadow-lg: 0 12px 40px rgba(23, 34, 28, 0.12);
+
   --ws-font: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ws-sidebar-w: 248px;
   --ws-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Dark theme (same green identity). Chosen with the Auto / Light / Dark toggle in the sidebar. */
 .ws[data-theme='dark'] {
-  --ws-bg: var(--color-dark-secondary);
-  --ws-surface: rgba(35, 48, 77, 0.82);
-  --ws-surface-solid: var(--color-navy);
-  --ws-field-bg: var(--color-dark-surface);
-  --ws-surface-muted: var(--color-dark-surface);
-  --ws-surface-tint: rgba(70, 31, 101, 0.55);
-  --ws-border: rgba(103, 102, 183, 0.32);
-  --ws-border-strong: rgba(103, 102, 183, 0.55);
-  --ws-text: var(--color-pale-purple);
-  --ws-text-2: var(--color-soft-lavender);
-  --ws-text-3: rgba(200, 199, 235, 0.72);
-  --ws-hover: rgba(70, 31, 101, 0.45);
-  --ws-topbar-bg: rgba(40, 40, 69, 0.9);
-  --ws-overlay: rgba(10, 12, 28, 0.6);
-
-  --ws-accent: var(--color-purple);
-  --ws-accent-hover: var(--color-deep-purple);
-  --ws-accent-soft: rgba(146, 48, 227, 0.2);
-  --ws-accent-text: var(--color-light-purple);
-  --ws-accent-border: rgba(219, 176, 255, 0.25);
-  --ws-focus-ring: rgba(219, 176, 255, 0.3);
-  --ws-violet: var(--color-soft-lavender);
-  --ws-violet-soft: rgba(103, 102, 183, 0.25);
-  --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.22) 0%, rgba(146, 48, 227, 0) 62%),
-    radial-gradient(900px 600px at -5% 0%, rgba(70, 31, 101, 0.45) 0%, rgba(70, 31, 101, 0) 60%),
-    radial-gradient(800px 600px at 50% 115%, rgba(103, 102, 183, 0.18) 0%, rgba(103, 102, 183, 0) 60%);
-
-  --ws-nav-bg: var(--color-navy);
-  --ws-nav-border: rgba(103, 102, 183, 0.28);
-
-  --ws-hero-bg:
-    radial-gradient(120% 140% at 100% 0%, rgba(146, 48, 227, 0.5) 0%, rgba(146, 48, 227, 0) 55%),
-    linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-navy) 100%);
-
-  --ws-success: var(--color-light-purple);
-  --ws-success-soft: rgba(146, 48, 227, 0.22);
-  --ws-success-border: rgba(219, 176, 255, 0.35);
-  --ws-warning: var(--color-soft-lavender);
-  --ws-warning-soft: rgba(103, 102, 183, 0.25);
-  --ws-warning-border: rgba(200, 199, 235, 0.3);
-  --ws-danger: #e797b2;
-  --ws-danger-soft: rgba(166, 58, 89, 0.22);
-  --ws-danger-border: rgba(231, 151, 178, 0.32);
-  --ws-danger-bg: rgba(166, 58, 89, 0.1);
-
-  --ws-skeleton-a: var(--color-dark-surface);
-  --ws-skeleton-b: rgba(70, 31, 101, 0.6);
-
-  --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-  --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(10, 12, 28, 0.35);
-  --ws-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --ws-bg: #111915;
+  --ws-surface: #17211b;
+  --ws-surface-muted: #1e2a23;
+  --ws-border: #2a3a31;
+  --ws-border-strong: #3b4f43;
+  --ws-text: #e7eee9;
+  --ws-text-2: #b2c1b7;
+  --ws-text-3: #7f9387;
+  --ws-accent: #4fae7f;
+  --ws-accent-hover: #63c191;
+  --ws-accent-soft: rgba(79, 174, 127, 0.15);
+  --ws-accent-text: #8fd3ad;
+  --ws-violet: #b3a8f2;
+  --ws-violet-soft: rgba(179, 168, 242, 0.14);
+  --ws-success: #7ccaa0;
+  --ws-success-soft: rgba(79, 174, 127, 0.15);
+  --ws-warning: #e0b866;
+  --ws-warning-soft: rgba(224, 184, 102, 0.14);
+  --ws-danger: #ec8f84;
+  --ws-danger-soft: rgba(236, 143, 132, 0.14);
+  --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.3);
+  --ws-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
   color-scheme: dark;
+
+  --ws-field-bg: #1b2620;
+  --ws-hover: #1c2822;
+  --ws-topbar-bg: rgba(17, 25, 21, 0.9);
+  --ws-overlay: rgba(0, 0, 0, 0.55);
+  --ws-focus-ring: rgba(79, 174, 127, 0.25);
+  --ws-accent-border: rgba(143, 211, 173, 0.2);
+  --ws-skeleton-a: #1e2a23;
+  --ws-skeleton-b: #26342c;
+  --ws-danger-border: rgba(236, 143, 132, 0.3);
+  --ws-danger-bg: rgba(236, 143, 132, 0.06);
+  --ws-success-border: rgba(124, 202, 160, 0.3);
+  --ws-warning-border: rgba(224, 184, 102, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
   .ws[data-theme='system'] {
-    --ws-bg: var(--color-dark-secondary);
-    --ws-surface: rgba(35, 48, 77, 0.82);
-    --ws-surface-solid: var(--color-navy);
-    --ws-field-bg: var(--color-dark-surface);
-    --ws-surface-muted: var(--color-dark-surface);
-    --ws-surface-tint: rgba(70, 31, 101, 0.55);
-    --ws-border: rgba(103, 102, 183, 0.32);
-    --ws-border-strong: rgba(103, 102, 183, 0.55);
-    --ws-text: var(--color-pale-purple);
-    --ws-text-2: var(--color-soft-lavender);
-    --ws-text-3: rgba(200, 199, 235, 0.72);
-    --ws-hover: rgba(70, 31, 101, 0.45);
-    --ws-topbar-bg: rgba(40, 40, 69, 0.9);
-    --ws-overlay: rgba(10, 12, 28, 0.6);
-
-    --ws-accent: var(--color-purple);
-    --ws-accent-hover: var(--color-deep-purple);
-    --ws-accent-soft: rgba(146, 48, 227, 0.2);
-    --ws-accent-text: var(--color-light-purple);
-    --ws-accent-border: rgba(219, 176, 255, 0.25);
-    --ws-focus-ring: rgba(219, 176, 255, 0.3);
-    --ws-violet: var(--color-soft-lavender);
-    --ws-violet-soft: rgba(103, 102, 183, 0.25);
-    --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.22) 0%, rgba(146, 48, 227, 0) 62%),
-      radial-gradient(900px 600px at -5% 0%, rgba(70, 31, 101, 0.45) 0%, rgba(70, 31, 101, 0) 60%),
-      radial-gradient(800px 600px at 50% 115%, rgba(103, 102, 183, 0.18) 0%, rgba(103, 102, 183, 0) 60%);
-
-    --ws-nav-bg: var(--color-navy);
-    --ws-nav-border: rgba(103, 102, 183, 0.28);
-
-    --ws-hero-bg:
-      radial-gradient(120% 140% at 100% 0%, rgba(146, 48, 227, 0.5) 0%, rgba(146, 48, 227, 0) 55%),
-      linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-navy) 100%);
-
-    --ws-success: var(--color-light-purple);
-    --ws-success-soft: rgba(146, 48, 227, 0.22);
-    --ws-success-border: rgba(219, 176, 255, 0.35);
-    --ws-warning: var(--color-soft-lavender);
-    --ws-warning-soft: rgba(103, 102, 183, 0.25);
-    --ws-warning-border: rgba(200, 199, 235, 0.3);
-    --ws-danger: #e797b2;
-    --ws-danger-soft: rgba(166, 58, 89, 0.22);
-    --ws-danger-border: rgba(231, 151, 178, 0.32);
-    --ws-danger-bg: rgba(166, 58, 89, 0.1);
-
-    --ws-skeleton-a: var(--color-dark-surface);
-    --ws-skeleton-b: rgba(70, 31, 101, 0.6);
-
-    --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-    --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(10, 12, 28, 0.35);
-    --ws-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+    --ws-bg: #111915;
+    --ws-surface: #17211b;
+    --ws-surface-muted: #1e2a23;
+    --ws-border: #2a3a31;
+    --ws-border-strong: #3b4f43;
+    --ws-text: #e7eee9;
+    --ws-text-2: #b2c1b7;
+    --ws-text-3: #7f9387;
+    --ws-accent: #4fae7f;
+    --ws-accent-hover: #63c191;
+    --ws-accent-soft: rgba(79, 174, 127, 0.15);
+    --ws-accent-text: #8fd3ad;
+    --ws-violet: #b3a8f2;
+    --ws-violet-soft: rgba(179, 168, 242, 0.14);
+    --ws-success: #7ccaa0;
+    --ws-success-soft: rgba(79, 174, 127, 0.15);
+    --ws-warning: #e0b866;
+    --ws-warning-soft: rgba(224, 184, 102, 0.14);
+    --ws-danger: #ec8f84;
+    --ws-danger-soft: rgba(236, 143, 132, 0.14);
+    --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.3);
+    --ws-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
     color-scheme: dark;
+
+    --ws-field-bg: #1b2620;
+    --ws-hover: #1c2822;
+    --ws-topbar-bg: rgba(17, 25, 21, 0.9);
+    --ws-overlay: rgba(0, 0, 0, 0.55);
+    --ws-focus-ring: rgba(79, 174, 127, 0.25);
+    --ws-accent-border: rgba(143, 211, 173, 0.2);
+    --ws-skeleton-a: #1e2a23;
+    --ws-skeleton-b: #26342c;
+    --ws-danger-border: rgba(236, 143, 132, 0.3);
+    --ws-danger-bg: rgba(236, 143, 132, 0.06);
+    --ws-success-border: rgba(124, 202, 160, 0.3);
+    --ws-warning-border: rgba(224, 184, 102, 0.3);
   }
 }
 
 .ws {
   min-height: 100vh;
-  background: var(--ws-page-glow), var(--ws-bg);
-  background-attachment: fixed;
+  background: var(--ws-bg);
   color: var(--ws-text);
   font-family: var(--ws-font);
   font-size: 15px;
@@ -249,9 +195,8 @@
   position: fixed;
   inset: 0 auto 0 0;
   width: var(--ws-sidebar-w);
-  background: var(--ws-nav-bg);
-  border-right: 1px solid var(--ws-nav-border);
-  color: var(--ws-nav-text);
+  background: var(--ws-surface);
+  border-right: 1px solid var(--ws-border);
   display: flex;
   flex-direction: column;
   padding: 1.25rem 0.85rem;
@@ -268,14 +213,14 @@
   font-size: 1rem;
   letter-spacing: -0.01em;
   text-decoration: none;
-  color: #ffffff;
+  color: var(--ws-text);
 }
 
 .ws-brand-mark {
   width: 30px;
   height: 30px;
   border-radius: 9px;
-  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-deep-purple) 100%);
+  background: var(--ws-accent);
   color: #fff;
   display: grid;
   place-items: center;
@@ -295,7 +240,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ws-nav-muted);
+  color: var(--ws-text-3);
   padding: 0 0.65rem 0.4rem;
 }
 
@@ -305,49 +250,34 @@
   gap: 0.7rem;
   padding: 0.5rem 0.65rem;
   border-radius: var(--ws-radius-sm);
-  color: var(--ws-nav-text);
+  color: var(--ws-text-2);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   white-space: nowrap;
-  transition:
-    background 0.15s,
-    color 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
 
 .ws-nav-link:hover {
-  background: var(--ws-nav-hover);
-  color: #ffffff;
+  background: var(--ws-surface-muted);
+  color: var(--ws-text);
 }
 
 .ws-nav-link.active {
-  background: var(--ws-nav-active-bg);
-  color: var(--ws-nav-active-text);
+  background: var(--ws-accent-soft);
+  color: var(--ws-accent-text);
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(146, 48, 227, 0.35);
-}
-
-.ws-nav-link.active .ws-nav-count {
-  color: var(--color-pale-purple);
 }
 
 .ws-nav-count {
   margin-left: auto;
   font-size: 0.75rem;
-  color: var(--ws-nav-muted);
+  color: var(--ws-text-3);
   font-variant-numeric: tabular-nums;
 }
 
-.ws-nav-count-accent {
-  color: #ffffff;
-  background: var(--color-purple);
-  border-radius: 999px;
-  padding: 0 0.45rem;
-  font-weight: 600;
-}
-
 .ws-sidebar-footer {
-  border-top: 1px solid var(--ws-nav-border);
+  border-top: 1px solid var(--ws-border);
   padding-top: 0.85rem;
   display: flex;
   align-items: center;
@@ -362,7 +292,6 @@
 .ws-user-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #ffffff;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -370,7 +299,7 @@
 
 .ws-user-email {
   font-size: 0.75rem;
-  color: var(--ws-nav-muted);
+  color: var(--ws-text-3);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -510,11 +439,7 @@
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
-  transition:
-    background 0.15s,
-    border-color 0.15s,
-    color 0.15s,
-    transform 0.1s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
 }
 
 .ws-btn:active {
@@ -592,10 +517,7 @@
 }
 
 .ws-card-interactive {
-  transition:
-    border-color 0.15s,
-    box-shadow 0.2s var(--ws-ease),
-    transform 0.2s var(--ws-ease);
+  transition: border-color 0.15s, box-shadow 0.2s var(--ws-ease), transform 0.2s var(--ws-ease);
 }
 
 .ws-card-interactive:hover {
@@ -605,9 +527,8 @@
 }
 
 .ws-hero {
-  background: var(--ws-hero-bg);
-  border: 1px solid transparent;
-  color: var(--ws-hero-text);
+  background: var(--ws-surface);
+  border: 1px solid var(--ws-border);
   border-radius: 20px;
   padding: 2.5rem;
   display: flex;
@@ -625,23 +546,9 @@
   margin-top: 0.5rem;
 }
 
-.ws-hero .ws-eyebrow {
-  color: var(--color-light-purple);
-}
-
-.ws-hero .ws-btn-secondary {
-  background: rgba(242, 225, 255, 0.1);
-  border-color: rgba(219, 176, 255, 0.4);
-  color: var(--color-pale-purple);
-}
-
-.ws-hero .ws-btn-secondary:hover:not(:disabled) {
-  background: rgba(242, 225, 255, 0.18);
-}
-
 .ws-hero-sub {
   font-size: 1.05rem;
-  color: var(--ws-hero-sub);
+  color: var(--ws-text-2);
   margin-top: 0.6rem;
 }
 
@@ -677,7 +584,7 @@ button.ws-stat {
 }
 
 button.ws-stat:hover {
-  background: var(--ws-hover);
+  background: var(--ws-surface-muted);
 }
 
 .ws-stat + .ws-stat {
@@ -692,7 +599,6 @@ button.ws-stat:hover {
 .ws-stat-value {
   font-size: 1.85rem;
   font-weight: 650;
-  color: var(--ws-accent-text);
   letter-spacing: -0.02em;
   margin-top: 0.25rem;
   font-variant-numeric: tabular-nums;
@@ -771,10 +677,10 @@ button.ws-stat:hover {
   height: 26px;
   padding: 0 0.65rem;
   border-radius: 7px;
-  border: 1px solid var(--ws-accent-border);
-  background: var(--ws-surface-tint);
+  border: 1px solid var(--ws-border);
+  background: var(--ws-surface);
   font-size: 0.78rem;
-  color: var(--ws-accent-text);
+  color: var(--ws-text-2);
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
@@ -795,9 +701,7 @@ button.ws-stat:hover {
   color: var(--ws-text);
   font-family: inherit;
   font-size: 0.9rem;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .ws-textarea {
@@ -875,7 +779,7 @@ button.ws-stat:hover {
   display: inline-flex;
   padding: 3px;
   border-radius: 10px;
-  background: var(--ws-surface-tint);
+  background: var(--ws-surface-muted);
   border: 1px solid var(--ws-border);
   gap: 2px;
   flex-wrap: wrap;
@@ -899,10 +803,8 @@ button.ws-stat:hover {
 
 .ws-segmented button[aria-pressed='true'] {
   background: var(--ws-surface);
-  color: var(--ws-accent);
-  box-shadow:
-    var(--ws-shadow-sm),
-    inset 0 0 0 1px var(--ws-accent-border);
+  color: var(--ws-text);
+  box-shadow: var(--ws-shadow-sm);
 }
 
 .ws-segmented .ws-count {
@@ -1058,7 +960,7 @@ button.ws-stat:hover {
 .ws-progress {
   height: 6px;
   border-radius: 999px;
-  background: var(--ws-surface-tint);
+  background: var(--ws-surface-muted);
   overflow: hidden;
 }
 
@@ -1066,7 +968,7 @@ button.ws-stat:hover {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--color-lavender-purple) 0%, var(--color-purple) 100%);
+  background: var(--ws-accent);
   transition: width 0.6s var(--ws-ease);
 }
 
@@ -1077,7 +979,7 @@ button.ws-stat:hover {
   padding: 3.5rem 1.5rem;
   border: 1px dashed var(--ws-border-strong);
   border-radius: var(--ws-radius-lg);
-  background: linear-gradient(180deg, var(--ws-surface) 0%, var(--ws-surface-tint) 260%);
+  background: var(--ws-surface);
 }
 
 .ws-empty-icon {
@@ -1276,42 +1178,9 @@ button.ws-stat:hover {
   line-height: 1.6;
 }
 
-.ws-bubble-wrap {
-  align-self: flex-end;
-  max-width: 82%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.25rem;
-}
-
-.ws-bubble-wrap .ws-bubble {
-  max-width: 100%;
-}
-
-.ws-bubble-meta {
-  font-size: 0.75rem;
-  color: var(--ws-text-3);
-}
-
-.ws-bubble-meta-error {
-  color: var(--ws-danger);
-}
-
-.ws-bubble-meta .ws-section-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-}
-
-.ws-bubble-failed {
-  opacity: 0.6;
-}
-
 .ws-bubble-user {
   align-self: flex-end;
-  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-deep-purple) 100%);
+  background: var(--ws-accent);
   color: #fff;
   border-bottom-right-radius: 4px;
   white-space: pre-wrap;
@@ -1319,8 +1188,7 @@ button.ws-stat:hover {
 
 .ws-bubble-ai {
   align-self: flex-start;
-  background: var(--ws-surface-tint);
-  color: var(--ws-text);
+  background: var(--ws-surface-muted);
   border-bottom-left-radius: 4px;
 }
 
@@ -1343,51 +1211,12 @@ button.ws-stat:hover {
   font-weight: 500;
   color: var(--ws-text);
   cursor: pointer;
-  transition:
-    border-color 0.15s,
-    background 0.15s;
+  transition: border-color 0.15s, background 0.15s;
 }
 
 .ws-suggestion:hover {
   border-color: var(--ws-accent);
   background: var(--ws-accent-soft);
-}
-
-.ws-suggestion svg {
-  color: var(--ws-accent);
-}
-
-/* Theme toggle (sidebar footer) */
-.ws-theme-toggle {
-  display: flex;
-  gap: 2px;
-  padding: 3px;
-  margin: 0 0 0.85rem;
-  border-radius: 10px;
-  background: rgba(200, 199, 235, 0.08);
-  border: 1px solid var(--ws-nav-border);
-}
-
-.ws-theme-toggle button {
-  flex: 1;
-  height: 28px;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  color: var(--ws-nav-muted);
-  font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
-.ws-theme-toggle button[aria-pressed='true'] {
-  background: rgba(219, 176, 255, 0.16);
-  color: #ffffff;
 }
 
 /* ---------- Week strip ---------- */
@@ -1408,7 +1237,6 @@ button.ws-stat:hover {
 
 .ws-day-today {
   border-color: var(--ws-accent);
-  background: var(--ws-surface-tint);
 }
 
 .ws-day-name {
@@ -1566,89 +1394,112 @@ button.ws-stat:hover {
   }
 }
 
-.ws-signout {
-  color: var(--ws-nav-muted);
-}
-
-.ws-signout:hover:not(:disabled) {
-  background: var(--ws-nav-hover);
-  color: #ffffff;
-}
-
-/* ---------- Brand continuation: glass surfaces like the login card ---------- */
-.ws-card,
-.ws-list,
-.ws-stats,
-.ws-empty,
-.ws-day {
-  backdrop-filter: var(--ws-glass-blur, blur(14px) saturate(140%));
-  -webkit-backdrop-filter: var(--ws-glass-blur, blur(14px) saturate(140%));
-}
-
-.ws-card,
-.ws-list,
-.ws-stats {
-  box-shadow: var(--ws-shadow-sm);
-}
-
-/* Form fields stay solid for legibility. */
+/* ---------- Form fields use the field token (solid in both themes) ---------- */
 .ws .ws-input,
 .ws .ws-select,
 .ws .ws-textarea {
   background: var(--ws-field-bg);
 }
 
-/* Primary CTA: solid brand purple, subtle gradient only on hover (matches the login). */
-.ws-btn-primary {
-  background: var(--color-purple);
-  box-shadow: 0 4px 14px rgba(146, 48, 227, 0.25);
+/* ---------- Sidebar extras: unread badge, theme toggle, sign out ---------- */
+.ws-nav-count-accent {
+  color: #ffffff;
+  background: var(--ws-accent);
+  border-radius: 999px;
+  padding: 0 0.45rem;
+  font-weight: 600;
 }
 
-.ws-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-deep-purple) 100%);
-  box-shadow: 0 6px 18px rgba(146, 48, 227, 0.32);
+.ws-theme-toggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  margin: 0 0 0.85rem;
+  border-radius: 10px;
+  background: var(--ws-surface-muted);
+  border: 1px solid var(--ws-border);
 }
 
-.ws-btn-secondary {
+.ws-theme-toggle button {
+  flex: 1;
+  height: 28px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ws-text-3);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.ws-theme-toggle button[aria-pressed='true'] {
   background: var(--ws-surface);
-  border-color: var(--ws-border-strong);
+  color: var(--ws-text);
+  box-shadow: var(--ws-shadow-sm);
 }
 
-.ws-btn-secondary:hover:not(:disabled) {
-  background: var(--ws-hover);
-  border-color: var(--ws-accent-border);
+.ws-signout {
+  color: var(--ws-text-3);
 }
 
-.ws-avatar {
-  background: var(--ws-surface-tint);
-  color: var(--ws-accent-text);
+/* ---------- AI chat queue states ---------- */
+.ws-bubble-wrap {
+  align-self: flex-end;
+  max-width: 82%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
 }
 
-.ws-eyebrow {
-  color: var(--ws-accent);
+.ws-bubble-wrap .ws-bubble {
+  max-width: 100%;
 }
 
-/* ---------- Legacy modal / form classes inside the workspace (submit / edit experience) ---------- */
+.ws-bubble-meta {
+  font-size: 0.75rem;
+  color: var(--ws-text-3);
+}
+
+.ws-bubble-meta-error {
+  color: var(--ws-danger);
+}
+
+.ws-bubble-meta .ws-section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.ws-bubble-failed {
+  opacity: 0.6;
+}
+
+.ws-bubble-ai {
+  color: var(--ws-text);
+}
+
+/* ---------- Submit / edit experience modal follows the workspace theme ---------- */
 .ws .modal-backdrop {
   background: var(--ws-overlay);
-  backdrop-filter: blur(4px);
 }
 
 .ws .modal-dialog {
-  background: var(--ws-surface-solid);
+  background: var(--ws-surface);
   border: 1px solid var(--ws-border);
   color: var(--ws-text);
   box-shadow: var(--ws-shadow-lg);
-  font-family: var(--ws-font);
-}
-
-.ws .modal-dialog::before {
-  background: linear-gradient(90deg, var(--color-navy), var(--color-purple), var(--color-light-purple));
 }
 
 .ws .modal-header,
 .ws .modal-footer {
-  background: var(--ws-surface-tint);
+  background: var(--ws-surface-muted);
   border-color: var(--ws-border);
 }
 
@@ -1677,7 +1528,6 @@ button.ws-stat:hover {
   background: var(--ws-field-bg);
   color: var(--ws-text);
   border-color: var(--ws-border-strong);
-  padding-left: 0.9rem;
 }
 
 .ws .modal-dialog .text-input:focus {
@@ -1702,7 +1552,6 @@ button.ws-stat:hover {
 
 .ws .pill-option:hover {
   background: var(--ws-hover);
-  border-color: var(--ws-accent-border);
 }
 
 .ws .pill-option.active {
@@ -1712,7 +1561,7 @@ button.ws-stat:hover {
 }
 
 .ws .modal-dialog .btn-secondary {
-  background: var(--ws-surface-solid);
+  background: var(--ws-surface);
   color: var(--ws-text);
   border-color: var(--ws-border-strong);
 }

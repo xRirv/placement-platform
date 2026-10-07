@@ -17,11 +17,11 @@ export const ProtectedRoute = ({
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1rem',
-          background: '#EAEAF7',
+          background: '#f8fafc',
         }}
       >
         <span className="spin-dot" style={{ width: '32px', height: '32px', borderWidth: '3px' }} />
-        <span style={{ fontSize: '0.95rem', color: '#353454' }}>Authenticating session...</span>
+        <span style={{ fontSize: '0.95rem', color: '#64748b' }}>Authenticating session...</span>
       </div>
     );
   }

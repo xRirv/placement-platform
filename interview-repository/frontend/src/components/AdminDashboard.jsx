@@ -385,18 +385,18 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">Registered Accounts</span>
             <span className="stat-num">{usersList.length || 4}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
+          <div className="stat-icon-wrap" style={{ background: '#eef2ff', color: '#4f46e5' }}>
             <Users size={20} />
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-content">
             <span className="stat-title">Pending Moderation</span>
-            <span className="stat-num" style={{ color: pendingModerations > 0 ? '#9a7a3a' : '#3d8c74' }}>
+            <span className="stat-num" style={{ color: pendingModerations > 0 ? '#d97706' : '#059669' }}>
               {pendingModerations}
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#f6eedb', color: '#9a7a3a' }}>
+          <div className="stat-icon-wrap" style={{ background: '#fef3c7', color: '#d97706' }}>
             <Clock size={20} />
           </div>
         </div>
@@ -405,18 +405,18 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">Total Experiences</span>
             <span className="stat-num">{experiences.length}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
+          <div className="stat-icon-wrap" style={{ background: '#faf5ff', color: '#9333ea' }}>
             <FileText size={20} />
           </div>
         </div>
         <div className="stat-card">
           <div className="stat-content">
             <span className="stat-title">System Status</span>
-            <span className="stat-num" style={{ fontSize: '1.25rem', color: '#3d8c74' }}>
+            <span className="stat-num" style={{ fontSize: '1.25rem', color: '#059669' }}>
               Operational
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#3d8c74' }}>
+          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#059669' }}>
             <Activity size={20} />
           </div>
         </div>
@@ -532,7 +532,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
               <tbody>
                 {experiences.length === 0 ? (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>
+                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                       No interview experiences submitted yet.
                     </td>
                   </tr>
@@ -540,16 +540,16 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                   experiences.map((exp) => (
                     <tr key={exp.id}>
                       <td>
-                        <strong style={{ fontSize: '0.9rem', color: '#23304D' }}>
+                        <strong style={{ fontSize: '0.9rem', color: '#0f172a' }}>
                           {exp.companyName || 'Company'}
                         </strong>
-                        <div style={{ fontSize: '0.8rem', color: '#353454' }}>{exp.role}</div>
+                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{exp.role}</div>
                       </td>
                       <td>
-                        <div style={{ fontSize: '0.85rem', color: '#353454' }}>
+                        <div style={{ fontSize: '0.85rem', color: '#334155' }}>
                           {exp.submitterName || exp.submitterEmail || 'User'}
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: '#6766B7' }}>{exp.interviewDate}</span>
+                        <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{exp.interviewDate}</span>
                       </td>
                       <td>
                         <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
@@ -590,7 +590,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                               className="btn btn-sm btn-secondary"
                               onClick={() => handleModerate(exp.id, 'APPROVED')}
                               disabled={moderatingId === exp.id}
-                              style={{ color: '#3d8c74', borderColor: '#DBB0FF' }}
+                              style={{ color: '#059669', borderColor: '#a7f3d0' }}
                               title="Approve Experience"
                             >
                               <CheckCircle2 size={13} />
@@ -601,7 +601,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                               className="btn btn-sm btn-secondary"
                               onClick={() => handleModerate(exp.id, 'REJECTED')}
                               disabled={moderatingId === exp.id}
-                              style={{ color: '#b3405f', borderColor: '#ecc5d3' }}
+                              style={{ color: '#dc2626', borderColor: '#fecaca' }}
                               title="Reject Experience"
                             >
                               <XCircle size={13} />
@@ -633,7 +633,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
             <div style={{ position: 'relative', width: '280px' }}>
               <Search
                 size={16}
-                style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#6766B7' }}
+                style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }}
               />
               <input
                 type="text"
@@ -660,7 +660,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
               <tbody>
                 {filteredUsers.length === 0 ? (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>
+                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                       No matching user records found
                     </td>
                   </tr>
@@ -671,16 +671,16 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                       <tr key={u.id}>
                         <td>
                           <div>
-                            <strong style={{ fontSize: '0.9rem', color: '#23304D' }}>
+                            <strong style={{ fontSize: '0.9rem', color: '#0f172a' }}>
                               {u.name || u.email?.split('@')[0]}
                             </strong>
                             {isSelf && (
-                              <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', background: '#F2E1FF', color: '#461F65', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                              <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', background: '#e0e7ff', color: '#4338ca', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
                                 YOU
                               </span>
                             )}
                           </div>
-                          <span style={{ fontSize: '0.8rem', color: '#353454' }}>{u.email}</span>
+                          <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{u.email}</span>
                         </td>
                         <td>
                           <div className="role-select-wrapper">
@@ -697,7 +697,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                               <option value="STUDENT">STUDENT</option>
                             </select>
                             {changingRoleId === u.id && (
-                              <RefreshCw size={14} className="animate-spin" style={{ color: '#9230E3' }} />
+                              <RefreshCw size={14} className="animate-spin" style={{ color: '#6366f1' }} />
                             )}
                           </div>
                         </td>
@@ -707,9 +707,9 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                               <select
                                 className="role-select"
                                 style={{
-                                  borderColor: u.mentorId ? '#9230E3' : '#C8C7EB',
-                                  backgroundColor: u.mentorId ? '#F2E1FF' : '#ffffff',
-                                  color: u.mentorId ? '#461F65' : '#353454',
+                                  borderColor: u.mentorId ? '#818cf8' : '#cbd5e1',
+                                  backgroundColor: u.mentorId ? '#eef2ff' : '#ffffff',
+                                  color: u.mentorId ? '#4338ca' : '#475569',
                                   maxWidth: '200px',
                                   fontSize: '0.75rem',
                                 }}
@@ -725,11 +725,11 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                                 ))}
                               </select>
                               {assigningMentorId === u.id && (
-                                <RefreshCw size={13} className="animate-spin" style={{ color: '#9230E3' }} />
+                                <RefreshCw size={13} className="animate-spin" style={{ color: '#6366f1' }} />
                               )}
                             </div>
                           ) : (
-                            <span style={{ fontSize: '0.8rem', color: '#6766B7' }}>—</span>
+                            <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>—</span>
                           )}
                         </td>
                         <td>
@@ -744,7 +744,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                             disabled={isSelf}
                             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
                           >
-                            {u.active ? <UserX size={13} color="#b3405f" /> : <UserCheck size={13} color="#3d8c74" />}
+                            {u.active ? <UserX size={13} color="#ef4444" /> : <UserCheck size={13} color="#10b981" />}
                             <span>{u.active ? 'Disable' : 'Enable'}</span>
                           </button>
                         </td>
@@ -779,31 +779,31 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
               <tbody>
                 {logsList.length === 0 ? (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>
+                    <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                       No moderation events recorded in system audit logs
                     </td>
                   </tr>
                 ) : (
                   logsList.map((log) => (
                     <tr key={log.id}>
-                      <td style={{ fontSize: '0.8rem', color: '#353454' }}>
+                      <td style={{ fontSize: '0.8rem', color: '#64748b' }}>
                         {new Date(log.createdAt).toLocaleString()}
                       </td>
                       <td>
-                        <strong style={{ fontSize: '0.85rem', color: '#23304D' }}>
+                        <strong style={{ fontSize: '0.85rem', color: '#0f172a' }}>
                           {log.adminName || 'System Admin'}
                         </strong>
                       </td>
                       <td>
                         <code>{log.action}</code>
                       </td>
-                      <td style={{ fontSize: '0.8rem', color: '#353454' }}>
+                      <td style={{ fontSize: '0.8rem', color: '#64748b' }}>
                         <code>
                           {log.entityType ? `${log.entityType}: ` : ''}
                           {log.entityId?.substring(0, 8) ?? 'N/A'}...
                         </code>
                       </td>
-                      <td style={{ fontSize: '0.85rem', color: '#353454' }}>
+                      <td style={{ fontSize: '0.85rem', color: '#334155' }}>
                         {log.reason || log.details || 'None provided'}
                       </td>
                     </tr>
@@ -841,7 +841,7 @@ export const AdminDashboard = ({ user, session, userProfile }) => {
                   className="text-input"
                   disabled
                   value={adminProfile.email}
-                  style={{ background: '#EAEAF7', color: '#353454' }}
+                  style={{ background: '#f8fafc', color: '#64748b' }}
                 />
               </div>
             </div>
