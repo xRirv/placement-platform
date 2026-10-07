@@ -410,8 +410,8 @@ export const MentorsPage = ({ user, session, userProfile }) => {
             position: 'fixed',
             top: '2rem',
             right: '2rem',
-            background: message.includes('Error') ? '#fee2e2' : '#dcfce7',
-            color: message.includes('Error') ? '#991b1b' : '#166534',
+            background: message.includes('Error') ? '#f8e6ee' : '#DBB0FF',
+            color: message.includes('Error') ? '#8c2f4a' : '#2f6b59',
             padding: '1rem 1.5rem',
             borderRadius: '8px',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -505,7 +505,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                           </div>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.875rem', color: '#0f172a' }}>
+                          <span style={{ fontSize: '0.875rem', color: '#23304D' }}>
                             {mentor.expertise || 'Not Specified'}
                           </span>
                         </td>
@@ -532,7 +532,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                               <span
                                 style={{
                                   fontSize: '0.75rem',
-                                  color: '#64748b',
+                                  color: '#353454',
                                   fontWeight: 600,
                                 }}
                               >
@@ -564,7 +564,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                 right: 0,
                                 top: '100%',
                                 background: 'white',
-                                border: '1px solid #e2e8f0',
+                                border: '1px solid #C8C7EB',
                                 borderRadius: '8px',
                                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                                 minWidth: '160px',
@@ -584,17 +584,17 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#6366f1',
+                                    color: '#9230E3',
                                     fontWeight: 600,
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#eef2ff'}
+                                  onMouseEnter={(e) => e.target.style.background = '#F2E1FF'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Eye size={14} />
                                   View Profile
                                 </button>
-                                <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+                                <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
                                 <button
                                   onClick={() => openMenteesModal(mentor)}
                                   style={{
@@ -608,17 +608,17 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#6366f1',
+                                    color: '#9230E3',
                                     fontWeight: 600,
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#eef2ff'}
+                                  onMouseEnter={(e) => e.target.style.background = '#F2E1FF'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Users size={14} />
                                   Manage Mentees
                                 </button>
-                                <div style={{ borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+                                <div style={{ borderTop: '1px solid #C8C7EB', margin: '0.25rem 0' }} />
                                 <button
                                   onClick={() => handleEditMentor(mentor)}
                                   style={{
@@ -632,10 +632,10 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#0f172a',
+                                    color: '#23304D',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#f1f5f9'}
+                                  onMouseEnter={(e) => e.target.style.background = '#EAEAF7'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Edit2 size={14} />
@@ -654,10 +654,10 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: mentor.isActive ? '#f59e0b' : '#10b981',
+                                    color: mentor.isActive ? '#9a7a3a' : '#3d8c74',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#f1f5f9'}
+                                  onMouseEnter={(e) => e.target.style.background = '#EAEAF7'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Eye size={14} />
@@ -670,17 +670,17 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                                     padding: '0.75rem 1rem',
                                     textAlign: 'left',
                                     border: 'none',
-                                    borderTop: '1px solid #e2e8f0',
+                                    borderTop: '1px solid #C8C7EB',
                                     background: 'transparent',
                                     cursor: 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '0.5rem',
                                     fontSize: '0.875rem',
-                                    color: '#dc2626',
+                                    color: '#b3405f',
                                     transition: 'background 0.15s'
                                   }}
-                                  onMouseEnter={(e) => e.target.style.background = '#fef2f2'}
+                                  onMouseEnter={(e) => e.target.style.background = '#f8e6ee'}
                                   onMouseLeave={(e) => e.target.style.background = 'transparent'}
                                 >
                                   <Trash2 size={14} />
@@ -719,16 +719,16 @@ export const MentorsPage = ({ user, session, userProfile }) => {
             <form onSubmit={handleCreateMentor}>
               <div className="modal-body">
                 {/* Info Box */}
-                <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
-                  <strong style={{ color: '#1e40af' }}>One-Click Mentor Creation</strong><br/>
-                  <span style={{ fontSize: '0.875rem', color: '#1e40af' }}>
+                <div style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '6px', padding: '1rem', marginBottom: '1rem' }}>
+                  <strong style={{ color: '#6766B7' }}>One-Click Mentor Creation</strong><br/>
+                  <span style={{ fontSize: '0.875rem', color: '#6766B7' }}>
                     This will automatically create:
                   </span>
-                  <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#1e40af' }}>
+                  <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem', color: '#6766B7' }}>
                     <li>✓ Login credentials in Supabase Auth</li>
                     <li>✓ Mentor record in database</li>
                   </ul>
-                  <em style={{ fontSize: '0.75rem', color: '#3b82f6' }}>Email must be unique!</em>
+                  <em style={{ fontSize: '0.75rem', color: '#6766B7' }}>Email must be unique!</em>
                 </div>
 
                 <div style={{ display: 'grid', gap: '1rem' }}>
@@ -741,7 +741,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -752,7 +752,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.facultyId}
                       onChange={(e) => setFormData({ ...formData, facultyId: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -764,7 +764,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -776,7 +776,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -787,7 +787,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       rows={3}
                       value={formData.bio}
                       onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -799,7 +799,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       value={formData.expertise}
                       onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
                       placeholder="e.g., Backend Development, System Design"
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                 </div>
@@ -829,17 +829,17 @@ export const MentorsPage = ({ user, session, userProfile }) => {
               </button>
             </div>
             <div className="modal-body">
-              <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: '#353454', marginBottom: '1rem' }}>
                 Upload an Excel file (.xlsx) with columns: Name, FacultyId, Email, Password, Bio, Expertise
               </p>
               <input
                 type="file"
                 accept=".xlsx"
                 onChange={(e) => setBatchFile(e.target.files[0])}
-                style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
               />
               {batchFile && (
-                <p style={{ fontSize: '0.875rem', color: '#059669', marginTop: '0.5rem' }}>
+                <p style={{ fontSize: '0.875rem', color: '#3d8c74', marginTop: '0.5rem' }}>
                   Selected: {batchFile.name}
                 </p>
               )}
@@ -879,7 +879,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -890,7 +890,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       type="text"
                       value={formData.facultyId}
                       onChange={(e) => setFormData({ ...formData, facultyId: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -901,7 +901,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       type="email"
                       value={formData.email}
                       disabled
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px', background: '#f1f5f9', cursor: 'not-allowed' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px', background: '#EAEAF7', cursor: 'not-allowed' }}
                     />
                   </div>
                   <div>
@@ -912,7 +912,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       rows={3}
                       value={formData.bio}
                       onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     />
                   </div>
                   <div>
@@ -923,7 +923,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       rows={2}
                       value={formData.expertise}
                       onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                      style={{ width: '100%', padding: '0.625rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                       placeholder="e.g., Java, Spring Boot, Cloud Computing"
                     />
                   </div>
@@ -954,23 +954,23 @@ export const MentorsPage = ({ user, session, userProfile }) => {
               </button>
             </div>
             <div className="modal-body">
-              <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: '#353454', marginBottom: '1rem' }}>
                 Are you sure you want to delete this mentor?
               </p>
-              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px', padding: '1rem' }}>
-                <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#991b1b', marginBottom: '0.25rem' }}>
+              <div style={{ background: '#f8e6ee', border: '1px solid #ecc5d3', borderRadius: '6px', padding: '1rem' }}>
+                <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#8c2f4a', marginBottom: '0.25rem' }}>
                   {selectedMentor.name}
                 </p>
-                <p style={{ fontSize: '0.75rem', color: '#b91c1c' }}>
+                <p style={{ fontSize: '0.75rem', color: '#8c2f4a' }}>
                   {selectedMentor.email}
                 </p>
                 {selectedMentor.studentsCount > 0 && (
-                  <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.5rem' }}>
+                  <p style={{ fontSize: '0.75rem', color: '#b3405f', marginTop: '0.5rem' }}>
                     ⚠️ This mentor has {selectedMentor.studentsCount} assigned student(s)
                   </p>
                 )}
               </div>
-              <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '1rem' }}>
+              <p style={{ fontSize: '0.75rem', color: '#b3405f', marginTop: '1rem' }}>
                 ⚠️ This action cannot be undone. The mentor will be removed from the database.
               </p>
             </div>
@@ -982,7 +982,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                 className="admin-btn-primary"
                 onClick={confirmDeleteMentor}
                 disabled={uploading}
-                style={{ background: '#dc2626' }}
+                style={{ background: '#b3405f' }}
               >
                 <Trash2 size={16} />
                 {uploading ? 'Deleting...' : 'Delete Mentor'}
@@ -1005,30 +1005,30 @@ export const MentorsPage = ({ user, session, userProfile }) => {
             <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
               {/* Profile Information */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
+                <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
                   Profile Information
                 </h4>
-                <div style={{ background: '#f8fafc', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+                <div style={{ background: '#EAEAF7', borderRadius: '8px', padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Email</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{profileMentor.email}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Email</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{profileMentor.email}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Faculty ID</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{profileMentor.facultyId || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Faculty ID</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{profileMentor.facultyId || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Department</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{profileMentor.department || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Department</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{profileMentor.department || 'N/A'}</p>
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Expertise</p>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0f172a' }}>{profileMentor.expertise || 'N/A'}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Expertise</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 500, color: '#23304D' }}>{profileMentor.expertise || 'N/A'}</p>
                   </div>
                   {profileMentor.bio && (
                     <div style={{ gridColumn: '1 / -1' }}>
-                      <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '0.25rem' }}>Bio</p>
-                      <p style={{ fontSize: '0.875rem', color: '#0f172a', lineHeight: '1.5' }}>{profileMentor.bio}</p>
+                      <p style={{ fontSize: '0.75rem', color: '#353454', marginBottom: '0.25rem' }}>Bio</p>
+                      <p style={{ fontSize: '0.875rem', color: '#23304D', lineHeight: '1.5' }}>{profileMentor.bio}</p>
                     </div>
                   )}
                 </div>
@@ -1037,7 +1037,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
               {/* Current Mentees */}
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h4 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0f172a' }}>
+                  <h4 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#23304D' }}>
                     Current Mentees ({profileMentor.students?.length || 0})
                   </h4>
                   <button
@@ -1055,7 +1055,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                 {profileMentor.students && profileMentor.students.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {profileMentor.students.map((student) => (
-                      <div key={student.studentId} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div key={student.studentId} style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '8px', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div className="admin-table-user">
                           <img
                             src={`https://ui-avatars.com/api/?name=${encodeURIComponent(student.name)}&background=4F46E5&color=fff`}
@@ -1066,7 +1066,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                             <span className="admin-table-user-name">{student.name}</span>
                             <span className="admin-table-user-meta">{student.email}</span>
                             {student.college && (
-                              <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{student.college}</span>
+                              <span style={{ fontSize: '0.75rem', color: '#6766B7' }}>{student.college}</span>
                             )}
                           </div>
                         </div>
@@ -1083,7 +1083,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                               setProfileMentor(data);
                             }
                           }}
-                          style={{ background: '#fee2e2', color: '#dc2626', border: 'none', fontSize: '0.875rem', padding: '0.5rem 0.75rem' }}
+                          style={{ background: '#f8e6ee', color: '#b3405f', border: 'none', fontSize: '0.875rem', padding: '0.5rem 0.75rem' }}
                         >
                           <UserMinus size={14} />
                           <span>Remove</span>
@@ -1092,7 +1092,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                     ))}
                   </div>
                 ) : (
-                  <div style={{ textAlign: 'center', padding: '3rem', background: '#f8fafc', borderRadius: '8px', color: '#64748b' }}>
+                  <div style={{ textAlign: 'center', padding: '3rem', background: '#EAEAF7', borderRadius: '8px', color: '#353454' }}>
                     <Users size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
                     <p>No mentees assigned yet</p>
                   </div>
@@ -1126,13 +1126,13 @@ export const MentorsPage = ({ user, session, userProfile }) => {
             <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
               {/* Current Mentees Section */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
                   Current Mentees ({selectedMentor.students?.length || 0})
                 </h4>
                 {menteesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '1rem', color: '#64748b' }}>Loading...</div>
+                  <div style={{ textAlign: 'center', padding: '1rem', color: '#353454' }}>Loading...</div>
                 ) : selectedMentor.students && selectedMentor.students.length > 0 ? (
-                  <div style={{ border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div style={{ border: '1px solid #C8C7EB', borderRadius: '8px', overflow: 'hidden' }}>
                     {selectedMentor.students.map((student) => (
                       <div
                         key={student.studentId}
@@ -1141,24 +1141,24 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
-                          borderBottom: '1px solid #e2e8f0',
-                          background: '#f8fafc',
+                          borderBottom: '1px solid #C8C7EB',
+                          background: '#EAEAF7',
                         }}
                       >
                         <div>
-                          <div style={{ fontWeight: 600, color: '#0f172a' }}>{student.name}</div>
-                          <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                          <div style={{ fontWeight: 600, color: '#23304D' }}>{student.name}</div>
+                          <div style={{ fontSize: '0.875rem', color: '#353454' }}>
                             {student.email} • {student.college}
                           </div>
                           {student.degree && (
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{student.degree}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#6766B7' }}>{student.degree}</div>
                           )}
                         </div>
                         <button
                           type="button"
                           className="admin-btn-secondary"
                           onClick={() => handleUnassignStudent(student.studentId)}
-                          style={{ background: '#fee2e2', color: '#dc2626', border: 'none', fontSize: '0.875rem', padding: '0.5rem 0.75rem' }}
+                          style={{ background: '#f8e6ee', color: '#b3405f', border: 'none', fontSize: '0.875rem', padding: '0.5rem 0.75rem' }}
                         >
                           <UserMinus size={14} />
                           <span>Remove</span>
@@ -1171,9 +1171,9 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                     style={{
                       padding: '2rem',
                       textAlign: 'center',
-                      background: '#f8fafc',
+                      background: '#EAEAF7',
                       borderRadius: '8px',
-                      color: '#64748b',
+                      color: '#353454',
                     }}
                   >
                     No mentees assigned yet
@@ -1183,7 +1183,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
 
               {/* Add Mentee Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
                   Add Mentee
                 </h4>
                 <div style={{ position: 'relative', marginBottom: '1rem' }}>
@@ -1194,22 +1194,22 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                       left: '10px',
                       top: '50%',
                       transform: 'translateY(-50%)',
-                      color: '#94a3b8',
+                      color: '#6766B7',
                     }}
                   />
                   <input
                     type="text"
                     className="text-input"
-                    style={{ paddingLeft: '2.5rem', width: '100%', padding: '0.625rem 0.625rem 0.625rem 2.5rem', border: '1px solid #e2e8f0', borderRadius: '6px' }}
+                    style={{ paddingLeft: '2.5rem', width: '100%', padding: '0.625rem 0.625rem 0.625rem 2.5rem', border: '1px solid #C8C7EB', borderRadius: '6px' }}
                     placeholder="Search students by name or email..."
                     value={studentSearchQuery}
                     onChange={(e) => setStudentSearchQuery(e.target.value)}
                   />
                 </div>
                 {menteesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '1rem', color: '#64748b' }}>Loading...</div>
+                  <div style={{ textAlign: 'center', padding: '1rem', color: '#353454' }}>Loading...</div>
                 ) : (
-                  <div style={{ border: '1px solid #e2e8f0', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+                  <div style={{ border: '1px solid #C8C7EB', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto' }}>
                     {availableStudents
                       .filter((student) => {
                         const isAlreadyAssigned = selectedMentor.students?.some(
@@ -1232,16 +1232,16 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            borderBottom: '1px solid #e2e8f0',
+                            borderBottom: '1px solid #C8C7EB',
                           }}
                         >
                           <div>
-                            <div style={{ fontWeight: 600, color: '#0f172a' }}>{student.name}</div>
-                            <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                            <div style={{ fontWeight: 600, color: '#23304D' }}>{student.name}</div>
+                            <div style={{ fontSize: '0.875rem', color: '#353454' }}>
                               {student.email} • {student.college}
                             </div>
                             {student.mentorName && (
-                              <div style={{ fontSize: '0.75rem', color: '#f59e0b' }}>
+                              <div style={{ fontSize: '0.75rem', color: '#9a7a3a' }}>
                                 Currently assigned to: {student.mentorName}
                               </div>
                             )}
@@ -1274,7 +1274,7 @@ export const MentorsPage = ({ user, session, userProfile }) => {
                         style={{
                           padding: '2rem',
                           textAlign: 'center',
-                          color: '#64748b',
+                          color: '#353454',
                         }}
                       >
                         No available students found

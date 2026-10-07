@@ -307,7 +307,7 @@ export const ExperienceModal = ({
             <h2 className="modal-title">
               {isEditing ? 'Edit Interview Experience' : 'Submit Interview Experience'}
             </h2>
-            <p style={{ fontSize: '0.825rem', color: '#64748b', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.825rem', color: '#353454', marginTop: '0.2rem' }}>
               Share authentic questions, rounds, and preparation guidance for prospective candidates.
             </p>
           </div>
@@ -328,7 +328,7 @@ export const ExperienceModal = ({
 
             {/* Section 1: Target Organization & Role */}
             <div className="form-section-title">
-              <Building size={16} color="#4f46e5" />
+              <Building size={16} color="#9230E3" />
               <span>Target Organization & Role</span>
             </div>
 
@@ -410,7 +410,7 @@ export const ExperienceModal = ({
             {/* Section 2: Rounds & Questions */}
             <div className="form-section-title" style={{ justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Briefcase size={16} color="#4f46e5" />
+                <Briefcase size={16} color="#9230E3" />
                 <span>Interview Rounds & Questions</span>
               </div>
               <button
@@ -466,7 +466,7 @@ export const ExperienceModal = ({
                 {/* Questions in Round */}
                 <div style={{ marginTop: '0.75rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#353454' }}>
                       Questions Asked in this Round
                     </span>
                     <button
@@ -476,8 +476,8 @@ export const ExperienceModal = ({
                       style={{
                         padding: '0.2rem 0.5rem',
                         fontSize: '0.75rem',
-                        background: '#e0e7ff',
-                        color: '#4338ca',
+                        background: '#F2E1FF',
+                        color: '#461F65',
                         border: 'none',
                         borderRadius: '6px',
                         cursor: 'pointer',
@@ -503,7 +503,7 @@ export const ExperienceModal = ({
                         background: '#ffffff',
                         padding: '0.5rem',
                         borderRadius: '8px',
-                        border: '1px solid #e2e8f0',
+                        border: '1px solid #C8C7EB',
                       }}
                     >
                       <input
@@ -550,7 +550,7 @@ export const ExperienceModal = ({
 
             {/* Section 3: Preparation, Tips & Advice */}
             <div className="form-section-title">
-              <Sparkles size={16} color="#4f46e5" />
+              <Sparkles size={16} color="#9230E3" />
               <span>Preparation Strategy & Tips for Juniors</span>
             </div>
 
@@ -590,13 +590,13 @@ export const ExperienceModal = ({
             </div>
 
             {/* Consent Checkbox */}
-            <div style={{ marginTop: '1.25rem', padding: '0.85rem 1rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontSize: '0.85rem', color: '#334155' }}>
+            <div style={{ marginTop: '1.25rem', padding: '0.85rem 1rem', background: '#EAEAF7', borderRadius: '10px', border: '1px solid #C8C7EB' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontSize: '0.85rem', color: '#353454' }}>
                 <input
                   type="checkbox"
                   checked={formData.consentGiven}
                   onChange={(e) => setFormData({ ...formData, consentGiven: e.target.checked })}
-                  style={{ width: '16px', height: '16px', accentColor: '#4f46e5' }}
+                  style={{ width: '16px', height: '16px', accentColor: '#9230E3' }}
                 />
                 <span>
                   I confirm that this experience record is accurate and give consent for it to be indexed and shared for candidate interview preparation.

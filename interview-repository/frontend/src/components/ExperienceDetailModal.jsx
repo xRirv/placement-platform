@@ -31,7 +31,7 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
                 {experience.moderationStatus || 'PENDING'}
               </span>
             </div>
-            <p style={{ fontSize: '0.9rem', color: '#475569', fontWeight: 500 }}>
+            <p style={{ fontSize: '0.9rem', color: '#353454', fontWeight: 500 }}>
               {experience.role} • Interviewed on {experience.interviewDate || 'Recent'}
             </p>
           </div>
@@ -43,7 +43,7 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
         {/* Modal Body */}
         <div className="modal-body">
           {experience.submitterName && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', fontSize: '0.85rem', color: '#64748b' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', fontSize: '0.85rem', color: '#353454' }}>
               <User size={14} />
               <span>Contributed by <strong>{experience.submitterName}</strong> ({experience.submitterEmail})</span>
             </div>
@@ -53,20 +53,20 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
           {experience.rounds && experience.rounds.length > 0 && (
             <div style={{ marginBottom: '1.5rem' }}>
               <div className="form-section-title">
-                <Building size={16} color="#4f46e5" />
+                <Building size={16} color="#9230E3" />
                 <span>Interview Rounds & Questions ({experience.rounds.length})</span>
               </div>
 
               {experience.rounds.map((round, rIdx) => (
-                <div key={rIdx} className="round-card" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+                <div key={rIdx} className="round-card" style={{ background: '#ffffff', border: '1px solid #C8C7EB' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#23304D', margin: 0 }}>
                       Round {round.roundOrder || rIdx + 1}: {round.name}
                     </h4>
                   </div>
 
                   {round.notes && (
-                    <p style={{ fontSize: '0.85rem', color: '#64748b', fontStyle: 'italic', marginBottom: '0.75rem' }}>
+                    <p style={{ fontSize: '0.85rem', color: '#353454', fontStyle: 'italic', marginBottom: '0.75rem' }}>
                       "{round.notes}"
                     </p>
                   )}
@@ -77,10 +77,10 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
                         <div
                           key={qIdx}
                           style={{
-                            background: '#f8fafc',
+                            background: '#EAEAF7',
                             padding: '0.65rem 0.85rem',
                             borderRadius: '8px',
-                            border: '1px solid #edf2f7',
+                            border: '1px solid #C8C7EB',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
@@ -88,14 +88,14 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                            <HelpCircle size={15} color="#6366f1" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
-                            <span style={{ fontSize: '0.875rem', color: '#1e293b', fontWeight: 500 }}>
+                            <HelpCircle size={15} color="#9230E3" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
+                            <span style={{ fontSize: '0.875rem', color: '#23304D', fontWeight: 500 }}>
                               {q.questionText}
                             </span>
                           </div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
                             {q.topic && (
-                              <span className="skill-tag" style={{ background: '#e0e7ff', color: '#3730a3' }}>
+                              <span className="skill-tag" style={{ background: '#F2E1FF', color: '#461F65' }}>
                                 {q.topic}
                               </span>
                             )}
@@ -109,7 +109,7 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
                       ))}
                     </div>
                   ) : (
-                    <p style={{ fontSize: '0.8rem', color: '#94a3b8', margin: 0 }}>No specific questions logged for this round.</p>
+                    <p style={{ fontSize: '0.8rem', color: '#6766B7', margin: 0 }}>No specific questions logged for this round.</p>
                   )}
                 </div>
               ))}
@@ -120,10 +120,10 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
           {experience.preparation && (
             <div style={{ marginBottom: '1.25rem' }}>
               <div className="form-section-title">
-                <Sparkles size={16} color="#4f46e5" />
+                <Sparkles size={16} color="#9230E3" />
                 <span>Preparation Strategy</span>
               </div>
-              <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#334155', lineHeight: 1.6 }}>
+              <div style={{ background: '#EAEAF7', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#353454', lineHeight: 1.6 }}>
                 {experience.preparation}
               </div>
             </div>
@@ -133,10 +133,10 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
           {experience.tips && (
             <div style={{ marginBottom: '1.25rem' }}>
               <div className="form-section-title">
-                <CheckCircle size={16} color="#16a34a" />
+                <CheckCircle size={16} color="#9230E3" />
                 <span>Advice & Tips for Upcoming Candidates</span>
               </div>
-              <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#334155', lineHeight: 1.6 }}>
+              <div style={{ background: '#EAEAF7', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#353454', lineHeight: 1.6 }}>
                 {experience.tips}
               </div>
             </div>
@@ -146,10 +146,10 @@ export const ExperienceDetailModal = ({ isOpen, onClose, experience }) => {
           {experience.timeline && (
             <div style={{ marginBottom: '1.25rem' }}>
               <div className="form-section-title">
-                <Clock size={16} color="#0284c7" />
+                <Clock size={16} color="#6766B7" />
                 <span>Hiring Timeline & Process</span>
               </div>
-              <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#334155' }}>
+              <div style={{ background: '#EAEAF7', padding: '0.85rem 1rem', borderRadius: '10px', fontSize: '0.875rem', color: '#353454' }}>
                 {experience.timeline}
               </div>
             </div>

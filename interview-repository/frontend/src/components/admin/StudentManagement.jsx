@@ -219,7 +219,7 @@ export const StudentManagement = ({ session }) => {
                   left: '10px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#94a3b8',
+                  color: '#6766B7',
                 }}
               />
               <input
@@ -262,7 +262,7 @@ export const StudentManagement = ({ session }) => {
                   <td>
                     <div style={{ fontWeight: 600 }}>{student.name}</div>
                     {student.rollNumber && (
-                      <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                      <div style={{ fontSize: '0.8rem', color: '#353454' }}>
                         Roll: {student.rollNumber}
                       </div>
                     )}

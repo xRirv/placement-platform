@@ -293,7 +293,7 @@ export const MentorManagement = ({ session }) => {
                   left: '10px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#94a3b8',
+                  color: '#6766B7',
                 }}
               />
               <input
@@ -336,7 +336,7 @@ export const MentorManagement = ({ session }) => {
                   <td>
                     <div style={{ fontWeight: 600 }}>{mentor.name}</div>
                     {mentor.facultyId && (
-                      <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                      <div style={{ fontSize: '0.8rem', color: '#353454' }}>
                         Faculty ID: {mentor.facultyId}
                       </div>
                     )}
@@ -598,13 +598,13 @@ export const MentorManagement = ({ session }) => {
             <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
               {/* Current Mentees Section */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
                   Current Mentees ({selectedMentor.students?.length || 0})
                 </h4>
                 {menteesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '1rem', color: '#64748b' }}>Loading...</div>
+                  <div style={{ textAlign: 'center', padding: '1rem', color: '#353454' }}>Loading...</div>
                 ) : selectedMentor.students && selectedMentor.students.length > 0 ? (
-                  <div style={{ border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden' }}>
+                  <div style={{ border: '1px solid #C8C7EB', borderRadius: '8px', overflow: 'hidden' }}>
                     {selectedMentor.students.map((student) => (
                       <div
                         key={student.studentId}
@@ -613,24 +613,24 @@ export const MentorManagement = ({ session }) => {
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
-                          borderBottom: '1px solid #e2e8f0',
-                          background: '#f8fafc',
+                          borderBottom: '1px solid #C8C7EB',
+                          background: '#EAEAF7',
                         }}
                       >
                         <div>
-                          <div style={{ fontWeight: 600, color: '#0f172a' }}>{student.name}</div>
-                          <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                          <div style={{ fontWeight: 600, color: '#23304D' }}>{student.name}</div>
+                          <div style={{ fontSize: '0.875rem', color: '#353454' }}>
                             {student.email} • {student.college}
                           </div>
                           {student.degree && (
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{student.degree}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#6766B7' }}>{student.degree}</div>
                           )}
                         </div>
                         <button
                           type="button"
                           className="btn btn-secondary btn-xs"
                           onClick={() => handleUnassignStudent(student.studentId)}
-                          style={{ background: '#fee2e2', color: '#dc2626', border: 'none' }}
+                          style={{ background: '#f8e6ee', color: '#b3405f', border: 'none' }}
                         >
                           <UserMinus size={14} />
                           <span>Remove</span>
@@ -643,9 +643,9 @@ export const MentorManagement = ({ session }) => {
                     style={{
                       padding: '2rem',
                       textAlign: 'center',
-                      background: '#f8fafc',
+                      background: '#EAEAF7',
                       borderRadius: '8px',
-                      color: '#64748b',
+                      color: '#353454',
                     }}
                   >
                     No mentees assigned yet
@@ -655,7 +655,7 @@ export const MentorManagement = ({ session }) => {
 
               {/* Add Mentee Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#23304D' }}>
                   Add Mentee
                 </h4>
                 <div style={{ position: 'relative', marginBottom: '1rem' }}>
@@ -666,7 +666,7 @@ export const MentorManagement = ({ session }) => {
                       left: '10px',
                       top: '50%',
                       transform: 'translateY(-50%)',
-                      color: '#94a3b8',
+                      color: '#6766B7',
                     }}
                   />
                   <input
@@ -679,9 +679,9 @@ export const MentorManagement = ({ session }) => {
                   />
                 </div>
                 {menteesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '1rem', color: '#64748b' }}>Loading...</div>
+                  <div style={{ textAlign: 'center', padding: '1rem', color: '#353454' }}>Loading...</div>
                 ) : (
-                  <div style={{ border: '1px solid #e2e8f0', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+                  <div style={{ border: '1px solid #C8C7EB', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto' }}>
                     {availableStudents
                       .filter((student) => {
                         // Filter out students already assigned to this mentor
@@ -707,16 +707,16 @@ export const MentorManagement = ({ session }) => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            borderBottom: '1px solid #e2e8f0',
+                            borderBottom: '1px solid #C8C7EB',
                           }}
                         >
                           <div>
-                            <div style={{ fontWeight: 600, color: '#0f172a' }}>{student.name}</div>
-                            <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                            <div style={{ fontWeight: 600, color: '#23304D' }}>{student.name}</div>
+                            <div style={{ fontSize: '0.875rem', color: '#353454' }}>
                               {student.email} • {student.college}
                             </div>
                             {student.mentorName && (
-                              <div style={{ fontSize: '0.75rem', color: '#f59e0b' }}>
+                              <div style={{ fontSize: '0.75rem', color: '#9a7a3a' }}>
                                 Currently assigned to: {student.mentorName}
                               </div>
                             )}
@@ -748,7 +748,7 @@ export const MentorManagement = ({ session }) => {
                         style={{
                           padding: '2rem',
                           textAlign: 'center',
-                          color: '#64748b',
+                          color: '#353454',
                         }}
                       >
                         No available students found

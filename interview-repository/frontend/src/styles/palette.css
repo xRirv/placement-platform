@@ -1,0 +1,16 @@
+/* Brand palette: the foundation of the whole visual identity. Use these tokens, not raw hex values. */
+:root {
+  /* Primary */
+  --color-navy: #23304d;
+  --color-deep-purple: #461f65;
+  --color-purple: #9230e3; /* main brand accent */
+  --color-light-purple: #dbb0ff;
+  --color-pale-purple: #f2e1ff;
+
+  /* Secondary / supporting */
+  --color-dark-secondary: #282845;
+  --color-dark-surface: #353454;
+  --color-lavender-purple: #6766b7;
+  --color-soft-lavender: #c8c7eb;
+  --color-pale-lavender: #eaeaf7;
+}

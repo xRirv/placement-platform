@@ -74,7 +74,7 @@ export const MenteeDetailModal = ({
             </div>
             <div>
               <h2 className="modal-title">{mentee.name || 'Mentee Profile'}</h2>
-              <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.15rem' }}>
+              <p style={{ fontSize: '0.85rem', color: '#353454', marginTop: '0.15rem' }}>
                 {mentee.email} {mentee.phone ? `• ${mentee.phone}` : ''}
               </p>
             </div>
@@ -87,38 +87,38 @@ export const MenteeDetailModal = ({
         {/* Modal Body */}
         <div className="modal-body">
           {/* Academic & Background Info */}
-          <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '1.25rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: '#EAEAF7', border: '1px solid #C8C7EB', borderRadius: '12px', padding: '1.25rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#353454', textTransform: 'uppercase' }}>
                   College / Institute
                 </span>
-                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b', marginTop: '0.2rem' }}>
+                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#23304D', marginTop: '0.2rem' }}>
                   {mentee.college || 'Not specified'}
                 </p>
               </div>
 
               <div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#353454', textTransform: 'uppercase' }}>
                   Degree & Major
                 </span>
-                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b', marginTop: '0.2rem' }}>
+                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#23304D', marginTop: '0.2rem' }}>
                   {mentee.degree || 'Not specified'}
                 </p>
               </div>
 
               <div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#353454', textTransform: 'uppercase' }}>
                   Graduation Year
                 </span>
-                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b', marginTop: '0.2rem' }}>
+                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#23304D', marginTop: '0.2rem' }}>
                   {mentee.graduationYear || '2025'}
                 </p>
               </div>
             </div>
 
             {/* Links Row */}
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid #e2e8f0', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid #C8C7EB', flexWrap: 'wrap' }}>
               {mentee.linkedinURL && (
                 <a
                   href={mentee.linkedinURL}
@@ -148,7 +148,7 @@ export const MenteeDetailModal = ({
                   href={mentee.resumeURL}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.825rem', color: '#4f46e5', fontWeight: 600, textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.825rem', color: '#9230E3', fontWeight: 600, textDecoration: 'none' }}
                 >
                   <FileText size={15} />
                   <span>Resume Document</span>
@@ -160,12 +160,12 @@ export const MenteeDetailModal = ({
             {/* Skills */}
             {skillsList.length > 0 && (
               <div style={{ marginTop: '1rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#353454', textTransform: 'uppercase' }}>
                   Technical Skills
                 </span>
                 <div className="skills-wrap" style={{ marginTop: '0.35rem' }}>
                   {skillsList.map((skill, i) => (
-                    <span key={i} className="skill-tag" style={{ background: '#e0e7ff', color: '#3730a3', fontSize: '0.775rem' }}>
+                    <span key={i} className="skill-tag" style={{ background: '#F2E1FF', color: '#461F65', fontSize: '0.775rem' }}>
                       {skill}
                     </span>
                   ))}
@@ -176,10 +176,10 @@ export const MenteeDetailModal = ({
             {/* Bio */}
             {mentee.bio && (
               <div style={{ marginTop: '1rem' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#353454', textTransform: 'uppercase' }}>
                   Candidate Summary
                 </span>
-                <p style={{ fontSize: '0.85rem', color: '#334155', marginTop: '0.2rem', lineHeight: 1.5 }}>
+                <p style={{ fontSize: '0.85rem', color: '#353454', marginTop: '0.2rem', lineHeight: 1.5 }}>
                   {mentee.bio}
                 </p>
               </div>
@@ -190,13 +190,13 @@ export const MenteeDetailModal = ({
           <div>
             <div className="form-section-title" style={{ justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Briefcase size={16} color="#4f46e5" />
+                <Briefcase size={16} color="#9230E3" />
                 <span>Submitted Interview Experiences ({experiences.length})</span>
               </div>
             </div>
 
             {loadingExp ? (
-              <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
+              <div style={{ textAlign: 'center', padding: '2rem', color: '#353454' }}>
                 Loading mentee experiences...
               </div>
             ) : experiences.length === 0 ? (
@@ -213,7 +213,7 @@ export const MenteeDetailModal = ({
                       key={exp.id}
                       style={{
                         background: '#ffffff',
-                        border: '1px solid #e2e8f0',
+                        border: '1px solid #C8C7EB',
                         borderRadius: '12px',
                         overflow: 'hidden',
                         transition: 'all 0.15s ease',
@@ -227,12 +227,12 @@ export const MenteeDetailModal = ({
                           alignItems: 'center',
                           justifyContent: 'space-between',
                           cursor: 'pointer',
-                          background: isExpanded ? '#f8fafc' : '#ffffff',
+                          background: isExpanded ? '#EAEAF7' : '#ffffff',
                         }}
                       >
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                            <strong style={{ fontSize: '1rem', color: '#0f172a' }}>
+                            <strong style={{ fontSize: '1rem', color: '#23304D' }}>
                               {exp.companyName || 'Company'}
                             </strong>
                             <span className={`badge-difficulty badge-diff-${(exp.difficulty || 'medium').toLowerCase()}`}>
@@ -245,39 +245,39 @@ export const MenteeDetailModal = ({
                               {exp.moderationStatus}
                             </span>
                           </div>
-                          <span style={{ fontSize: '0.825rem', color: '#64748b' }}>
+                          <span style={{ fontSize: '0.825rem', color: '#353454' }}>
                             {exp.role} • {exp.interviewDate || 'Recent'} • {exp.rounds ? `${exp.rounds.length} rounds` : 'Rounds available'}
                           </span>
                         </div>
 
-                        <div style={{ color: '#64748b' }}>
+                        <div style={{ color: '#353454' }}>
                           {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                         </div>
                       </div>
 
                       {/* Expandable Details */}
                       {isExpanded && (
-                        <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid #e2e8f0', background: '#ffffff' }}>
+                        <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid #C8C7EB', background: '#ffffff' }}>
                           {exp.rounds && exp.rounds.length > 0 && (
                             <div style={{ marginBottom: '1rem' }}>
-                              <h5 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155', marginBottom: '0.5rem' }}>
+                              <h5 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#353454', marginBottom: '0.5rem' }}>
                                 Interview Rounds & Questions Logged:
                               </h5>
                               {exp.rounds.map((round, rIdx) => (
-                                <div key={rIdx} style={{ background: '#f8fafc', padding: '0.65rem 0.85rem', borderRadius: '8px', marginBottom: '0.5rem' }}>
-                                  <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>
+                                <div key={rIdx} style={{ background: '#EAEAF7', padding: '0.65rem 0.85rem', borderRadius: '8px', marginBottom: '0.5rem' }}>
+                                  <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#23304D' }}>
                                     Round {round.roundOrder || rIdx + 1}: {round.name}
                                   </div>
                                   {round.notes && (
-                                    <div style={{ fontSize: '0.785rem', color: '#64748b', fontStyle: 'italic', marginTop: '0.2rem' }}>
+                                    <div style={{ fontSize: '0.785rem', color: '#353454', fontStyle: 'italic', marginTop: '0.2rem' }}>
                                       {round.notes}
                                     </div>
                                   )}
                                   {round.questions && round.questions.length > 0 && (
-                                    <ul style={{ margin: '0.4rem 0 0 1rem', padding: 0, fontSize: '0.825rem', color: '#1e293b' }}>
+                                    <ul style={{ margin: '0.4rem 0 0 1rem', padding: 0, fontSize: '0.825rem', color: '#23304D' }}>
                                       {round.questions.map((q, qIdx) => (
                                         <li key={qIdx} style={{ marginBottom: '0.25rem' }}>
-                                          {q.questionText} {q.topic && <span style={{ color: '#6366f1' }}>({q.topic})</span>}
+                                          {q.questionText} {q.topic && <span style={{ color: '#9230E3' }}>({q.topic})</span>}
                                         </li>
                                       ))}
                                     </ul>
@@ -289,8 +289,8 @@ export const MenteeDetailModal = ({
 
                           {exp.preparation && (
                             <div style={{ marginBottom: '0.75rem' }}>
-                              <span style={{ fontSize: '0.785rem', fontWeight: 600, color: '#64748b' }}>Preparation Strategy:</span>
-                              <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.825rem', color: '#334155', lineHeight: 1.5 }}>
+                              <span style={{ fontSize: '0.785rem', fontWeight: 600, color: '#353454' }}>Preparation Strategy:</span>
+                              <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.825rem', color: '#353454', lineHeight: 1.5 }}>
                                 {exp.preparation}
                               </p>
                             </div>
@@ -298,8 +298,8 @@ export const MenteeDetailModal = ({
 
                           {exp.tips && (
                             <div>
-                              <span style={{ fontSize: '0.785rem', fontWeight: 600, color: '#64748b' }}>Tips & Advice:</span>
-                              <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.825rem', color: '#334155', lineHeight: 1.5 }}>
+                              <span style={{ fontSize: '0.785rem', fontWeight: 600, color: '#353454' }}>Tips & Advice:</span>
+                              <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.825rem', color: '#353454', lineHeight: 1.5 }}>
                                 {exp.tips}
                               </p>
                             </div>

@@ -274,7 +274,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">Community Experiences</span>
             <span className="stat-num">{communityExperiences.length}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#eef2ff', color: '#6366f1' }}>
+          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
             <BookOpen size={20} />
           </div>
         </div>
@@ -284,7 +284,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
             <span className="stat-title">My Contributions</span>
             <span className="stat-num">{myExperiences.length}</span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#faf5ff', color: '#9333ea' }}>
+          <div className="stat-icon-wrap" style={{ background: '#F2E1FF', color: '#9230E3' }}>
             <FileCheck size={20} />
           </div>
         </div>
@@ -292,11 +292,11 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
         <div className="stat-card">
           <div className="stat-content">
             <span className="stat-title">Live & Approved</span>
-            <span className="stat-num" style={{ color: '#059669' }}>
+            <span className="stat-num" style={{ color: '#3d8c74' }}>
               {approvedCount}
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#059669' }}>
+          <div className="stat-icon-wrap" style={{ background: '#ecfdf5', color: '#3d8c74' }}>
             <CheckCircle size={20} />
           </div>
         </div>
@@ -308,7 +308,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
               {profile.position || 'Software Engineer'}
             </span>
           </div>
-          <div className="stat-icon-wrap" style={{ background: '#fef3c7', color: '#d97706' }}>
+          <div className="stat-icon-wrap" style={{ background: '#f6eedb', color: '#9a7a3a' }}>
             <Building2 size={20} />
           </div>
         </div>
@@ -354,7 +354,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                       left: '0.85rem',
                       top: '50%',
                       transform: 'translateY(-50%)',
-                      color: '#94a3b8',
+                      color: '#6766B7',
                     }}
                   />
                   <input
@@ -405,13 +405,13 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                   justifyContent: 'space-between',
                   flexWrap: 'wrap',
                   gap: '0.75rem',
-                  borderTop: '1px solid #f1f5f9',
+                  borderTop: '1px solid #EAEAF7',
                   paddingTop: '0.85rem',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#353454' }}>
                       Difficulty:
                     </span>
                     <div className="pill-group">
@@ -430,7 +430,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#353454' }}>
                       Outcome:
                     </span>
                     <div className="pill-group">
@@ -449,7 +449,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                   </div>
                 </div>
 
-                <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>
+                <div style={{ fontSize: '0.8rem', color: '#353454', fontWeight: 500 }}>
                   Showing <strong>{filteredCommunity.length}</strong> of{' '}
                   <strong>{communityExperiences.length}</strong> verified experiences
                 </div>
@@ -459,16 +459,16 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
 
           {/* Grid */}
           {loadingCommunity ? (
-            <div style={{ textAlign: 'center', padding: '3.5rem', color: '#64748b' }}>
+            <div style={{ textAlign: 'center', padding: '3.5rem', color: '#353454' }}>
               Loading community experiences...
             </div>
           ) : filteredCommunity.length === 0 ? (
             <div className="dashboard-card empty-state">
-              <BookOpen size={44} className="empty-state-icon" color="#94a3b8" />
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.35rem' }}>
+              <BookOpen size={44} className="empty-state-icon" color="#6766B7" />
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#23304D', marginBottom: '0.35rem' }}>
                 No Experiences Found
               </h3>
-              <p style={{ maxWidth: '420px', margin: '0 auto 1.25rem auto', color: '#64748b' }}>
+              <p style={{ maxWidth: '420px', margin: '0 auto 1.25rem auto', color: '#353454' }}>
                 Try adjusting your search criteria or contribute the first experience for this company!
               </p>
               <button className="btn btn-primary" onClick={handleOpenCreate}>
@@ -496,14 +496,14 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                               width: '40px',
                               height: '40px',
                               borderRadius: '10px',
-                              background: '#faf5ff',
-                              border: '1px solid #e9d5ff',
+                              background: '#F2E1FF',
+                              border: '1px solid #F2E1FF',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                               fontSize: '1.1rem',
                               fontWeight: 800,
-                              color: '#9333ea',
+                              color: '#9230E3',
                             }}
                           >
                             {exp.companyName ? exp.companyName.charAt(0) : 'C'}
@@ -539,8 +539,8 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                           <span
                             style={{
                               fontSize: '0.75rem',
-                              color: '#9333ea',
-                              background: '#faf5ff',
+                              color: '#9230E3',
+                              background: '#F2E1FF',
                               padding: '0.2rem 0.55rem',
                               borderRadius: '6px',
                               fontWeight: 600,
@@ -551,7 +551,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                           </span>
                         )}
                         {exp.interviewDate && (
-                          <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                          <span style={{ fontSize: '0.75rem', color: '#353454' }}>
                             {exp.interviewDate}
                           </span>
                         )}
@@ -564,7 +564,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                               fontSize: '0.725rem',
                               fontWeight: 700,
                               textTransform: 'uppercase',
-                              color: '#64748b',
+                              color: '#353454',
                               letterSpacing: '0.04em',
                             }}
                           >
@@ -573,7 +573,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                           <p
                             style={{
                               fontSize: '0.825rem',
-                              color: '#1e293b',
+                              color: '#23304D',
                               fontWeight: 500,
                               marginTop: '0.2rem',
                               lineClamp: 2,
@@ -591,17 +591,17 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                       {exp.tips && (
                         <div
                           style={{
-                            background: '#f8fafc',
+                            background: '#EAEAF7',
                             padding: '0.6rem 0.8rem',
                             borderRadius: '8px',
-                            border: '1px solid #edf2f7',
+                            border: '1px solid #C8C7EB',
                             margin: '0.5rem 0',
                           }}
                         >
                           <p
                             style={{
                               fontSize: '0.8rem',
-                              color: '#475569',
+                              color: '#353454',
                               fontStyle: 'italic',
                               margin: 0,
                               lineClamp: 2,
@@ -618,7 +618,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                     </div>
 
                     <div className="exp-footer">
-                      <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#6766B7' }}>
                         Verified placement review
                       </span>
                       <button
@@ -654,13 +654,13 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
           </div>
 
           {loadingExp ? (
-            <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
+            <div style={{ textAlign: 'center', padding: '3rem', color: '#353454' }}>
               Loading your submitted experiences...
             </div>
           ) : myExperiences.length === 0 ? (
             <div className="empty-state">
               <FileCheck size={40} className="empty-state-icon" />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.35rem' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#23304D', marginBottom: '0.35rem' }}>
                 No Interview Experiences Submitted Yet
               </h3>
               <p style={{ maxWidth: '420px', margin: '0 auto 1.25rem auto' }}>
@@ -693,13 +693,13 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                       <span className={`badge-result badge-res-${(exp.interviewResult || 'pending').toLowerCase().replace(' ', '-')}`}>
                         {exp.interviewResult || 'Offered'}
                       </span>
-                      <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#353454' }}>
                         {exp.interviewDate ? `Date: ${exp.interviewDate}` : ''}
                       </span>
                     </div>
 
                     {exp.rounds && exp.rounds.length > 0 && (
-                      <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.5rem 0' }}>
+                      <p style={{ fontSize: '0.8rem', color: '#353454', margin: '0.5rem 0' }}>
                         Includes <strong>{exp.rounds.length} rounds</strong> with specific questions.
                       </p>
                     )}
@@ -708,7 +708,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
                       <p
                         style={{
                           fontSize: '0.825rem',
-                          color: '#334155',
+                          color: '#353454',
                           fontStyle: 'italic',
                           margin: '0.5rem 0',
                           lineClamp: 2,

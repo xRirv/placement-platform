@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { createApi } from '../../lib/api';
 import { asArray } from '../../lib/format';
+import { ChatProvider } from './ChatQueue';
 
 /**
  * Loads one backend resource with explicit loading / error / data states and a reload().
@@ -58,7 +59,14 @@ export const StudentDataProvider = ({ session, backendUrl, children }) => {
     () => ({ api, backendUrl, session, profile, experiences, submissions, plans }),
     [api, backendUrl, session, profile, experiences, submissions, plans],
   );
-  return <StudentDataContext.Provider value={value}>{children}</StudentDataContext.Provider>;
+  const userId = session?.user?.id;
+  return (
+    <StudentDataContext.Provider value={value}>
+      <ChatProvider key={userId || 'anon'} api={api} userId={userId}>
+        {children}
+      </ChatProvider>
+    </StudentDataContext.Provider>
+  );
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

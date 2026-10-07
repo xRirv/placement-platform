@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Send, Sparkles, Building2, Code2, MessagesSquare, Network, Search } from 'lucide-react';
+import { Send, Sparkles, Building2, Code2, MessagesSquare, Network, Search, RotateCcw, SquarePen } from 'lucide-react';
 import { PageHeader, SectionHeader, Button, SearchBar } from '../ui/ui';
 import { useStudentData } from './StudentData';
+import { useChat } from './ChatQueue';
 
 // Minimal Markdown for AI answers: **bold**, #-headings and "- "/"* " bullets.
 const renderInline = (text) =>
@@ -34,10 +35,9 @@ const renderMarkdown = (text) =>
 export const AssistantPage = () => {
   const { api, plans, experiences } = useStudentData();
   const [params, setParams] = useSearchParams();
-  const [messages, setMessages] = useState([]);
+  const { messages, pending, send: enqueue, retry, reset, setViewing } = useChat();
   const [input, setInput] = useState(params.get('prompt') || '');
-  const [sending, setSending] = useState(false);
-  const [sessionId] = useState(() => crypto.randomUUID());
+  const sending = pending > 0;
   const logRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -50,6 +50,12 @@ export const AssistantPage = () => {
       inputRef.current?.focus();
     }
   }, [params, setParams]);
+
+  // While this page is on screen, replies aren't "unread".
+  useEffect(() => {
+    setViewing(true);
+    return () => setViewing(false);
+  }, [setViewing]);
 
   useEffect(() => {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: 'smooth' });
@@ -85,20 +91,13 @@ export const AssistantPage = () => {
     ].filter(Boolean);
   }, [plans.data, experiences.data]);
 
-  const send = async (text) => {
+  // Messages go through the shared queue: you can keep typing while the assistant answers,
+  // and replies still arrive if you switch pages.
+  const send = (text) => {
     const message = (text ?? input).trim();
-    if (!message || sending) return;
-    setInput('');
-    setMessages((m) => [...m, { role: 'user', content: message }]);
-    setSending(true);
-    try {
-      const resp = await api.post('/api/ai/chat', { message, session_id: sessionId });
-      setMessages((m) => [...m, { role: 'assistant', content: resp.answer }]);
-    } catch (err) {
-      setMessages((m) => [...m, { role: 'error', content: err.message }]);
-    } finally {
-      setSending(false);
-    }
+    if (!message) return;
+    if (text == null) setInput('');
+    enqueue(message);
   };
 
   const runSearch = async (e) => {
@@ -122,11 +121,22 @@ export const AssistantPage = () => {
         eyebrow="Preparation"
         title="AI Interview Assistant"
         subtitle="Prepare for your next interview with context from real interview experiences, your target companies and your study plan."
+        actions={
+          messages.length > 0 && (
+            <Button
+              variant="secondary"
+              icon={SquarePen}
+              onClick={() => window.confirm('Start a new chat? The current conversation will be cleared.') && reset()}
+            >
+              New chat
+            </Button>
+          )
+        }
       />
 
       <div className="ws-suggestions" style={{ marginBottom: '1.25rem' }} aria-label="Suggested actions">
         {suggestions.map(({ icon: Icon, label, prompt }) => (
-          <button key={label} type="button" className="ws-suggestion" onClick={() => send(prompt)} disabled={sending}>
+          <button key={label} type="button" className="ws-suggestion" onClick={() => send(prompt)}>
             <Icon size={15} aria-hidden="true" /> {label}
           </button>
         ))}
@@ -145,18 +155,32 @@ export const AssistantPage = () => {
               </p>
             </div>
           )}
-          {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`ws-bubble ${m.role === 'user' ? 'ws-bubble-user' : 'ws-bubble-ai'}`}
-              style={
-                m.role === 'error' ? { background: 'var(--ws-danger-soft)', color: 'var(--ws-danger)' } : undefined
-              }
-            >
-              {m.role === 'assistant' ? renderMarkdown(m.content) : m.content}
-            </div>
-          ))}
-          {sending && (
+          {messages.map((m) =>
+            m.role === 'assistant' ? (
+              <div key={m.id} className="ws-bubble ws-bubble-ai">
+                {renderMarkdown(m.content)}
+              </div>
+            ) : (
+              <div key={m.id} className="ws-bubble-wrap">
+                <div className={`ws-bubble ws-bubble-user ${m.status === 'failed' ? 'ws-bubble-failed' : ''}`}>
+                  {m.content}
+                </div>
+                {m.status === 'queued' && (
+                  <div className="ws-bubble-meta">Queued — will send after the current reply</div>
+                )}
+                {m.status === 'sending' && <div className="ws-bubble-meta">Sending…</div>}
+                {m.status === 'failed' && (
+                  <div className="ws-bubble-meta ws-bubble-meta-error" role="alert">
+                    Not delivered{m.error ? ` — ${m.error}` : ''}.{' '}
+                    <button type="button" className="ws-section-link" onClick={() => retry(m.id)}>
+                      <RotateCcw size={12} aria-hidden="true" /> Retry
+                    </button>
+                  </div>
+                )}
+              </div>
+            ),
+          )}
+          {messages.some((m) => m.status === 'sending') && (
             <div className="ws-bubble ws-bubble-ai ws-muted" aria-label="Assistant is typing">
               Thinking…
             </div>
@@ -179,9 +203,8 @@ export const AssistantPage = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="e.g. How should I prepare for the TCS interview?"
-            disabled={sending}
           />
-          <Button type="submit" icon={Send} disabled={sending || !input.trim()}>
+          <Button type="submit" icon={Send} disabled={!input.trim()}>
             Send
           </Button>
         </form>

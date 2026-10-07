@@ -138,8 +138,10 @@ export const Overview = ({ userProfile }) => {
                 />
                 <StatCard
                   label="Study plan progress"
-                  value={summary ? `${summary.completionPercent}%` : '—'}
-                  hint={summary ? `${summary.completed} of ${summary.totalTopics} topics done` : 'no plan yet'}
+                  value={summary?.totalTopics ? `${summary.completionPercent}%` : '—'}
+                  hint={
+                    summary?.totalTopics ? `${summary.completed} of ${summary.totalTopics} topics done` : 'no plan yet'
+                  }
                   onClick={() => navigate('/student/plan')}
                 />
               </>

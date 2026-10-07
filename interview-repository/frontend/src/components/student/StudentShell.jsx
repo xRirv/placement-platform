@@ -14,10 +14,14 @@ import {
   Menu,
   X,
   Compass,
+  Sun,
+  Moon,
+  Monitor,
 } from 'lucide-react';
 import { getSupabaseClient } from '../../lib/supabaseClient';
 import { ErrorBoundary, CompanyAvatar } from '../ui/ui';
 import { useStudentData } from './StudentData';
+import { useChat } from './ChatQueue';
 
 const NAV = [
   {
@@ -33,7 +37,7 @@ const NAV = [
     label: 'Preparation',
     items: [
       { to: '/student/plan', label: 'Study Plan', icon: ListChecks },
-      { to: '/student/assistant', label: 'AI Assistant', icon: Sparkles },
+      { to: '/student/assistant', label: 'AI Assistant', icon: Sparkles, count: 'chat' },
       { to: '/student/profile', label: 'Candidate Profile', icon: UserRound },
     ],
   },
@@ -46,11 +50,35 @@ const NAV = [
   },
 ];
 
+const THEMES = [
+  { value: 'system', label: 'Auto', icon: Monitor },
+  { value: 'light', label: 'Light', icon: Sun },
+  { value: 'dark', label: 'Dark', icon: Moon },
+];
+
+const readTheme = () => {
+  try {
+    return localStorage.getItem('ws-theme') || 'system';
+  } catch {
+    return 'system';
+  }
+};
+
 export const StudentShell = ({ user, userProfile }) => {
   const [navOpen, setNavOpen] = useState(false);
+  const [theme, setTheme] = useState(readTheme);
+  const chooseTheme = (value) => {
+    setTheme(value);
+    try {
+      localStorage.setItem('ws-theme', value);
+    } catch {
+      // ignore (private mode)
+    }
+  };
   const location = useLocation();
   const navigate = useNavigate();
   const data = useStudentData();
+  const chat = useChat();
 
   // Close the mobile drawer whenever the route changes.
   const [lastPath, setLastPath] = useState(location.pathname);
@@ -78,10 +106,12 @@ export const StudentShell = ({ user, userProfile }) => {
   const counts = {
     experiences: data.experiences.data?.length,
     submissions: data.submissions.data?.length,
+    // Unread AI replies (or a working indicator) while you're on another page.
+    chat: chat.unread ? `${chat.unread} new` : chat.pending ? '…' : null,
   };
 
   return (
-    <div className={`ws ws-shell ${navOpen ? 'nav-open' : ''}`}>
+    <div className={`ws ws-shell ${navOpen ? 'nav-open' : ''}`} data-theme={theme}>
       <aside className="ws-sidebar" id="ws-sidebar" aria-label="Main navigation">
         <NavLink to="/student" end className="ws-brand">
           <span className="ws-brand-mark">
@@ -98,12 +128,30 @@ export const StudentShell = ({ user, userProfile }) => {
                 <NavLink key={to} to={to} end={end} className="ws-nav-link">
                   <Icon size={17} aria-hidden="true" />
                   <span>{label}</span>
-                  {count && counts[count] != null && <span className="ws-nav-count">{counts[count]}</span>}
+                  {count && counts[count] != null && (
+                    <span className={`ws-nav-count ${count === 'chat' ? 'ws-nav-count-accent' : ''}`}>
+                      {counts[count]}
+                    </span>
+                  )}
                 </NavLink>
               ))}
             </div>
           ))}
         </nav>
+
+        <div className="ws-theme-toggle" role="group" aria-label="Color theme">
+          {THEMES.map(({ value, label, icon: Icon }) => (
+            <button
+              key={value}
+              type="button"
+              aria-pressed={theme === value}
+              onClick={() => chooseTheme(value)}
+              title={`${label} theme`}
+            >
+              <Icon size={13} aria-hidden="true" /> {label}
+            </button>
+          ))}
+        </div>
 
         <div className="ws-sidebar-footer">
           <CompanyAvatar name={name} size={34} />
@@ -113,7 +161,7 @@ export const StudentShell = ({ user, userProfile }) => {
           </div>
           <button
             type="button"
-            className="ws-btn ws-btn-ghost ws-btn-icon"
+            className="ws-btn ws-btn-ghost ws-btn-icon ws-signout"
             onClick={handleSignOut}
             aria-label="Sign out"
             title="Sign out"
