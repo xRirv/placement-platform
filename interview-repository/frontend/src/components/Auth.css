@@ -1,0 +1,1248 @@
+/* ==========================================================================
+   InterviewRepo — Living Anime Scenery & Editorial Earth-Toned Theme
+   Contrasting Forest Green & Warm Earthy Brown with Subtle Rainbow Prism Blur
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* --- Color Theory: Forest Green & Warm Bark Brown with Soft Cream Canvas --- */
+  --c-forest-900: #16301f;
+  --c-forest-800: #20442c;
+  --c-forest-700: #2b573a;
+  --c-forest-600: #386f4a;
+  --c-forest-500: #4a8a5f;
+  --c-sage-soft:   #eaf2ec;
+  --c-sage-border: #c4dccb;
+
+  --c-wood-900:   #341d0f;
+  --c-wood-800:   #4e2b17;
+  --c-wood-700:   #6d3d20;
+  --c-wood-600:   #8a4e29;
+  --c-wood-500:   #a86338;
+  --c-sand-soft:   #f6eee5;
+  --c-sand-border: #e6d3c2;
+
+  /* Canvas: Subtle organic warm cream, never blinding sterile white */
+  --c-canvas-bg:   #fbf9f4;
+  --c-surface-card: rgba(254, 253, 249, 0.9);
+  --c-surface-hover: rgba(255, 255, 255, 0.96);
+  --c-border-subtle: rgba(109, 61, 32, 0.12);
+  --c-border-focus:  #2b573a;
+
+  /* Text Hierarchy */
+  --c-text-deep:   #152019;
+  --c-text-body:   #333f37;
+  --c-text-muted:  #5d6e64;
+  --c-text-warm:   #6d3d20;
+
+  /* Subtle Rainbow Prism & Chromatic Blur Gradient */
+  --rainbow-prism-light: linear-gradient(
+    135deg,
+    rgba(255, 120, 120, 0.14) 0%,
+    rgba(255, 205, 105, 0.14) 22%,
+    rgba(80, 220, 160, 0.16) 48%,
+    rgba(95, 185, 255, 0.14) 74%,
+    rgba(195, 140, 255, 0.14) 100%
+  );
+
+  --rainbow-border-shimmer: linear-gradient(
+    135deg,
+    rgba(43, 87, 58, 0.35) 0%,
+    rgba(148, 88, 49, 0.35) 30%,
+    rgba(95, 185, 255, 0.25) 60%,
+    rgba(43, 87, 58, 0.35) 100%
+  );
+
+  /* Glassmorphic Shadows */
+  --shadow-glass: 0 20px 48px -12px rgba(22, 48, 31, 0.18), 0 4px 16px -2px rgba(78, 43, 23, 0.08);
+  --shadow-glass-elevated: 0 28px 60px -14px rgba(22, 48, 31, 0.25), 0 6px 20px -2px rgba(78, 43, 23, 0.12);
+}
+
+/* ==========================================================================
+   Full Viewport Living Scenery Root
+   ========================================================================== */
+.scenery-page-root {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a2f22;
+  color: var(--c-text-deep);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Living Anime Scenery Background Stage
+   ========================================================================== */
+.scenery-stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Base Painting with Subtle Ambient Breathing Pulse */
+.scenery-bg-image {
+  position: absolute;
+  inset: -15px;
+  background-size: cover;
+  background-position: center 75%;
+  background-repeat: no-repeat;
+  filter: saturate(1.05) contrast(1.02);
+  animation: sceneryGentleBreathe 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes sceneryGentleBreathe {
+  0% {
+    transform: scale(1.01) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.03) translate(-8px, -4px);
+  }
+  100% {
+    transform: scale(1.015) translate(4px, 2px);
+  }
+}
+
+/* The Anime Boy Resting Under the Tree — Subtle Looping Breathing Motion */
+.scenery-boy-motion-layer {
+  position: absolute;
+  inset: -15px;
+  background-size: cover;
+  background-position: center 75%;
+  background-repeat: no-repeat;
+  filter: saturate(1.05) contrast(1.02);
+  pointer-events: none;
+  /* Radial mask isolating just the sleeping boy at the base of the tree */
+  -webkit-mask-image: radial-gradient(ellipse 26% 28% at 61% 78%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 80%);
+  mask-image: radial-gradient(ellipse 26% 28% at 61% 78%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 80%);
+  animation: boySubtleBreathe 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes boySubtleBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  38% {
+    transform: translateY(-3.5px) scale(1.008);
+  }
+  70% {
+    transform: translateY(-1.2px) scale(1.003);
+  }
+}
+
+/* Rainbow Prism Optical Lens Flare & Soft Chromatic Blur */
+.rainbow-prism-halo {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255, 235, 160, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 35% 25%, rgba(120, 230, 180, 0.12) 0%, transparent 55%),
+    var(--rainbow-prism-light);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Gentle Cinematic Vignette for readability while preserving the art */
+.scenery-soft-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(20, 36, 26, 0.08) 30%, rgba(14, 28, 20, 0.38) 100%),
+              linear-gradient(to right, rgba(16, 32, 23, 0.45) 0%, rgba(16, 32, 23, 0.15) 50%, rgba(16, 32, 23, 0.48) 100%);
+  pointer-events: none;
+}
+
+/* Continuous Drifting Leaves Canvas Layer */
+.leaves-animation-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Navigation Bar with Frosted Glass
+   ========================================================================== */
+.scenery-nav {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(253, 252, 248, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(109, 61, 32, 0.14);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.auth-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--c-forest-900);
+}
+
+.logo-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--c-forest-800) 0%, var(--c-forest-700) 100%);
+  border: 1px solid var(--c-wood-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f7eee4;
+  box-shadow: 0 4px 14px rgba(32, 68, 44, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.auth-nav-logo:hover .logo-badge {
+  transform: rotate(6deg) scale(1.05);
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+  color: var(--c-forest-900);
+}
+
+.logo-accent {
+  color: var(--c-wood-700);
+  margin-left: 2px;
+}
+
+.nav-badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(234, 243, 237, 0.85);
+  border: 1px solid var(--c-sage-border);
+  color: var(--c-forest-800);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+}
+
+.status-dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--c-forest-600);
+  box-shadow: 0 0 0 0 rgba(56, 111, 74, 0.7);
+  animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(56, 111, 74, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(56, 111, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 111, 74, 0); }
+}
+
+/* ==========================================================================
+   Main Layout: Split Stage (Editorial Left + Fading Box Right)
+   ========================================================================== */
+.scenery-layout {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  padding: 2.5rem 3.5rem;
+  min-height: calc(100vh - 72px);
+  gap: 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .scenery-layout {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.5rem;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================================================
+   Left Side: Rocketlane-Inspired Minimalist Editorial Section
+   ========================================================================== */
+.scenery-left-showcase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 620px;
+}
+
+.rocketlane-showcase {
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+/* Capsule Tag */
+.editorial-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(254, 253, 249, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(109, 61, 32, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.25rem;
+  width: fit-content;
+}
+
+.editorial-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-forest-600);
+}
+
+.editorial-pill-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-wood-800);
+}
+
+/* Bold Editorial Typography */
+.editorial-headline-wrap {
+  margin-bottom: 1.75rem;
+}
+
+.editorial-title {
+  font-size: 2.85rem;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgba(18, 38, 25, 0.55), 0 1px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
+}
+
+.editorial-highlight-green {
+  color: #79d799;
+  text-shadow: 0 2px 14px rgba(25, 60, 36, 0.6);
+}
+
+.editorial-highlight-brown {
+  color: #f6c096;
+  text-shadow: 0 2px 14px rgba(78, 43, 23, 0.6);
+}
+
+.editorial-sub {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #f7f9f5;
+  text-shadow: 0 1px 10px rgba(18, 38, 25, 0.55);
+  max-width: 540px;
+  margin: 0;
+}
+
+/* Floating Capsule Badges */
+.editorial-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.editorial-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.editorial-badge-pill:hover {
+  transform: translateY(-2px);
+}
+
+.pill-forest {
+  background: rgba(234, 243, 237, 0.92);
+  border: 1px solid var(--c-sage-border);
+  color: var(--c-forest-900);
+}
+
+.pill-brown {
+  background: rgba(246, 238, 229, 0.92);
+  border: 1px solid var(--c-sand-border);
+  color: var(--c-wood-800);
+}
+
+.pill-sage {
+  background: rgba(254, 253, 249, 0.92);
+  border: 1px solid rgba(109, 61, 32, 0.2);
+  color: var(--c-forest-800);
+}
+
+/* Company Tags Strip */
+.editorial-company-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+
+.company-strip-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #e6eee8;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.company-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.company-tag-minimal {
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(254, 253, 249, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(109, 61, 32, 0.14);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-forest-900);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Trust Quote Box */
+.editorial-quote-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  background: rgba(254, 253, 249, 0.78);
+  backdrop-filter: blur(14px);
+  border-left: 3px solid var(--c-wood-700);
+  border-top: 1px solid rgba(109, 61, 32, 0.1);
+  border-right: 1px solid rgba(109, 61, 32, 0.1);
+  border-bottom: 1px solid rgba(109, 61, 32, 0.1);
+  max-width: 520px;
+}
+
+.quote-text {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--c-text-body);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Right Side: The Login Box that Fades & Glides in
+   ========================================================================== */
+.scenery-form-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .scenery-form-column {
+    justify-content: center;
+  }
+}
+
+.scenery-card-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+/* THE ENTRANCE ANIMATION: Smooth Fade and Glide From Right */
+.scenery-card {
+  width: 100%;
+  background: rgba(254, 253, 249, 0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-radius: 24px;
+  border: 1px solid rgba(109, 61, 32, 0.15);
+  box-shadow: var(--shadow-glass);
+  padding: 2.25rem 2.25rem;
+  position: relative;
+  overflow: hidden;
+
+  /* Smooth Fade & Glide In */
+  animation: loginCardFadeSlideIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  will-change: transform, opacity;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.scenery-card:hover {
+  border-color: rgba(43, 87, 58, 0.3);
+  box-shadow: var(--shadow-glass-elevated);
+}
+
+/* Rainbow Prism Shimmer on Top Edge of the Login Box */
+.scenery-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rainbow-prism-light);
+  opacity: 0.9;
+}
+
+@keyframes loginCardFadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(48px) scale(0.96);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ==========================================================================
+   AuthCard Interactive Form Styles (Contrasting Green & Brown)
+   ========================================================================== */
+
+/* Tabs: Sign In / Create Account */
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.25rem;
+  border-radius: 12px;
+  background: rgba(246, 238, 229, 0.7);
+  border: 1px solid var(--c-sand-border);
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+.auth-tab {
+  padding: 0.55rem;
+  border: none;
+  background: transparent;
+  color: var(--c-text-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+  font-family: inherit;
+}
+
+.auth-tab:hover {
+  color: var(--c-wood-800);
+}
+
+.auth-tab.active {
+  background: #ffffff;
+  color: var(--c-forest-900);
+  box-shadow: 0 2px 8px rgba(32, 68, 44, 0.1), 0 1px 3px rgba(109, 61, 32, 0.08);
+}
+
+/* Headers */
+.auth-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.auth-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--c-forest-900);
+  margin: 0 0 0.35rem 0;
+}
+
+.auth-subtitle {
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  margin: 0;
+}
+
+/* Social Buttons */
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-social {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(109, 61, 32, 0.18);
+  color: var(--c-text-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.btn-social:hover:not(:disabled) {
+  border-color: var(--c-wood-600);
+  background: #faf7f2;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(109, 61, 32, 0.1);
+}
+
+.btn-social:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Or Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--c-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(109, 61, 32, 0.12);
+}
+
+/* Form Groups & Inputs */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--c-forest-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-label-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-wood-700);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.field-label-link:hover {
+  color: var(--c-wood-900);
+  text-decoration: underline;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 0.95rem;
+  color: var(--c-text-muted);
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+.input-action-right {
+  position: absolute;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--c-text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.input-action-right:hover {
+  color: var(--c-forest-900);
+}
+
+.text-input {
+  width: 100%;
+  padding: 0.72rem 1rem 0.72rem 2.65rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(109, 61, 32, 0.18);
+  font-size: 0.9rem;
+  color: var(--c-text-deep);
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.text-input::placeholder {
+  color: #9ba89f;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--c-forest-700);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(43, 87, 58, 0.14);
+}
+
+.text-input.input-error {
+  border-color: #c93b2b;
+  background: #fff8f7;
+}
+
+.text-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(201, 59, 43, 0.12);
+}
+
+.field-error-text {
+  font-size: 0.75rem;
+  color: #c93b2b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Primary Button (Deep Forest Green with Warm Brown Accent) */
+.btn-primary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--c-forest-800) 0%, var(--c-forest-700) 100%);
+  border: 1px solid var(--c-forest-900);
+  color: #f7eee4;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(32, 68, 44, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--c-forest-900) 0%, var(--c-forest-800) 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(32, 68, 44, 0.45);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Password Strength Indicator */
+.password-meter-wrap {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.password-meter-bar {
+  display: flex;
+  gap: 4px;
+  height: 4px;
+  width: 100%;
+}
+
+.password-meter-segment {
+  flex: 1;
+  border-radius: 9999px;
+  background: rgba(109, 61, 32, 0.12);
+  transition: background-color 0.25s ease;
+}
+
+.password-meter-segment.active-weak { background: #c93b2b; }
+.password-meter-segment.active-medium { background: #d48b38; }
+.password-meter-segment.active-strong { background: var(--c-forest-600); }
+
+.password-meter-label {
+  font-size: 0.725rem;
+  color: var(--c-text-muted);
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Alerts */
+.auth-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.825rem;
+  font-weight: 600;
+}
+
+.auth-alert-error,
+.auth-alert-danger {
+  background: #fdf2f0;
+  border: 1px solid #f8d3cc;
+  color: #a8281a;
+}
+
+.auth-alert-success {
+  background: var(--c-sage-soft);
+  border: 1px solid var(--c-sage-border);
+  color: var(--c-forest-900);
+}
+
+/* ==========================================================================
+   Input Affix & Form Control Additions
+   ========================================================================== */
+.input-affix-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-affix-icon {
+  position: absolute;
+  left: 0.95rem;
+  color: var(--c-text-muted);
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+.input-affix-wrapper:focus-within .input-affix-icon {
+  color: var(--c-forest-700);
+}
+
+.input-affix-toggle {
+  position: absolute;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--c-text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.input-affix-toggle:hover {
+  color: var(--c-forest-900);
+}
+
+.text-input.has-prefix {
+  padding-left: 2.75rem;
+}
+
+.text-input.has-suffix {
+  padding-right: 2.75rem;
+}
+
+.input-affix-wrapper.has-error .text-input {
+  border-color: #c93b2b;
+  background: #fff8f7;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.forgot-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-wood-700);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.forgot-link:hover {
+  color: var(--c-wood-900);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Password Strength Meter
+   ========================================================================== */
+.password-strength-box {
+  margin-top: 0.5rem;
+  padding: 0.75rem 0.95rem;
+  background: rgba(246, 238, 229, 0.7);
+  border: 1px solid var(--c-sand-border);
+  border-radius: 12px;
+}
+
+.strength-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.strength-label {
+  color: var(--c-text-muted);
+}
+
+.strength-score {
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.strength-meter-bar {
+  height: 5px;
+  width: 100%;
+  background: rgba(109, 61, 32, 0.14);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.55rem;
+}
+
+.strength-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.strength-criteria-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 0.6rem;
+}
+
+.criteria-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--c-text-muted);
+  font-weight: 600;
+}
+
+.criteria-bullet {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #cbd5c1;
+  transition: background-color 0.2s ease;
+}
+
+.criteria-item.met {
+  color: var(--c-forest-800);
+}
+
+.criteria-item.met .criteria-bullet {
+  background: var(--c-forest-600);
+}
+
+/* ==========================================================================
+   Checkbox & Form Options
+   ========================================================================== */
+.form-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.35rem 0;
+}
+
+.custom-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-checkbox-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(109, 61, 32, 0.25);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s ease;
+  color: #ffffff;
+}
+
+.custom-checkbox-input:checked + .custom-checkbox-box {
+  background: var(--c-forest-700);
+  border-color: var(--c-forest-800);
+}
+
+.custom-check-icon {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.custom-checkbox-input:checked + .custom-checkbox-box .custom-check-icon {
+  opacity: 1;
+}
+
+.custom-checkbox-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--c-text-body);
+}
+
+/* ==========================================================================
+   Submit Buttons & States
+   ========================================================================== */
+.btn-block {
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 0.85rem 1.35rem;
+}
+
+.submit-btn {
+  margin-top: 0.4rem;
+}
+
+.btn-content,
+.btn-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-arrow {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.submit-btn:hover:not(:disabled) .btn-arrow {
+  transform: translateX(4px);
+}
+
+.spin-dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Auth Card Footer & Switch Modes
+   ========================================================================== */
+.auth-card-footer {
+  margin-top: 1.6rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(109, 61, 32, 0.1);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+  font-weight: 500;
+}
+
+.inline-action-link {
+  background: none;
+  border: none;
+  color: var(--c-wood-700);
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  margin-left: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.inline-action-link:hover {
+  color: var(--c-wood-900);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Forgot Password View
+   ========================================================================== */
+.forgot-password-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.back-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: none;
+  color: var(--c-wood-700);
+  font-size: 0.825rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.25rem;
+  transition: color 0.15s ease;
+}
+
+.back-nav-btn:hover {
+  color: var(--c-wood-900);
+}
+
+.auth-header {
+  margin-bottom: 1.5rem;
+}
+
+.auth-heading {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--c-forest-900);
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem 0;
+}
+
+.auth-subheading {
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.reset-success-box {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.success-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--c-sage-soft);
+  color: var(--c-forest-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+  border: 1px solid var(--c-sage-border);
+}
+
+.success-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--c-forest-900);
+  margin-bottom: 0.5rem;
+}
+
+.success-message {
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Utility Animations
+   ========================================================================== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.35s ease;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,7 @@
+# Secrets: config comes from docker compose env_file, never baked into the image.
+# (DotenvEnvironmentPostProcessor would otherwise let a copied .env override it.)
+.env
+.env.*
+target/
+disabled-tests/
+*.pdf

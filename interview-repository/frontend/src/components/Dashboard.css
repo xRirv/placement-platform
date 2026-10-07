@@ -1,0 +1,912 @@
+/* ==========================================================================
+   InterviewRepo — Role Dashboards (Admin, Student, Mentor, Alumni)
+   Warm Minimalist Design: Forest Green, Earthy Wood Brown, Linen Cream
+   Subtle Rainbow Prism Accents & Chromatic Frosted Blur
+   ========================================================================== */
+
+:root {
+  --dash-forest-900: #16301f;
+  --dash-forest-800: #20442c;
+  --dash-forest-700: #2b573a;
+  --dash-forest-600: #386f4a;
+  --dash-sage-soft:   #eaf2ec;
+  --dash-sage-border: #c4dccb;
+
+  --dash-wood-900:   #341d0f;
+  --dash-wood-800:   #4e2b17;
+  --dash-wood-700:   #6d3d20;
+  --dash-wood-600:   #8a4e29;
+  --dash-sand-soft:   #f6eee5;
+  --dash-sand-border: #e6d3c2;
+
+  --dash-canvas-bg:   #faf8f3;
+  --dash-surface:     #ffffff;
+  --dash-border:      rgba(109, 61, 32, 0.12);
+  --dash-border-hover: rgba(43, 87, 58, 0.3);
+
+  --dash-text-deep:   #152019;
+  --dash-text-body:   #333f37;
+  --dash-text-muted:  #5d6e64;
+
+  --dash-rainbow-light: linear-gradient(
+    90deg,
+    rgba(255, 120, 120, 0.3) 0%,
+    rgba(255, 205, 105, 0.3) 25%,
+    rgba(80, 220, 160, 0.35) 50%,
+    rgba(95, 185, 255, 0.3) 75%,
+    rgba(195, 140, 255, 0.3) 100%
+  );
+}
+
+.dashboard-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dash-canvas-bg);
+  color: var(--dash-text-deep);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================================================
+   Navigation Bar with Frosted Glass & Rainbow Hairline
+   ========================================================================== */
+.dashboard-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 2.25rem;
+  background: rgba(254, 253, 249, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--dash-border);
+  box-shadow: 0 2px 12px rgba(22, 48, 31, 0.03);
+}
+
+.dashboard-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--dash-rainbow-light);
+  opacity: 0.45;
+}
+
+.dashboard-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+  color: var(--dash-forest-900);
+}
+
+.dashboard-logo .logo-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--dash-forest-800) 0%, var(--dash-forest-700) 100%);
+  border: 1px solid var(--dash-wood-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f7eee4;
+  box-shadow: 0 3px 10px rgba(32, 68, 44, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.dashboard-logo:hover .logo-badge {
+  transform: rotate(6deg) scale(1.05);
+}
+
+.dashboard-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.38rem 0.85rem;
+  background: rgba(246, 238, 229, 0.85);
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--dash-wood-900);
+  border: 1px solid var(--dash-sand-border);
+}
+
+/* Role Badges with Refined Minimalist Earth Tones */
+.role-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background: #fdf1ef;
+  color: #8f281f;
+  border: 1px solid #f4cbc6;
+}
+
+.role-student {
+  background: #eaf3ed;
+  color: #1e4a2d;
+  border: 1px solid #c5decb;
+}
+
+.role-mentor {
+  background: #f0f5eb;
+  color: #325220;
+  border: 1px solid #cedcc3;
+}
+
+.role-alumni {
+  background: #faf1e8;
+  color: #7c3d18;
+  border: 1px solid #ead5c3;
+}
+
+/* ==========================================================================
+   Main Dashboard Layout & Header
+   ========================================================================== */
+.dashboard-main {
+  flex: 1;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.25rem 1.75rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.dashboard-header-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--dash-forest-900);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+}
+
+.dashboard-header-sub {
+  color: var(--dash-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Stat KPI Cards with Subtle Shimmer & Elevation
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid var(--dash-border);
+  border-radius: 16px;
+  padding: 1.35rem;
+  box-shadow: 0 2px 8px rgba(22, 48, 31, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--dash-rainbow-light);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 8px 24px -4px rgba(22, 48, 31, 0.08), 0 2px 6px rgba(109, 61, 32, 0.04);
+  border-color: var(--dash-border-hover);
+}
+
+.stat-card:hover::before {
+  opacity: 0.85;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-size: 1.95rem;
+  font-weight: 800;
+  color: var(--dash-forest-900);
+  margin-top: 0.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.stat-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--dash-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dash-sand-soft);
+  color: var(--dash-wood-700);
+  border: 1px solid var(--dash-sand-border);
+}
+
+/* ==========================================================================
+   Tab Navigation
+   ========================================================================== */
+.tab-nav {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--dash-border);
+  margin-bottom: 1.75rem;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dash-text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.tab-button:hover {
+  color: var(--dash-forest-800);
+}
+
+.tab-button.active {
+  color: var(--dash-forest-900);
+  border-bottom-color: var(--dash-forest-700);
+}
+
+/* ==========================================================================
+   Content Cards & Surface
+   ========================================================================== */
+.dashboard-card {
+  background: #ffffff;
+  border: 1px solid var(--dash-border);
+  border-radius: 18px;
+  padding: 1.65rem;
+  box-shadow: 0 2px 10px rgba(22, 48, 31, 0.03);
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+.card-heading {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--dash-forest-900);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Custom Table with Warm Minimalist Styling
+   ========================================================================== */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.custom-table th {
+  padding: 0.85rem 1.15rem;
+  background: #f7f3ec;
+  color: var(--dash-wood-900);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.custom-table td {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid rgba(109, 61, 32, 0.08);
+  color: var(--dash-text-body);
+  vertical-align: middle;
+}
+
+.custom-table tr:hover td {
+  background: #faf6f0;
+}
+
+.badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: #eaf3ed;
+  color: #1e4a2d;
+  border: 1px solid #c5decb;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge-inactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background: #fdf1ef;
+  color: #8f281f;
+  border: 1px solid #f4cbc6;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  color: var(--dash-text-muted);
+}
+
+.empty-state-icon {
+  margin-bottom: 0.85rem;
+  opacity: 0.6;
+  color: var(--dash-wood-600);
+}
+
+/* Role select */
+.role-select-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.role-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #ffffff;
+  border: 1px solid var(--dash-sand-border);
+  border-radius: 8px;
+  padding: 0.4rem 1.8rem 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dash-text-deep);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease-in-out;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236d3d20' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.55rem center;
+}
+
+.role-select:hover:not(:disabled) {
+  border-color: var(--dash-wood-600);
+  background-color: #faf7f2;
+}
+
+.role-select:focus {
+  border-color: var(--dash-forest-700);
+  box-shadow: 0 0 0 3px rgba(43, 87, 58, 0.14);
+}
+
+.role-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f6eee5;
+}
+
+.role-select.role-admin {
+  color: #8f281f;
+  background-color: #fdf1ef;
+  border-color: #f4cbc6;
+}
+
+.role-select.role-student {
+  color: #1e4a2d;
+  background-color: #eaf3ed;
+  border-color: #c5decb;
+}
+
+.role-select.role-mentor {
+  color: #325220;
+  background-color: #f0f5eb;
+  border-color: #cedcc3;
+}
+
+.role-select.role-alumni {
+  color: #7c3d18;
+  background-color: #faf1e8;
+  border-color: #ead5c3;
+}
+
+/* ==========================================================================
+   Modals, Drawers & Experience Submission Components
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 34, 24, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-dialog {
+  background: #ffffff;
+  border: 1px solid var(--dash-border);
+  border-radius: 22px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px -12px rgba(18, 34, 24, 0.3), 0 4px 16px rgba(109, 61, 32, 0.1);
+  animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-dialog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--dash-rainbow-light);
+  opacity: 0.85;
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(16px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  padding: 1.35rem 1.85rem;
+  border-bottom: 1px solid var(--dash-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dash-forest-900);
+  letter-spacing: -0.02em;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dash-text-muted);
+  padding: 0.4rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--dash-sand-soft);
+  color: var(--dash-forest-900);
+}
+
+.modal-body {
+  padding: 1.75rem 1.85rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-footer {
+  padding: 1.35rem 1.85rem;
+  border-top: 1px solid var(--dash-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  background: #faf6ef;
+}
+
+/* Stepper / Section headers */
+.form-section-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--dash-wood-900);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 1.5rem 0 0.85rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-section-title:first-child {
+  margin-top: 0;
+}
+
+/* Pills & Badges */
+.pill-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill-option {
+  padding: 0.45rem 1.05rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--dash-sand-border);
+  background: #ffffff;
+  color: var(--dash-text-body);
+  transition: all 0.15s ease;
+}
+
+.pill-option:hover {
+  border-color: var(--dash-forest-600);
+  background: #faf7f2;
+}
+
+.pill-option.active {
+  border-color: var(--dash-forest-700);
+  background: var(--dash-sage-soft);
+  color: var(--dash-forest-900);
+  box-shadow: 0 0 0 2px rgba(43, 87, 58, 0.16);
+}
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badge-status.approved {
+  background: #eaf3ed;
+  color: #1e4a2d;
+  border: 1px solid #c5decb;
+}
+
+.badge-status.pending {
+  background: #fbf5e6;
+  color: #8a5d15;
+  border: 1px solid #eed6a1;
+}
+
+.badge-status.rejected {
+  background: #fdf1ef;
+  color: #8f281f;
+  border: 1px solid #f4cbc6;
+}
+
+.badge-difficulty {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+}
+
+.badge-diff-easy {
+  background: #eaf3ed;
+  color: #1e4a2d;
+}
+
+.badge-diff-medium {
+  background: #fbf5e6;
+  color: #8a5d15;
+}
+
+.badge-diff-hard {
+  background: #fdf1ef;
+  color: #8f281f;
+}
+
+.badge-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge-res-offered {
+  background: #eaf3ed;
+  color: #1e4a2d;
+}
+
+.badge-res-rejected {
+  background: #fdf1ef;
+  color: #8f281f;
+}
+
+.badge-res-pending {
+  background: #f6eee5;
+  color: var(--dash-wood-800);
+}
+
+/* Round builder */
+.round-card {
+  background: #faf6f0;
+  border: 1px solid var(--dash-border);
+  border-radius: 14px;
+  padding: 1.15rem;
+  margin-bottom: 0.95rem;
+}
+
+.round-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.round-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--dash-wood-900);
+}
+
+.btn-icon-danger {
+  background: none;
+  border: none;
+  color: #c93b2b;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+}
+
+.btn-icon-danger:hover {
+  background: #feeceb;
+}
+
+/* Experience grid */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.35rem;
+}
+
+.experience-card {
+  background: #ffffff;
+  border: 1px solid var(--dash-border);
+  border-radius: 16px;
+  padding: 1.35rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(22, 48, 31, 0.03);
+}
+
+.experience-card:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 10px 28px -6px rgba(22, 48, 31, 0.09);
+  border-color: var(--dash-border-hover);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.exp-company {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--dash-forest-900);
+  letter-spacing: -0.02em;
+}
+
+.exp-role {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dash-wood-800);
+}
+
+.exp-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.75rem 0;
+}
+
+.exp-footer {
+  margin-top: 1.15rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(109, 61, 32, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Buttons (Deep Forest Green Primary & Warm Linen Secondary)
+   ========================================================================== */
+.btn-sm {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+  border-radius: 10px;
+}
+
+.btn-secondary {
+  background: rgba(246, 238, 229, 0.85);
+  color: var(--dash-wood-900);
+  border: 1px solid var(--dash-sand-border);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-secondary:hover {
+  background: #ede3d6;
+  color: var(--dash-wood-900);
+  border-color: var(--dash-wood-600);
+}
+
+.btn-danger-outline {
+  background: #ffffff;
+  color: #c93b2b;
+  border: 1px solid #f4cbc6;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-danger-outline:hover {
+  background: #fdf1ef;
+}
+
+/* Mentee Card */
+.mentee-card {
+  background: #ffffff;
+  border: 1px solid var(--dash-border);
+  border-radius: 16px;
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(22, 48, 31, 0.03);
+}
+
+.mentee-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(22, 48, 31, 0.08);
+  border-color: var(--dash-border-hover);
+}
+
+.mentee-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--dash-sage-soft);
+  color: var(--dash-forest-800);
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dash-sage-border);
+}
+
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.skill-tag {
+  background: var(--dash-sand-soft);
+  color: var(--dash-wood-900);
+  font-size: 0.74rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: 1px solid var(--dash-sand-border);
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-nav {
+    padding: 0.75rem 1.15rem;
+  }
+}
+
+/* Extra small button variant */
+.btn-xs {
+  padding: 0.28rem 0.65rem;
+  font-size: 0.78rem;
+  border-radius: 8px;
+}
+
+/* Spinner animation for loading states */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 0.8s linear infinite;
+}
