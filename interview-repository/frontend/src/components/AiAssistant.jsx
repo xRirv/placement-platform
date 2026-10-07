@@ -1,22 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Search, Send, Bot } from 'lucide-react';
+import { createApi } from '../lib/api';
 
 // Talks only to Team A's backend (/api/ai/*), which proxies to the internal AI service.
-const postJson = async (url, token, body) => {
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    throw new Error(
-      res.status === 503
-        ? 'The AI assistant is currently unavailable. Please try again later.'
-        : `Request failed (${res.status})`
-    );
-  }
-  return res.json();
-};
 
 const bubbleStyle = (role) => ({
   alignSelf: role === 'user' ? 'flex-end' : 'flex-start',
@@ -30,6 +16,7 @@ const bubbleStyle = (role) => ({
 
 export const AiAssistant = ({ session, backendUrl }) => {
   const token = session?.access_token;
+  const api = useMemo(() => createApi(backendUrl, token), [backendUrl, token]);
 
   // Search
   const [query, setQuery] = useState('');
@@ -55,7 +42,7 @@ export const AiAssistant = ({ session, backendUrl }) => {
     setSearching(true);
     setSearchError('');
     try {
-      setResults(await postJson(`${backendUrl}/api/ai/search`, token, { query: text, limit: 20 }));
+      setResults(await api.post('/api/ai/search', { query: text, limit: 20 }));
     } catch (err) {
       setSearchError(err.message);
       setResults(null);
@@ -72,7 +59,7 @@ export const AiAssistant = ({ session, backendUrl }) => {
     setMessages((prev) => [...prev, { role: 'user', content: text }]);
     setChatting(true);
     try {
-      const resp = await postJson(`${backendUrl}/api/ai/chat`, token, {
+      const resp = await api.post('/api/ai/chat', {
         message: text,
         session_id: sessionId,
       });
@@ -107,21 +94,27 @@ export const AiAssistant = ({ session, backendUrl }) => {
             <span>{searching ? 'Searching…' : 'Search'}</span>
           </button>
         </form>
-        {searchError && (
-          <p style={{ color: '#b91c1c', marginTop: '0.75rem' }}>{searchError}</p>
-        )}
+        {searchError && <p style={{ color: '#b91c1c', marginTop: '0.75rem' }}>{searchError}</p>}
         {results && (
           <div style={{ marginTop: '1rem', display: 'grid', gap: '0.75rem' }}>
-            <p style={{ color: '#64748b' }}>
-              {results.total_found ?? questions.length} result(s)
-            </p>
+            <p style={{ color: '#64748b' }}>{results.total_found ?? questions.length} result(s)</p>
             {questions.map((q) => (
               <div
                 key={q.question_id}
-                style={{ border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.75rem 1rem' }}
+                style={{
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  padding: '0.75rem 1rem',
+                }}
               >
                 <div style={{ fontWeight: 600 }}>{q.canonical_text}</div>
-                <div style={{ color: '#64748b', fontSize: '0.85rem', marginTop: '0.25rem' }}>
+                <div
+                  style={{
+                    color: '#64748b',
+                    fontSize: '0.85rem',
+                    marginTop: '0.25rem',
+                  }}
+                >
                   {[q.companies?.join(', '), q.topic, q.difficulty, `asked ${q.occurrence_count}×`]
                     .filter(Boolean)
                     .join(' · ')}

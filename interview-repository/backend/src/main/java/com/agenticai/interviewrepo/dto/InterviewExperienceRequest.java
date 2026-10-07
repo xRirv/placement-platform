@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class InterviewExperienceRequest {
-    @NotNull private UUID companyId;
+    // Either companyId or companyName is required; an unknown companyName creates the company.
+    private UUID companyId;
+    @Size(max = 150) private String companyName;
     @NotBlank @Size(max = 100) private String role;
     private LocalDate interviewDate;
     @Size(max = 50) private String difficulty;
@@ -26,6 +28,10 @@ public class InterviewExperienceRequest {
     @Valid private List<RoundRequest> rounds = new ArrayList<>();
 
     public UUID getCompanyId() { return companyId; }
+
+    public String getCompanyName() { return companyName; }
+
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
     public void setCompanyId(UUID companyId) { this.companyId = companyId; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }

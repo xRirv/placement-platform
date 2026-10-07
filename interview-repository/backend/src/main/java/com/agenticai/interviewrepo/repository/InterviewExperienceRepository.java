@@ -16,4 +16,5 @@ public interface InterviewExperienceRepository extends JpaRepository<InterviewEx
     Long countByAlumni_Id(UUID alumniId);
     Page<InterviewExperience> findByStudent_Id(UUID studentId, Pageable pageable);
     Page<InterviewExperience> findByAlumni_Id(UUID alumniId, Pageable pageable);
+    Page<InterviewExperience> findBySubmittedBy_Id(UUID userId, Pageable pageable);
 }

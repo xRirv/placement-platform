@@ -9,6 +9,7 @@ public class QuestionRequest {
     @NotBlank private String questionText;
     @Size(max = 100) private String topic;
     @Size(max = 50) private String difficulty;
+    @Size(max = 100) private String category;
     public int getQuestionOrder() { return questionOrder; }
     public void setQuestionOrder(int questionOrder) { this.questionOrder = questionOrder; }
     public String getQuestionText() { return questionText; }
@@ -17,4 +18,6 @@ public class QuestionRequest {
     public void setTopic(String topic) { this.topic = topic; }
     public String getDifficulty() { return difficulty; }
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 }

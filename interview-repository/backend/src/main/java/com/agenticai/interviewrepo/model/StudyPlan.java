@@ -39,6 +39,20 @@ public class StudyPlan {
     @Column(length = 50)
     private String status; // Not Started | In Progress | Completed
 
+    /** Company name as given to the AI (kept even when no matching Company row exists). */
+    @Column(name = "target_company_name", length = 150)
+    private String targetCompanyName;
+
+    @Column(name = "days_available")
+    private Integer daysAvailable;
+
+    @Column(length = 20)
+    private String source; // AI | MANUAL
+
+    /** Full preparation plan returned by the AI service (Team B), stored as JSON. */
+    @Column(name = "plan_json", columnDefinition = "TEXT")
+    private String planJson;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -69,6 +83,14 @@ public class StudyPlan {
     public void setTargetDate(LocalDate targetDate) { this.targetDate = targetDate; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    public String getTargetCompanyName() { return targetCompanyName; }
+    public void setTargetCompanyName(String targetCompanyName) { this.targetCompanyName = targetCompanyName; }
+    public Integer getDaysAvailable() { return daysAvailable; }
+    public void setDaysAvailable(Integer daysAvailable) { this.daysAvailable = daysAvailable; }
+    public String getSource() { return source; }
+    public void setSource(String source) { this.source = source; }
+    public String getPlanJson() { return planJson; }
+    public void setPlanJson(String planJson) { this.planJson = planJson; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
 }

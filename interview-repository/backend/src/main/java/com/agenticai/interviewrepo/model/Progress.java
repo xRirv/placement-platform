@@ -20,6 +20,14 @@ public class Progress {
     private String topic;
 
     @Column(length = 50)
+    private String category;
+
+    private Integer priority; // 1 = highest, from the AI plan
+
+    @Column(name = "sample_questions", columnDefinition = "TEXT")
+    private String sampleQuestions; // newline-separated
+
+    @Column(length = 50)
     private String status; // Not Started | In Progress | Completed
 
     private Integer score;
@@ -45,6 +53,12 @@ public class Progress {
     public void setStudyPlan(StudyPlan studyPlan) { this.studyPlan = studyPlan; }
     public String getTopic() { return topic; }
     public void setTopic(String topic) { this.topic = topic; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public Integer getPriority() { return priority; }
+    public void setPriority(Integer priority) { this.priority = priority; }
+    public String getSampleQuestions() { return sampleQuestions; }
+    public void setSampleQuestions(String sampleQuestions) { this.sampleQuestions = sampleQuestions; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public Integer getScore() { return score; }

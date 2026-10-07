@@ -20,10 +20,18 @@ import {
   Clock,
   Layers,
   Bot,
+  Plus,
+  Edit2,
+  FileCheck,
+  Send,
+  ListChecks,
 } from 'lucide-react';
 import { DashboardLayout } from './DashboardLayout';
 import { ExperienceDetailModal } from './ExperienceDetailModal';
+import { ExperienceModal } from './ExperienceModal';
 import { AiAssistant } from './AiAssistant';
+import { StudyPlanPanel } from './StudyPlanPanel';
+import { QuestionBank } from './QuestionBank';
 
 export const StudentDashboard = ({ user, session, userProfile }) => {
   const [activeTab, setActiveTab] = useState('experiences');
@@ -45,6 +53,12 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
   const [experiences, setExperiences] = useState([]);
   const [loadingExp, setLoadingExp] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState(null);
+
+  // My Submissions state
+  const [mySubmissions, setMySubmissions] = useState([]);
+  const [loadingMySub, setLoadingMySub] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingExp, setEditingExp] = useState(null);
 
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -106,6 +120,48 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
       ignore = true;
     };
   }, [session?.access_token, backendUrl]);
+
+  // Fetch student's own submissions
+  const fetchMySubmissions = async () => {
+    if (!session?.access_token) return;
+    setLoadingMySub(true);
+    try {
+      const res = await fetch(`${backendUrl}/api/interviews/my`, {
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setMySubmissions(data || []);
+      }
+    } catch {
+      setMySubmissions([]);
+    } finally {
+      setLoadingMySub(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMySubmissions();
+  }, [session?.access_token, backendUrl]);
+
+  // Modal handlers
+  const handleOpenCreate = () => {
+    setEditingExp(null);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEdit = (exp) => {
+    setEditingExp(exp);
+    setIsModalOpen(true);
+  };
+
+  const handleModalSuccess = () => {
+    fetchMySubmissions();
+    setMessage(
+      editingExp ? 'Experience updated successfully!' : 'Experience submitted successfully! It will be reviewed by an admin.'
+    );
+    setTimeout(() => setMessage(''), 4000);
+  };
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
@@ -294,6 +350,13 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
           <span>My Assigned Mentor {profile.mentorName ? '✓' : ''}</span>
         </button>
         <button
+          className={`tab-button ${activeTab === 'submissions' ? 'active' : ''}`}
+          onClick={() => setActiveTab('submissions')}
+        >
+          <Send size={16} />
+          <span>My Submissions ({mySubmissions.length})</span>
+        </button>
+        <button
           className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
           onClick={() => setActiveTab('profile')}
         >
@@ -307,9 +370,317 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
           <Bot size={16} />
           <span>AI Assistant</span>
         </button>
+        <button
+          className={`tab-button ${activeTab === 'plan' ? 'active' : ''}`}
+          onClick={() => setActiveTab('plan')}
+        >
+          <ListChecks size={16} />
+          <span>Study Plan</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'questions' ? 'active' : ''}`}
+          onClick={() => setActiveTab('questions')}
+        >
+          <HelpCircle size={16} />
+          <span>Question Bank</span>
+        </button>
       </div>
 
       {activeTab === 'ai' && <AiAssistant session={session} backendUrl={backendUrl} />}
+      {activeTab === 'plan' && <StudyPlanPanel session={session} backendUrl={backendUrl} />}
+      {activeTab === 'questions' && <QuestionBank session={session} backendUrl={backendUrl} />}
+
+      {/* TAB: MY SUBMISSIONS */}
+      {activeTab === 'submissions' && (
+        <div>
+          {/* Submit CTA Card */}
+          <div
+            className="dashboard-card"
+            style={{
+              background: 'linear-gradient(135deg, #eaf3ed 0%, #f0f5eb 50%, #faf1e8 100%)',
+              border: '1px solid #c5decb',
+              padding: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1.5rem',
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ flex: 1, minWidth: '260px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                <div
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '12px',
+                    background: 'linear-gradient(135deg, #2b573a 0%, #386f4a 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#fff',
+                    boxShadow: '0 3px 10px rgba(32, 68, 44, 0.25)',
+                  }}
+                >
+                  <FileCheck size={18} />
+                </div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#16301f', margin: 0 }}>
+                  Share Your Interview Experience
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.88rem', color: '#5d6e64', lineHeight: 1.6, margin: 0, maxWidth: '520px' }}>
+                Help future candidates prepare by sharing your real interview questions, rounds, and tips.
+                Your submission will be reviewed by an admin before being published.
+              </p>
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={handleOpenCreate}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem 1.5rem',
+                fontSize: '0.92rem',
+                fontWeight: 800,
+                borderRadius: '12px',
+                boxShadow: '0 4px 14px rgba(32, 68, 44, 0.2)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <Plus size={18} />
+              <span>Submit New Experience</span>
+            </button>
+          </div>
+
+          {/* My Submissions List */}
+          <div className="dashboard-card">
+            <div className="card-heading">
+              <span>Your Submitted Experiences</span>
+              <span
+                style={{
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: '#5d6e64',
+                  background: '#eaf3ed',
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '9999px',
+                  border: '1px solid #c5decb',
+                }}
+              >
+                {mySubmissions.length} {mySubmissions.length === 1 ? 'submission' : 'submissions'}
+              </span>
+            </div>
+
+            {loadingMySub ? (
+              <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b' }}>
+                <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+                  Loading your submissions...
+                </div>
+              </div>
+            ) : mySubmissions.length === 0 ? (
+              <div className="empty-state" style={{ padding: '3.5rem 1.5rem' }}>
+                <Send size={44} className="empty-state-icon" color="#94a3b8" />
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.35rem' }}>
+                  No Submissions Yet
+                </h3>
+                <p style={{ maxWidth: '420px', margin: '0 auto 1.25rem auto', color: '#64748b', lineHeight: 1.6 }}>
+                  You haven't submitted any interview experiences yet. Share your story to help other students prepare!
+                </p>
+                <button className="btn btn-primary" onClick={handleOpenCreate} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Plus size={16} />
+                  <span>Submit Your First Experience</span>
+                </button>
+              </div>
+            ) : (
+              <div className="experience-grid">
+                {mySubmissions.map((exp) => {
+                  const totalRounds = exp.rounds?.length || 0;
+                  const totalQuestions = exp.rounds?.reduce(
+                    (acc, r) => acc + (r.questions ? r.questions.length : 0),
+                    0
+                  ) || 0;
+                  const statusKey = (exp.moderationStatus || 'pending').toLowerCase();
+
+                  return (
+                    <div key={exp.id} className="experience-card">
+                      <div>
+                        {/* Company Header */}
+                        <div className="exp-header">
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div
+                              style={{
+                                width: '40px',
+                                height: '40px',
+                                borderRadius: '10px',
+                                background: '#f1f5f9',
+                                border: '1px solid #e2e8f0',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '1.1rem',
+                                fontWeight: 800,
+                                color: '#4f46e5',
+                              }}
+                            >
+                              {exp.companyName ? exp.companyName.charAt(0) : 'C'}
+                            </div>
+                            <div>
+                              <h3 className="exp-company">{exp.companyName || 'Company'}</h3>
+                              <p className="exp-role">{exp.role}</p>
+                            </div>
+                          </div>
+                          <span className={`badge-status ${statusKey}`}>
+                            {statusKey === 'approved' && <CheckCircle size={12} />}
+                            {statusKey === 'pending' && <Clock size={12} />}
+                            {exp.moderationStatus || 'PENDING'}
+                          </span>
+                        </div>
+
+                        {/* Meta badges */}
+                        <div className="exp-meta">
+                          <span
+                            className={`badge-difficulty badge-diff-${(
+                              exp.difficulty || 'medium'
+                            ).toLowerCase()}`}
+                          >
+                            {exp.difficulty || 'Medium'}
+                          </span>
+                          <span
+                            className={`badge-result badge-res-${(
+                              exp.interviewResult || 'offered'
+                            )
+                              .toLowerCase()
+                              .replace(' ', '-')}`}
+                          >
+                            {exp.interviewResult || 'Offered'}
+                          </span>
+                          {totalRounds > 0 && (
+                            <span
+                              style={{
+                                fontSize: '0.75rem',
+                                color: '#4f46e5',
+                                background: '#eef2ff',
+                                padding: '0.2rem 0.55rem',
+                                borderRadius: '6px',
+                                fontWeight: 600,
+                              }}
+                            >
+                              {totalRounds} {totalRounds === 1 ? 'Round' : 'Rounds'}
+                              {totalQuestions > 0 ? ` • ${totalQuestions} Questions` : ''}
+                            </span>
+                          )}
+                          {exp.interviewDate && (
+                            <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                              {exp.interviewDate}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Moderation info banner */}
+                        {statusKey === 'pending' && (
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.5rem',
+                              background: '#fbf5e6',
+                              border: '1px solid #eed6a1',
+                              borderRadius: '8px',
+                              padding: '0.5rem 0.75rem',
+                              margin: '0.65rem 0',
+                              fontSize: '0.8rem',
+                              color: '#8a5d15',
+                              fontWeight: 500,
+                            }}
+                          >
+                            <Clock size={14} />
+                            <span>Under admin review — visible to others once approved</span>
+                          </div>
+                        )}
+
+                        {statusKey === 'rejected' && (
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.5rem',
+                              background: '#fdf1ef',
+                              border: '1px solid #f4cbc6',
+                              borderRadius: '8px',
+                              padding: '0.5rem 0.75rem',
+                              margin: '0.65rem 0',
+                              fontSize: '0.8rem',
+                              color: '#8f281f',
+                              fontWeight: 500,
+                            }}
+                          >
+                            <span>This submission was not approved. You may edit and resubmit.</span>
+                          </div>
+                        )}
+
+                        {/* Tips snippet */}
+                        {exp.tips && (
+                          <div
+                            style={{
+                              background: '#f8fafc',
+                              padding: '0.6rem 0.8rem',
+                              borderRadius: '8px',
+                              border: '1px solid #edf2f7',
+                              margin: '0.5rem 0',
+                            }}
+                          >
+                            <p
+                              style={{
+                                fontSize: '0.8rem',
+                                color: '#475569',
+                                fontStyle: 'italic',
+                                margin: 0,
+                                lineClamp: 2,
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                              }}
+                            >
+                              💡 "{exp.tips}"
+                            </p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Footer / Actions */}
+                      <div className="exp-footer">
+                        <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                          {exp.submittedAt ? `Submitted ${new Date(exp.submittedAt).toLocaleDateString()}` : 'Recently submitted'}
+                        </span>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button
+                            className="btn btn-sm btn-secondary"
+                            onClick={() => setSelectedExperience(exp)}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                          >
+                            <Eye size={13} />
+                            <span>View</span>
+                          </button>
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={() => handleOpenEdit(exp)}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                          >
+                            <Edit2 size={13} />
+                            <span>Edit</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* TAB 1: INTERVIEW EXPERIENCES FEED */}
       {activeTab === 'experiences' && (
@@ -875,6 +1246,16 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
         isOpen={Boolean(selectedExperience)}
         onClose={() => setSelectedExperience(null)}
         experience={selectedExperience}
+      />
+
+      {/* Experience Submit/Edit Modal */}
+      <ExperienceModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleModalSuccess}
+        initialData={editingExp}
+        session={session}
+        backendUrl={backendUrl}
       />
     </DashboardLayout>
   );

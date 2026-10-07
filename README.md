@@ -224,6 +224,23 @@ A request with only `experience_id` re-queues an existing row.
 Only these fields are forwarded. Chat sessions are kept separate per user. If Team B is
 unreachable, these endpoints return `503`.
 
+## Student features (Team A backend)
+
+All endpoints need `Authorization: Bearer <Supabase JWT>`.
+
+| Endpoint | What it does |
+|---|---|
+| `POST /api/study-plans/generate` `{"company","role","daysAvailable"}` | Asks Team B's Preparation Agent for a plan, stores it for the student, and creates one progress item per priority topic |
+| `GET /api/study-plans`, `GET/PATCH/DELETE /api/study-plans/{id}` | The student's stored plans (full AI plan in `plan`) |
+| `GET /api/progress/summary` | Completion totals across all of the student's plans |
+| `GET /api/progress/plan/{planId}`, `POST /api/progress`, `PATCH/DELETE /api/progress/{id}` | Per-topic progress: `status` (`Not Started`, `In Progress`, `Completed`), `score` (0-100), `notes` |
+| `GET /api/questions?q=&topic=&difficulty=&companyId=`, `GET /api/questions/topics` | Question bank from approved experiences |
+| `POST /api/interviews/{id}/questions`, `PUT/DELETE /api/questions/{id}` | Edit questions (submitter before approval, or admin) |
+| `GET /api/interviews/my`, `PUT/DELETE /api/interviews/{id}` | A user's own submissions |
+| `POST /api/interviews/ai-resync` (admin) | Sends every approved experience to the AI service, e.g. ones approved before the integration |
+
+In the UI these are the **Study Plan** and **Question Bank** tabs on the student dashboard.
+
 ## Troubleshooting
 
 | Symptom | Cause / fix |

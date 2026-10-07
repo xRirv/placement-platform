@@ -35,6 +35,7 @@ class InterviewExperienceServiceTest {
     @Mock ModerationLogRepository moderationLogs;
     @Mock CurrentUserService currentUser;
     @Mock ApplicationEventPublisher events;
+    @Mock QuestionRepository questions;
     @InjectMocks InterviewExperienceService service;
 
     @Test
@@ -110,6 +111,17 @@ class InterviewExperienceServiceTest {
     }
 
     @Test
+    void moderationWritesLegacyStatusInTheFormatTheDbConstraintAllows() {
+        UUID id = UUID.randomUUID();
+        InterviewExperience value = pendingExperience(id);
+        service.moderate(id, moderation("APPROVED"));
+        org.junit.jupiter.api.Assertions.assertEquals("Approved", value.getStatus());
+        org.junit.jupiter.api.Assertions.assertEquals("APPROVED", value.getModerationStatus());
+        service.moderate(id, moderation("REJECTED"));
+        org.junit.jupiter.api.Assertions.assertEquals("Rejected", value.getStatus());
+    }
+
+    @Test
     void rejectionDoesNotTriggerAiIngest() {
         UUID id = UUID.randomUUID();
         pendingExperience(id);
@@ -123,5 +135,30 @@ class InterviewExperienceServiceTest {
         pendingExperience(id).setModerationStatus("APPROVED");
         service.moderate(id, moderation("APPROVED"));
         verifyNoInteractions(events);
+    }
+
+    @Test
+    void createResolvesCompanyByNameAndCreatesUnknownCompanies() {
+        User user = User.builder().id(UUID.randomUUID()).build();
+        InterviewExperienceRequest request = new InterviewExperienceRequest();
+        request.setCompanyName("  NewCo "); request.setRole("Engineer"); request.setConsentGiven(true);
+        when(currentUser.getCurrentUser()).thenReturn(user);
+        when(companies.findByNameIgnoreCase("NewCo")).thenReturn(Optional.empty());
+        when(companies.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        when(experiences.save(any())).thenAnswer(inv -> inv.getArgument(0));
+        service.create(request);
+        verify(companies).save(argThat(c -> "NewCo".equals(c.getName())));
+    }
+
+    @Test
+    void othersCannotDeleteSomeonesExperience() {
+        UUID id = UUID.randomUUID();
+        InterviewExperience value = new InterviewExperience();
+        value.setSubmittedBy(User.builder().id(UUID.randomUUID()).build());
+        when(experiences.findById(id)).thenReturn(Optional.of(value));
+        when(currentUser.getCurrentUser()).thenReturn(
+                User.builder().id(UUID.randomUUID()).role(com.agenticai.interviewrepo.model.Role.STUDENT).build());
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> service.delete(id));
+        verify(experiences, never()).delete(any());
     }
 }

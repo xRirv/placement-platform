@@ -38,7 +38,7 @@ public class AiServiceClient {
                            @Value("${app.ai.api-key:}") String apiKey,
                            @Value("${app.ai.connect-timeout-seconds:2}") int connectTimeoutSeconds,
                            @Value("${app.ai.ingest-timeout-seconds:5}") int ingestTimeoutSeconds,
-                           @Value("${app.ai.query-timeout-seconds:60}") int queryTimeoutSeconds) {
+                           @Value("${app.ai.query-timeout-seconds:120}") int queryTimeoutSeconds) {
         this.enabled = serviceUrl != null && !serviceUrl.isBlank();
         if (!enabled) {
             log.warn("app.ai.service-url is not set; AI ingest/search/chat are disabled");
@@ -51,7 +51,10 @@ public class AiServiceClient {
     }
 
     private static RestClient build(String baseUrl, String apiKey, int connectSeconds, int readSeconds) {
+        // HTTP/1.1 only: the JDK client otherwise sends an h2c upgrade on plain http://,
+        // and uvicorn (Team B) drops the request body of upgrade requests (-> 422 "body missing").
         HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
                 .connectTimeout(Duration.ofSeconds(connectSeconds))
                 .build();
         JdkClientHttpRequestFactory factory = new JdkClientHttpRequestFactory(httpClient);
@@ -89,6 +92,11 @@ public class AiServiceClient {
 
     public Map<String, Object> chat(Map<String, Object> body) {
         return query("/api/v1/agents/chat", body);
+    }
+
+    /** Asks Team B's Preparation Agent for a structured preparation plan. */
+    public Map<String, Object> preparation(Map<String, Object> body) {
+        return query("/api/v1/agents/preparation", body);
     }
 
     private Map<String, Object> query(String path, Map<String, Object> body) {
