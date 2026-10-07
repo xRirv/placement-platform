@@ -24,6 +24,10 @@ server:
 app:
   cors:
     allowed-origins: ${FRONTEND_URL:http://localhost:5173,http://localhost:3000}
+  supabase:
+    # Supabase Admin API (used by admin user management). Empty disables it.
+    admin-url: ${SUPABASE_URL:}
+    service-role-key: ${SUPABASE_SERVICE_ROLE_KEY:}
   ai:
     # Team B (Placement Intelligence Platform) internal API, e.g. http://ai-api:8000 in Docker.
     # Leave empty to disable AI features; approvals still work.

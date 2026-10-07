@@ -1,0 +1,5 @@
+# Runs the whole platform from the repo root: docker compose up --build
+# Service definitions live in interview-repository/docker-compose.integration.yml
+# (paths there are resolved relative to that file). See README.md for setup.
+include:
+  - interview-repository/docker-compose.integration.yml

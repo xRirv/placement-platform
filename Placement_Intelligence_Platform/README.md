@@ -73,7 +73,7 @@ SUPABASE_KEY=your-anon-or-service-role-key
 
 # RabbitMQ
 # Local Docker:  amqp://guest:guest@localhost:5672/
-# CloudAMQP:     amqps://user:***REMOVED***@host/vhost
+# CloudAMQP:     amqps://user:pass@host/vhost
 AMQP_URL=amqp://guest:guest@localhost:5672/
 
 # Google Gemini
