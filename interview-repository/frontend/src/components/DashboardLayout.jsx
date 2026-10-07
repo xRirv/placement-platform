@@ -35,7 +35,7 @@ export const DashboardLayout = ({
             <Sparkles size={18} />
           </div>
           <span>
-            Interview<span style={{ color: '#6766B7' }}>Repo</span>
+            Interview<span style={{ color: '#DBB0FF' }}>Repo</span>
           </span>
         </a>
 
@@ -46,7 +46,7 @@ export const DashboardLayout = ({
           <div className="user-badge">
             <span>{displayName}</span>
             <span style={{ color: '#6766B7' }}>•</span>
-            <span style={{ fontSize: '0.78rem', color: '#353454' }}>{user?.email}</span>
+            <span style={{ fontSize: '0.78rem', color: '#C8C7EB' }}>{user?.email}</span>
           </div>
           <button
             type="button"

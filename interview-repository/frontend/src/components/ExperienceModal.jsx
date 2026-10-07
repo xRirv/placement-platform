@@ -307,7 +307,7 @@ export const ExperienceModal = ({
             <h2 className="modal-title">
               {isEditing ? 'Edit Interview Experience' : 'Submit Interview Experience'}
             </h2>
-            <p style={{ fontSize: '0.825rem', color: '#353454', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.825rem', color: 'var(--ws-text-2, #353454)', marginTop: '0.2rem' }}>
               Share authentic questions, rounds, and preparation guidance for prospective candidates.
             </p>
           </div>
@@ -466,7 +466,7 @@ export const ExperienceModal = ({
                 {/* Questions in Round */}
                 <div style={{ marginTop: '0.75rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#353454' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ws-text-2, #353454)' }}>
                       Questions Asked in this Round
                     </span>
                     <button
@@ -476,8 +476,8 @@ export const ExperienceModal = ({
                       style={{
                         padding: '0.2rem 0.5rem',
                         fontSize: '0.75rem',
-                        background: '#F2E1FF',
-                        color: '#461F65',
+                        background: 'var(--ws-surface-tint, #F2E1FF)',
+                        color: 'var(--ws-accent-text, #461F65)',
                         border: 'none',
                         borderRadius: '6px',
                         cursor: 'pointer',
@@ -500,10 +500,10 @@ export const ExperienceModal = ({
                         gap: '0.5rem',
                         alignItems: 'center',
                         marginBottom: '0.5rem',
-                        background: '#ffffff',
+                        background: 'var(--ws-field-bg, #ffffff)',
                         padding: '0.5rem',
                         borderRadius: '8px',
-                        border: '1px solid #C8C7EB',
+                        border: '1px solid var(--ws-border-strong, #C8C7EB)',
                       }}
                     >
                       <input
@@ -590,8 +590,8 @@ export const ExperienceModal = ({
             </div>
 
             {/* Consent Checkbox */}
-            <div style={{ marginTop: '1.25rem', padding: '0.85rem 1rem', background: '#EAEAF7', borderRadius: '10px', border: '1px solid #C8C7EB' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontSize: '0.85rem', color: '#353454' }}>
+            <div style={{ marginTop: '1.25rem', padding: '0.85rem 1rem', background: 'var(--ws-surface-muted, #EAEAF7)', borderRadius: '10px', border: '1px solid var(--ws-border-strong, #C8C7EB)' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--ws-text-2, #353454)' }}>
                 <input
                   type="checkbox"
                   checked={formData.consentGiven}

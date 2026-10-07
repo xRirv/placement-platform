@@ -488,11 +488,11 @@
 /* THE ENTRANCE ANIMATION: Smooth Fade and Glide From Right */
 .scenery-card {
   width: 100%;
-  background: rgba(252, 250, 255, 0.88);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(252, 250, 255, 0.94);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
   border-radius: 24px;
-  border: 1px solid rgba(70, 31, 101, 0.15);
+  border: 1px solid rgba(103, 102, 183, 0.32);
   box-shadow: var(--shadow-glass);
   padding: 2.25rem 2.25rem;
   position: relative;
@@ -774,21 +774,23 @@
   gap: 0.5rem;
   padding: 0.8rem 1.25rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--c-forest-800) 0%, var(--c-forest-700) 100%);
-  border: 1px solid var(--c-forest-900);
-  color: #EAEAF7;
+  background: var(--color-purple);
+  border: 1px solid var(--color-purple);
+  color: #ffffff;
   font-size: 0.92rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(35, 48, 77, 0.35);
+  box-shadow: 0 4px 14px rgba(146, 48, 227, 0.28);
 }
 
+/* Solid brand purple at rest; a subtle purple -> deep purple gradient only on hover. */
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--c-forest-900) 0%, var(--c-forest-800) 100%);
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-deep-purple) 100%);
+  border-color: var(--color-deep-purple);
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 18px rgba(35, 48, 77, 0.45);
+  box-shadow: 0 6px 18px rgba(146, 48, 227, 0.36);
 }
 
 .btn-primary:disabled {
@@ -1255,7 +1257,14 @@
   inset: 0;
   background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-deep-purple) 55%, var(--color-purple) 100%);
   mix-blend-mode: color;
-  opacity: 0.88;
+  opacity: 0.55;
   pointer-events: none;
   z-index: 3;
+}
+
+/* Atmospheric navy wash at the edges (palette comes from light, not a full tint). */
+.scenery-soft-vignette {
+  background:
+    linear-gradient(180deg, rgba(35, 48, 77, 0) 55%, rgba(35, 48, 77, 0.38) 100%),
+    radial-gradient(120% 90% at 100% 0%, rgba(70, 31, 101, 0.28) 0%, rgba(70, 31, 101, 0) 55%);
 }

@@ -879,3 +879,71 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   Brand continuation (matches the login and student workspace)
+   ========================================================================== */
+.admin-layout {
+  background:
+    radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.16) 0%, rgba(146, 48, 227, 0) 62%),
+    radial-gradient(900px 520px at -5% -10%, rgba(35, 48, 77, 0.1) 0%, rgba(35, 48, 77, 0) 58%),
+    var(--color-pale-lavender);
+  background-attachment: fixed;
+}
+
+.admin-header {
+  background: var(--color-navy);
+  border-bottom: 1px solid rgba(200, 199, 235, 0.14);
+}
+
+.admin-logo {
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  color: #ffffff;
+  animation: none;
+}
+
+.admin-nav-item {
+  color: var(--color-soft-lavender);
+}
+
+.admin-nav-item:hover {
+  color: #ffffff;
+  background: rgba(219, 176, 255, 0.1);
+}
+
+.admin-nav-item.active {
+  color: #ffffff;
+  background: var(--color-purple);
+}
+
+.admin-nav-item.active::after,
+.admin-nav-item::after {
+  opacity: 0;
+}
+
+.admin-user-name {
+  color: #ffffff;
+}
+
+.admin-user-role {
+  color: rgba(200, 199, 235, 0.72);
+}
+
+.admin-logout-btn {
+  background: transparent;
+  color: var(--color-soft-lavender);
+  border-color: rgba(200, 199, 235, 0.3);
+}
+
+.admin-logout-btn:hover {
+  background: rgba(219, 176, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(219, 176, 255, 0.4);
+}
+
+.admin-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(103, 102, 183, 0.22);
+  box-shadow: 0 1px 2px rgba(35, 48, 77, 0.05), 0 4px 14px rgba(70, 31, 101, 0.05);
+}

@@ -8,27 +8,33 @@
 .ws {
   /* Surfaces & text (light) */
   --ws-bg: var(--color-pale-lavender);
-  --ws-surface: #ffffff;
-  --ws-surface-muted: #f6f5fc;
+  --ws-surface: rgba(255, 255, 255, 0.78);
+  --ws-surface-solid: #ffffff;
+  --ws-field-bg: #ffffff;
+  --ws-surface-muted: rgba(234, 234, 247, 0.7);
   --ws-surface-tint: var(--color-pale-purple);
-  --ws-border: var(--color-soft-lavender);
-  --ws-border-strong: #aeacdf;
+  --ws-border: rgba(103, 102, 183, 0.22);
+  --ws-border-strong: rgba(103, 102, 183, 0.42);
   --ws-text: var(--color-navy);
   --ws-text-2: var(--color-dark-surface);
   --ws-text-3: var(--color-lavender-purple);
-  --ws-hover: #f7f1ff;
+  --ws-hover: rgba(242, 225, 255, 0.65);
   --ws-topbar-bg: rgba(234, 234, 247, 0.92);
   --ws-overlay: rgba(35, 48, 77, 0.45);
 
   /* Brand */
   --ws-accent: var(--color-purple);
-  --ws-accent-hover: #7d22c9;
+  --ws-accent-hover: var(--color-deep-purple);
   --ws-accent-soft: var(--color-pale-purple);
   --ws-accent-text: var(--color-deep-purple);
   --ws-accent-border: rgba(146, 48, 227, 0.22);
   --ws-focus-ring: rgba(146, 48, 227, 0.22);
   --ws-violet: var(--color-lavender-purple);
   --ws-violet-soft: var(--color-pale-lavender);
+  --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.16) 0%, rgba(146, 48, 227, 0) 62%),
+    radial-gradient(900px 520px at -5% -10%, rgba(35, 48, 77, 0.1) 0%, rgba(35, 48, 77, 0) 58%),
+    radial-gradient(800px 600px at 50% 110%, rgba(219, 176, 255, 0.22) 0%, rgba(219, 176, 255, 0) 60%);
+  --ws-glass-blur: blur(14px) saturate(140%);
 
   /* Navigation (navy panel in both themes) */
   --ws-nav-bg: var(--color-navy);
@@ -47,22 +53,22 @@
   --ws-hero-sub: var(--color-soft-lavender);
 
   /* Semantic (muted, subordinate to the brand) */
-  --ws-success: #2f7a63;
-  --ws-success-soft: #e3f1ec;
-  --ws-success-border: #c3e0d6;
-  --ws-warning: #8a6a2c;
-  --ws-warning-soft: #f6eedb;
-  --ws-warning-border: #ead9b3;
+  --ws-success: var(--color-deep-purple);
+  --ws-success-soft: var(--color-pale-purple);
+  --ws-success-border: var(--color-light-purple);
+  --ws-warning: var(--color-lavender-purple);
+  --ws-warning-soft: var(--color-pale-lavender);
+  --ws-warning-border: var(--color-soft-lavender);
   --ws-danger: #a63a59;
   --ws-danger-soft: #f8e6ee;
   --ws-danger-border: #ecc5d3;
   --ws-danger-bg: #fdf6f9;
 
-  --ws-skeleton-a: #e3e2f3;
-  --ws-skeleton-b: #f1f0fa;
+  --ws-skeleton-a: var(--color-pale-lavender);
+  --ws-skeleton-b: var(--color-pale-purple);
 
-  --ws-shadow-sm: 0 1px 2px rgba(35, 48, 77, 0.06);
-  --ws-shadow: 0 1px 2px rgba(35, 48, 77, 0.06), 0 6px 20px rgba(70, 31, 101, 0.07);
+  --ws-shadow-sm: 0 1px 2px rgba(35, 48, 77, 0.05), 0 4px 14px rgba(70, 31, 101, 0.05);
+  --ws-shadow: 0 2px 4px rgba(35, 48, 77, 0.06), 0 10px 28px rgba(70, 31, 101, 0.1);
   --ws-shadow-lg: 0 16px 48px rgba(35, 48, 77, 0.22);
 
   --ws-radius-sm: 8px;
@@ -75,47 +81,52 @@
 
 .ws[data-theme='dark'] {
   --ws-bg: var(--color-dark-secondary);
-  --ws-surface: var(--color-navy);
+  --ws-surface: rgba(35, 48, 77, 0.82);
+  --ws-surface-solid: var(--color-navy);
+  --ws-field-bg: var(--color-dark-surface);
   --ws-surface-muted: var(--color-dark-surface);
   --ws-surface-tint: rgba(70, 31, 101, 0.55);
   --ws-border: rgba(103, 102, 183, 0.32);
   --ws-border-strong: rgba(103, 102, 183, 0.55);
   --ws-text: var(--color-pale-purple);
   --ws-text-2: var(--color-soft-lavender);
-  --ws-text-3: #9d9cd6;
+  --ws-text-3: rgba(200, 199, 235, 0.72);
   --ws-hover: rgba(70, 31, 101, 0.45);
   --ws-topbar-bg: rgba(40, 40, 69, 0.9);
   --ws-overlay: rgba(10, 12, 28, 0.6);
 
   --ws-accent: var(--color-purple);
-  --ws-accent-hover: #a24cf0;
+  --ws-accent-hover: var(--color-deep-purple);
   --ws-accent-soft: rgba(146, 48, 227, 0.2);
   --ws-accent-text: var(--color-light-purple);
   --ws-accent-border: rgba(219, 176, 255, 0.25);
   --ws-focus-ring: rgba(219, 176, 255, 0.3);
   --ws-violet: var(--color-soft-lavender);
   --ws-violet-soft: rgba(103, 102, 183, 0.25);
+  --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.22) 0%, rgba(146, 48, 227, 0) 62%),
+    radial-gradient(900px 600px at -5% 0%, rgba(70, 31, 101, 0.45) 0%, rgba(70, 31, 101, 0) 60%),
+    radial-gradient(800px 600px at 50% 115%, rgba(103, 102, 183, 0.18) 0%, rgba(103, 102, 183, 0) 60%);
 
-  --ws-nav-bg: #1f2944;
+  --ws-nav-bg: var(--color-navy);
   --ws-nav-border: rgba(103, 102, 183, 0.28);
 
   --ws-hero-bg:
     radial-gradient(120% 140% at 100% 0%, rgba(146, 48, 227, 0.5) 0%, rgba(146, 48, 227, 0) 55%),
     linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-navy) 100%);
 
-  --ws-success: #7cc7ae;
-  --ws-success-soft: rgba(61, 140, 116, 0.18);
-  --ws-success-border: rgba(124, 199, 174, 0.3);
-  --ws-warning: #d9bb7c;
-  --ws-warning-soft: rgba(154, 122, 58, 0.2);
-  --ws-warning-border: rgba(217, 187, 124, 0.3);
+  --ws-success: var(--color-light-purple);
+  --ws-success-soft: rgba(146, 48, 227, 0.22);
+  --ws-success-border: rgba(219, 176, 255, 0.35);
+  --ws-warning: var(--color-soft-lavender);
+  --ws-warning-soft: rgba(103, 102, 183, 0.25);
+  --ws-warning-border: rgba(200, 199, 235, 0.3);
   --ws-danger: #e797b2;
   --ws-danger-soft: rgba(166, 58, 89, 0.22);
   --ws-danger-border: rgba(231, 151, 178, 0.32);
   --ws-danger-bg: rgba(166, 58, 89, 0.1);
 
-  --ws-skeleton-a: #2f3a5c;
-  --ws-skeleton-b: #3a4569;
+  --ws-skeleton-a: var(--color-dark-surface);
+  --ws-skeleton-b: rgba(70, 31, 101, 0.6);
 
   --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
   --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(10, 12, 28, 0.35);
@@ -126,47 +137,52 @@
 @media (prefers-color-scheme: dark) {
   .ws[data-theme='system'] {
     --ws-bg: var(--color-dark-secondary);
-    --ws-surface: var(--color-navy);
+    --ws-surface: rgba(35, 48, 77, 0.82);
+    --ws-surface-solid: var(--color-navy);
+    --ws-field-bg: var(--color-dark-surface);
     --ws-surface-muted: var(--color-dark-surface);
     --ws-surface-tint: rgba(70, 31, 101, 0.55);
     --ws-border: rgba(103, 102, 183, 0.32);
     --ws-border-strong: rgba(103, 102, 183, 0.55);
     --ws-text: var(--color-pale-purple);
     --ws-text-2: var(--color-soft-lavender);
-    --ws-text-3: #9d9cd6;
+    --ws-text-3: rgba(200, 199, 235, 0.72);
     --ws-hover: rgba(70, 31, 101, 0.45);
     --ws-topbar-bg: rgba(40, 40, 69, 0.9);
     --ws-overlay: rgba(10, 12, 28, 0.6);
 
     --ws-accent: var(--color-purple);
-    --ws-accent-hover: #a24cf0;
+    --ws-accent-hover: var(--color-deep-purple);
     --ws-accent-soft: rgba(146, 48, 227, 0.2);
     --ws-accent-text: var(--color-light-purple);
     --ws-accent-border: rgba(219, 176, 255, 0.25);
     --ws-focus-ring: rgba(219, 176, 255, 0.3);
     --ws-violet: var(--color-soft-lavender);
     --ws-violet-soft: rgba(103, 102, 183, 0.25);
+    --ws-page-glow: radial-gradient(1100px 560px at 88% -12%, rgba(146, 48, 227, 0.22) 0%, rgba(146, 48, 227, 0) 62%),
+      radial-gradient(900px 600px at -5% 0%, rgba(70, 31, 101, 0.45) 0%, rgba(70, 31, 101, 0) 60%),
+      radial-gradient(800px 600px at 50% 115%, rgba(103, 102, 183, 0.18) 0%, rgba(103, 102, 183, 0) 60%);
 
-    --ws-nav-bg: #1f2944;
+    --ws-nav-bg: var(--color-navy);
     --ws-nav-border: rgba(103, 102, 183, 0.28);
 
     --ws-hero-bg:
       radial-gradient(120% 140% at 100% 0%, rgba(146, 48, 227, 0.5) 0%, rgba(146, 48, 227, 0) 55%),
       linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-navy) 100%);
 
-    --ws-success: #7cc7ae;
-    --ws-success-soft: rgba(61, 140, 116, 0.18);
-    --ws-success-border: rgba(124, 199, 174, 0.3);
-    --ws-warning: #d9bb7c;
-    --ws-warning-soft: rgba(154, 122, 58, 0.2);
-    --ws-warning-border: rgba(217, 187, 124, 0.3);
+    --ws-success: var(--color-light-purple);
+    --ws-success-soft: rgba(146, 48, 227, 0.22);
+    --ws-success-border: rgba(219, 176, 255, 0.35);
+    --ws-warning: var(--color-soft-lavender);
+    --ws-warning-soft: rgba(103, 102, 183, 0.25);
+    --ws-warning-border: rgba(200, 199, 235, 0.3);
     --ws-danger: #e797b2;
     --ws-danger-soft: rgba(166, 58, 89, 0.22);
     --ws-danger-border: rgba(231, 151, 178, 0.32);
     --ws-danger-bg: rgba(166, 58, 89, 0.1);
 
-    --ws-skeleton-a: #2f3a5c;
-    --ws-skeleton-b: #3a4569;
+    --ws-skeleton-a: var(--color-dark-surface);
+    --ws-skeleton-b: rgba(70, 31, 101, 0.6);
 
     --ws-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
     --ws-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(10, 12, 28, 0.35);
@@ -177,7 +193,8 @@
 
 .ws {
   min-height: 100vh;
-  background: var(--ws-bg);
+  background: var(--ws-page-glow), var(--ws-bg);
+  background-attachment: fixed;
   color: var(--ws-text);
   font-family: var(--ws-font);
   font-size: 15px;
@@ -1556,4 +1573,157 @@ button.ws-stat:hover {
 .ws-signout:hover:not(:disabled) {
   background: var(--ws-nav-hover);
   color: #ffffff;
+}
+
+/* ---------- Brand continuation: glass surfaces like the login card ---------- */
+.ws-card,
+.ws-list,
+.ws-stats,
+.ws-empty,
+.ws-day {
+  backdrop-filter: var(--ws-glass-blur, blur(14px) saturate(140%));
+  -webkit-backdrop-filter: var(--ws-glass-blur, blur(14px) saturate(140%));
+}
+
+.ws-card,
+.ws-list,
+.ws-stats {
+  box-shadow: var(--ws-shadow-sm);
+}
+
+/* Form fields stay solid for legibility. */
+.ws .ws-input,
+.ws .ws-select,
+.ws .ws-textarea {
+  background: var(--ws-field-bg);
+}
+
+/* Primary CTA: solid brand purple, subtle gradient only on hover (matches the login). */
+.ws-btn-primary {
+  background: var(--color-purple);
+  box-shadow: 0 4px 14px rgba(146, 48, 227, 0.25);
+}
+
+.ws-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-deep-purple) 100%);
+  box-shadow: 0 6px 18px rgba(146, 48, 227, 0.32);
+}
+
+.ws-btn-secondary {
+  background: var(--ws-surface);
+  border-color: var(--ws-border-strong);
+}
+
+.ws-btn-secondary:hover:not(:disabled) {
+  background: var(--ws-hover);
+  border-color: var(--ws-accent-border);
+}
+
+.ws-avatar {
+  background: var(--ws-surface-tint);
+  color: var(--ws-accent-text);
+}
+
+.ws-eyebrow {
+  color: var(--ws-accent);
+}
+
+/* ---------- Legacy modal / form classes inside the workspace (submit / edit experience) ---------- */
+.ws .modal-backdrop {
+  background: var(--ws-overlay);
+  backdrop-filter: blur(4px);
+}
+
+.ws .modal-dialog {
+  background: var(--ws-surface-solid);
+  border: 1px solid var(--ws-border);
+  color: var(--ws-text);
+  box-shadow: var(--ws-shadow-lg);
+  font-family: var(--ws-font);
+}
+
+.ws .modal-dialog::before {
+  background: linear-gradient(90deg, var(--color-navy), var(--color-purple), var(--color-light-purple));
+}
+
+.ws .modal-header,
+.ws .modal-footer {
+  background: var(--ws-surface-tint);
+  border-color: var(--ws-border);
+}
+
+.ws .modal-title,
+.ws .form-section-title,
+.ws .round-title {
+  color: var(--ws-text);
+}
+
+.ws .modal-close-btn {
+  color: var(--ws-text-2);
+  background: transparent;
+  border-color: var(--ws-border);
+}
+
+.ws .modal-close-btn:hover {
+  background: var(--ws-hover);
+  color: var(--ws-text);
+}
+
+.ws .field-label {
+  color: var(--ws-text-2);
+}
+
+.ws .modal-dialog .text-input {
+  background: var(--ws-field-bg);
+  color: var(--ws-text);
+  border-color: var(--ws-border-strong);
+  padding-left: 0.9rem;
+}
+
+.ws .modal-dialog .text-input:focus {
+  border-color: var(--ws-accent);
+  box-shadow: 0 0 0 3px var(--ws-focus-ring);
+}
+
+.ws .modal-dialog .text-input::placeholder {
+  color: var(--ws-text-3);
+}
+
+.ws .round-card {
+  background: var(--ws-surface-muted);
+  border-color: var(--ws-border);
+}
+
+.ws .pill-option {
+  background: var(--ws-field-bg);
+  color: var(--ws-text-2);
+  border-color: var(--ws-border-strong);
+}
+
+.ws .pill-option:hover {
+  background: var(--ws-hover);
+  border-color: var(--ws-accent-border);
+}
+
+.ws .pill-option.active {
+  background: var(--ws-accent-soft);
+  border-color: var(--ws-accent);
+  color: var(--ws-accent-text);
+}
+
+.ws .modal-dialog .btn-secondary {
+  background: var(--ws-surface-solid);
+  color: var(--ws-text);
+  border-color: var(--ws-border-strong);
+}
+
+.ws .modal-dialog .btn-secondary:hover:not(:disabled) {
+  background: var(--ws-hover);
+}
+
+.ws .modal-footer .btn-secondary {
+  width: auto;
+  min-width: 110px;
+  padding: 0 1.25rem;
+  white-space: nowrap;
 }
