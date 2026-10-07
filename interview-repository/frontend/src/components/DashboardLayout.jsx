@@ -35,7 +35,7 @@ export const DashboardLayout = ({
             <Sparkles size={18} />
           </div>
           <span>
-            Interview<span style={{ color: '#6366f1' }}>Repo</span>
+            Interview<span style={{ color: '#8a4e29' }}>Repo</span>
           </span>
         </a>
 
