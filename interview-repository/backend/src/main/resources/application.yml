@@ -24,6 +24,11 @@ server:
 app:
   cors:
     allowed-origins: ${FRONTEND_URL:http://localhost:5173,http://localhost:3000}
+  ai:
+    # Team B (Placement Intelligence Platform) internal API, e.g. http://ai-api:8000 in Docker.
+    # Leave empty to disable AI features; approvals still work.
+    service-url: ${AI_SERVICE_URL:}
+    api-key: ${AI_SERVICE_API_KEY:}
 logging:
   level:
     root: INFO

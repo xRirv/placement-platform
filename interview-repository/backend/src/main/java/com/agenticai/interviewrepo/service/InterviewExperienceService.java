@@ -6,6 +6,7 @@ import com.agenticai.interviewrepo.dto.ModerationRequest;
 import com.agenticai.interviewrepo.model.*;
 import com.agenticai.interviewrepo.repository.*;
 import jakarta.transaction.Transactional;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,14 +23,15 @@ public class InterviewExperienceService {
     private final AdministratorRepository administrators;
     private final ModerationLogRepository moderationLogs;
     private final CurrentUserService currentUser;
+    private final ApplicationEventPublisher events;
 
     public InterviewExperienceService(InterviewExperienceRepository experiences,
             CompanyRepository companies, StudentRepository students, AlumniRepository alumni,
             AdministratorRepository administrators, ModerationLogRepository moderationLogs,
-            CurrentUserService currentUser) {
+            CurrentUserService currentUser, ApplicationEventPublisher events) {
         this.experiences = experiences; this.companies = companies; this.students = students;
         this.alumni = alumni; this.administrators = administrators; this.moderationLogs = moderationLogs;
-        this.currentUser = currentUser;
+        this.currentUser = currentUser; this.events = events;
     }
 
     @Transactional
@@ -73,6 +75,8 @@ public class InterviewExperienceService {
         InterviewExperience value = experiences.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Interview experience not found"));
         User adminUser = currentUser.getCurrentUser();
+        boolean newlyApproved = "APPROVED".equals(request.getModerationStatus())
+                && !"APPROVED".equals(value.getModerationStatus());
         value.setModerationStatus(request.getModerationStatus());
         value.setStatus(request.getModerationStatus());
         administrators.findByLogin(adminUser).ifPresent(admin -> {
@@ -81,6 +85,9 @@ public class InterviewExperienceService {
             log.setAction(request.getModerationStatus()); log.setReason(request.getReason());
             moderationLogs.save(log);
         });
+        // Sent to the AI service after commit (see AiIngestListener); failures never affect approval.
+        if (newlyApproved)
+            events.publishEvent(new AiIngestListener.ExperienceApprovedEvent(AiIngestPayload.from(value)));
         return InterviewExperienceResponse.from(value);
     }
 

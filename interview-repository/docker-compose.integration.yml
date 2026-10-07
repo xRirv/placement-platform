@@ -1,0 +1,72 @@
+# Full platform: Team A (this repo) + Team B (../Placement_Intelligence_Platform).
+# Expects both repos side by side, each with its own .env:
+#   backend/.env                              Team A backend (Supabase A, AI_SERVICE_API_KEY)
+#   frontend/.env                             Team A frontend (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+#   ../Placement_Intelligence_Platform/.env   Team B (Supabase B, INTERNAL_API_KEY, LLM_API_KEY)
+# AI_SERVICE_API_KEY (Team A) must equal INTERNAL_API_KEY (Team B).
+#
+# Run: docker compose -f docker-compose.integration.yml up --build
+# Browser-facing: frontend http://localhost:5173, backend http://localhost:8080.
+# Team B's API is reachable only inside the compose network.
+name: placement-platform
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  ai-api:
+    build:
+      context: ../Placement_Intelligence_Platform
+      dockerfile: Dockerfile
+    env_file: ../Placement_Intelligence_Platform/.env
+    environment:
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672/
+    expose:
+      - "8000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+
+  ai-worker:
+    build:
+      context: ../Placement_Intelligence_Platform
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.mq.consumers.ingestion_worker"]
+    env_file: ../Placement_Intelligence_Platform/.env
+    environment:
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      AI_SERVICE_URL: http://ai-api:8000
+      FRONTEND_URL: http://localhost:5173
+    ports:
+      - "8080:8080"
+    # AI calls fail open, so the backend does not wait for ai-api to be healthy.
+    depends_on:
+      - ai-api
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_BACKEND_URL: http://localhost:8080
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

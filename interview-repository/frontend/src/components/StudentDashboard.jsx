@@ -19,9 +19,11 @@ import {
   CheckCircle2,
   Clock,
   Layers,
+  Bot,
 } from 'lucide-react';
 import { DashboardLayout } from './DashboardLayout';
 import { ExperienceDetailModal } from './ExperienceDetailModal';
+import { AiAssistant } from './AiAssistant';
 
 export const StudentDashboard = ({ user, session, userProfile }) => {
   const [activeTab, setActiveTab] = useState('experiences');
@@ -298,7 +300,16 @@ export const StudentDashboard = ({ user, session, userProfile }) => {
           <Sparkles size={16} />
           <span>Candidate Profile</span>
         </button>
+        <button
+          className={`tab-button ${activeTab === 'ai' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ai')}
+        >
+          <Bot size={16} />
+          <span>AI Assistant</span>
+        </button>
       </div>
+
+      {activeTab === 'ai' && <AiAssistant session={session} backendUrl={backendUrl} />}
 
       {/* TAB 1: INTERVIEW EXPERIENCES FEED */}
       {activeTab === 'experiences' && (
