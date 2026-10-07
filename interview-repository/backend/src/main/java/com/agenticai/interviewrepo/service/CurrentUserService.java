@@ -16,9 +16,11 @@ import java.util.UUID;
 public class CurrentUserService {
 
     private final UserRepository userRepository;
+    private final ProvisioningHelper provisioning;
 
-    public CurrentUserService(UserRepository userRepository) {
+    public CurrentUserService(UserRepository userRepository, ProvisioningHelper provisioning) {
         this.userRepository = userRepository;
+        this.provisioning = provisioning;
     }
 
     public Optional<String> getCurrentAuthUserId() {
@@ -70,9 +72,10 @@ public class CurrentUserService {
             Object metadata = jwt.getClaims().get("user_metadata");
             String name = metadata instanceof java.util.Map<?, ?> m && m.get("name") instanceof String n && !n.isBlank()
                     ? n : newEmail.split("@")[0];
-            User created = User.builder().authUserId(authUserId).email(newEmail).name(name)
-                    .role(Role.STUDENT).isActive(true).build();
-            return Optional.of(userRepository.save(created));
+            return Optional.of(provisioning.getOrCreate(
+                    () -> userRepository.findByAuthUserId(authUserId),
+                    () -> userRepository.save(User.builder().authUserId(authUserId).email(newEmail).name(name)
+                            .role(Role.STUDENT).isActive(true).build())));
         }
         return Optional.empty();
     }

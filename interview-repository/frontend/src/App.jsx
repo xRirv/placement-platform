@@ -248,7 +248,7 @@ function AppContent() {
         />
 
         <Route
-          path="/student"
+          path="/student/*"
           element={
             <ProtectedRoute
               user={user}

@@ -139,4 +139,19 @@ public class StudentProfileResponse {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    // Assigned mentor details and camelCase link aliases used by the student dashboard.
+    private String mentorName;
+    private String mentorEmail;
+    private String mentorExpertise;
+    public String getMentorName() { return mentorName; }
+    public void setMentorName(String mentorName) { this.mentorName = mentorName; }
+    public String getMentorEmail() { return mentorEmail; }
+    public void setMentorEmail(String mentorEmail) { this.mentorEmail = mentorEmail; }
+    public String getMentorExpertise() { return mentorExpertise; }
+    public void setMentorExpertise(String mentorExpertise) { this.mentorExpertise = mentorExpertise; }
+    public String getLinkedinUrl() { return linkedinURL; }
+    public String getGithubUrl() { return githubURL; }
+    public String getResumeUrl() { return resumeURL; }
+    public UUID getMentorId() { return mentorID; }
 }

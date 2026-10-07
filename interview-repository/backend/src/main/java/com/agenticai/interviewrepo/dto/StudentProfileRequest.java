@@ -1,14 +1,16 @@
 package com.agenticai.interviewrepo.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class StudentProfileRequest {
     private String name;
     private String phone;
     private String college;
     private String degree;
     private Integer graduationYear;
-    private String resumeURL;
-    private String linkedinURL;
-    private String githubURL;
+    @JsonAlias("resumeUrl") private String resumeURL;
+    @JsonAlias("linkedinUrl") private String linkedinURL;
+    @JsonAlias("githubUrl") private String githubURL;
     private String skills;
     private String bio;
 

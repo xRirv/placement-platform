@@ -44,7 +44,14 @@ class StudyPlanAndProgressServiceTest {
 
     @BeforeEach
     void setUp() {
-        studyPlans = new StudyPlanService(plans, progress, students, companies, currentUser, ai, new ObjectMapper());
+        // Direct provisioning (no transaction manager needed in unit tests).
+        com.agenticai.interviewrepo.service.ProvisioningHelper provisioning = mock(com.agenticai.interviewrepo.service.ProvisioningHelper.class);
+        when(provisioning.getOrCreate(any(), any())).thenAnswer(inv -> {
+            java.util.function.Supplier<Optional<Object>> find = inv.getArgument(0);
+            java.util.function.Supplier<Object> create = inv.getArgument(1);
+            return find.get().orElseGet(create);
+        });
+        studyPlans = new StudyPlanService(plans, progress, students, companies, currentUser, ai, new ObjectMapper(), provisioning);
         progressService = new ProgressService(progress, plans, studyPlans);
         user = User.builder().id(UUID.randomUUID()).role(Role.STUDENT).build();
         student = new Student(); student.setId(UUID.randomUUID()); student.setLogin(user);

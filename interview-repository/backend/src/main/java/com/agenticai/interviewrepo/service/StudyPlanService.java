@@ -34,12 +34,13 @@ public class StudyPlanService {
     private final CurrentUserService currentUser;
     private final AiServiceClient ai;
     private final ObjectMapper objectMapper;
+    private final ProvisioningHelper provisioning;
 
     public StudyPlanService(StudyPlanRepository plans, ProgressRepository progress, StudentRepository students,
                             CompanyRepository companies, CurrentUserService currentUser, AiServiceClient ai,
-                            ObjectMapper objectMapper) {
+                            ObjectMapper objectMapper, ProvisioningHelper provisioning) {
         this.plans = plans; this.progress = progress; this.students = students; this.companies = companies;
-        this.currentUser = currentUser; this.ai = ai; this.objectMapper = objectMapper;
+        this.currentUser = currentUser; this.ai = ai; this.objectMapper = objectMapper; this.provisioning = provisioning;
     }
 
     /** Calls the AI service, then stores the plan and one progress item per priority topic. */
@@ -126,9 +127,10 @@ public class StudyPlanService {
      */
     public Student currentStudent() {
         User user = currentUser.getCurrentUser();
-        return students.findByLogin(user).orElseGet(() -> {
-            if (user.getRole() != Role.STUDENT)
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Only students have study plans");
+        if (user.getRole() != Role.STUDENT)
+            return students.findByLogin(user).orElseThrow(() ->
+                    new ResponseStatusException(HttpStatus.FORBIDDEN, "Only students have study plans"));
+        return provisioning.getOrCreate(() -> students.findByLogin(user), () -> {
             Student student = new Student();
             student.setLogin(user);
             String name = user.getName() != null && !user.getName().isBlank() ? user.getName()

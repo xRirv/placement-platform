@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 public record InterviewExperienceResponse(
-        UUID id, UUID companyId, UUID submittedBy, String role, LocalDate interviewDate,
+        UUID id, UUID companyId, String companyName, UUID submittedBy, String role, LocalDate interviewDate,
         String difficulty, String experience, String questionsSummary, String tips,
         String interviewResult, String moderationStatus, boolean consentGiven,
         LocalDateTime consentAt, LocalDateTime submittedAt, String provenance,
         String preparation, String timeline, List<RoundResponse> rounds) {
     public static InterviewExperienceResponse from(InterviewExperience value) {
-        return new InterviewExperienceResponse(value.getId(), value.getCompany().getId(),
+        return new InterviewExperienceResponse(value.getId(), value.getCompany().getId(), value.getCompany().getName(),
                 value.getSubmittedBy().getId(), value.getRole(), value.getInterviewDate(),
                 value.getDifficulty(), value.getExperience(), value.getQuestionsSummary(),
                 value.getTips(), value.getInterviewResult(), value.getModerationStatus(),

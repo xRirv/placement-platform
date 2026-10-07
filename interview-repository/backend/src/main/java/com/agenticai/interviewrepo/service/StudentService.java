@@ -15,17 +15,21 @@ import java.nio.file.AccessDeniedException;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final CurrentUserService currentUserService;
+    private final StudyPlanService studyPlanService;
 
-    StudentService(StudentRepository studentRepository, CurrentUserService currentUserService) {
+    StudentService(StudentRepository studentRepository, CurrentUserService currentUserService,
+                   StudyPlanService studyPlanService) {
         this.studentRepository=studentRepository;
         this.currentUserService=currentUserService;
+        this.studyPlanService=studyPlanService;
     }
 
     @Transactional
     public StudentProfileResponse getMyProfile() {
         User user=currentUserService.getCurrentUser();
 
-        Student student=studentRepository.findByLogin(user).orElseThrow(() -> new IllegalStateException("Student Profile Not Found"));
+        Student student = user.getRole() == Role.STUDENT ? studyPlanService.currentStudent()
+                : studentRepository.findByLogin(user).orElseThrow(() -> new IllegalArgumentException("Student Profile Not Found"));
 
         return toResponse(student);
     }
@@ -38,7 +42,8 @@ public class StudentService {
             throw new AccessDeniedException("Only the user and the administrator can update the profile");
         }
 
-        Student student=studentRepository.findByLogin(user).orElseThrow(()->new IllegalStateException("Student Profile is not found"));
+        Student student = user.getRole() == Role.STUDENT ? studyPlanService.currentStudent()
+                : studentRepository.findByLogin(user).orElseThrow(() -> new IllegalArgumentException("Student Profile is not found"));
 
         if (request.getBio()!=null) {
             student.setBio(request.getBio());
@@ -87,8 +92,8 @@ public class StudentService {
     private StudentProfileResponse toResponse(Student student) {
         StudentProfileResponse response=new StudentProfileResponse();
 
-        response.setId(response.getId());
-        response.setName(response.getName());
+        response.setId(student.getId());
+        response.setName(student.getName());
 
         if (student.getLogin()!=null) {
             response.setEmail(student.getLogin().getEmail());
@@ -106,6 +111,10 @@ public class StudentService {
 
         if (student.getMentor() != null) {
             response.setMentorID(student.getMentor().getId());
+            response.setMentorName(student.getMentor().getName());
+            response.setMentorExpertise(student.getMentor().getExpertise());
+            if (student.getMentor().getLogin() != null)
+                response.setMentorEmail(student.getMentor().getLogin().getEmail());
         }
 
         response.setCreatedAt(student.getCreatedAt());
