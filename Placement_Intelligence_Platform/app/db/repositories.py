@@ -310,6 +310,16 @@ class SupabaseRepository(EntityRepository):
             logger.error("Failed to apply payload: %s", e)
             raise DatabaseError(f"Persistence error: {e}") from e
 
+    def upsert_raw_experience(self, row: dict[str, Any]):
+        """Creates or replaces a raw experience row (keyed by experience_id) and queues it."""
+        payload = {key: value for key, value in row.items() if value is not None}
+        payload.update({"status": "QUEUED", "stage": "INGESTION", "error": None})
+        try:
+            supabase.table("experiences").upsert(payload, on_conflict="experience_id").execute()
+        except Exception as exc:
+            logger.error("Failed to upsert experience experience_id=%s: %s", row.get("experience_id"), exc)
+            raise DatabaseError(f"Upsert failed for {row.get('experience_id')}: {exc}") from exc
+
     def update_raw_status(self, experience_id: str, status: str, stage: str, error: str | None = None):
         """Updates status metadata on Team A's raw experiences table."""
         payload = {"status": status, "stage": stage, "error": error}

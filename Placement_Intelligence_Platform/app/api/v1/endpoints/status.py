@@ -1,9 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+
+from app.core.security import require_internal_api_key
 
 from app.db.models import ExperienceStatus
 from app.db.repositories import SupabaseRepository
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_internal_api_key)])
 
 
 # Retrieve the current processing state and extracted results for an experience
