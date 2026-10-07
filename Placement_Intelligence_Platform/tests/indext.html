@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interview Experience Intake - Prototype</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; padding: 24px; color: #1e293b; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 28px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    h2, h3 { margin-top: 0; color: #0f172a; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    label { font-size: 0.85rem; font-weight: 600; color: #475569; }
+    input, select, textarea { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+    textarea { resize: vertical; min-height: 80px; }
+    .question-card { background: #f1f5f9; padding: 16px; border-radius: 6px; margin-bottom: 12px; position: relative; }
+    .btn { padding: 8px 16px; font-size: 0.9rem; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-secondary { background: #e2e8f0; color: #1e293b; }
+    .btn-danger { background: #ef4444; color: white; position: absolute; top: 12px; right: 12px; font-size: 0.75rem; }
+    .btn-success { background: #10b981; color: white; margin-left: 8px; }
+    pre { background: #0f172a; color: #38bdf8; padding: 16px; border-radius: 6px; overflow-x: auto; max-height: 400px; }
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-weight: bold; font-size: 0.85rem; margin-bottom: 12px; }
+    .status-QUEUED { background: #fef3c7; color: #d97706; }
+    .status-PROCESSING { background: #dbeafe; color: #2563eb; }
+    .status-COMPLETED { background: #d1fae5; color: #059669; }
+    .status-FAILED { background: #fee2e2; color: #dc2626; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Interview Experience Intake</h2>
+  <form id="experienceForm">
+    <div class="grid">
+      <div class="form-group">
+        <label>Student ID (UUID)</label>
+        <input type="text" id="student_id" value="9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d" required />
+      </div>
+      <div class="form-group">
+        <label>Company ID (UUID)</label>
+        <input type="text" id="company_id" value="c1a2b3c4-d5e6-7f80-9a1b-2c3d4e5f6071" required />
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" id="role" placeholder="e.g. SDE Intern" value="Software Engineer" required />
+      </div>
+      <div class="form-group">
+        <label>Interview Date</label>
+        <input type="date" id="interview_date" value="2026-08-15" required />
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="form-group">
+        <label>Difficulty</label>
+        <select id="difficulty">
+          <option value="Easy">Easy</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Moderation Status</label>
+        <input type="text" id="status" value="Pending" readonly />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Overall Experience Narrative</label>
+      <textarea id="experience" placeholder="Describe the overall interview process, demeanor, rounds..." required>Amazon interview had 3 technical rounds focusing on coding and system design.</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Questions Summary</label>
+      <textarea id="questions_summary" placeholder="Brief summary of questions or topics encountered..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Tips for Peers</label>
+      <textarea id="tips" placeholder="Preparation tips, focus topics, resources..."></textarea>
+    </div>
+
+    <h3>Interview Questions</h3>
+    <div id="questionsContainer"></div>
+    <button type="button" class="btn btn-secondary" onclick="addQuestionField()">+ Add Question</button>
+    <br><br>
+
+    <button type="submit" class="btn btn-primary" id="submitBtn">Submit & Ingest to Backend</button>
+  </form>
+
+  <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e2e8f0;" />
+
+  <h3>API Response & Real-Time Status</h3>
+  <div id="statusContainer" style="display: none;">
+    Current Status: <span id="statusBadge" class="status-badge">QUEUED</span>
+    <button type="button" class="btn btn-success" id="checkStatusBtn" onclick="checkJobStatus()">Check Live Status</button>
+  </div>
+  <pre><code id="jsonOutput">// API output will appear here after submission...</code></pre>
+</div>
+
+<script>
+  const API_BASE_URL = "http://127.0.0.1:8000/api/v1";
+  let activeExperienceId = null;
+
+  function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  function addQuestionField() {
+    const container = document.getElementById('questionsContainer');
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">Remove</button>
+      <div class="form-group">
+        <label>Question Text</label>
+        <textarea class="q-text" placeholder="Enter the question asked..." required>Implement an LRU Cache with O(1) ops.</textarea>
+      </div>
+      <div class="grid">
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" class="q-cat" value="Data Structures" placeholder="e.g. Data Structures, System Design, HR" required />
+        </div>
+        <div class="form-group">
+          <label>Difficulty</label>
+          <select class="q-diff">
+            <option value="Easy">Easy</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  }
+
+  addQuestionField();
+
+  document.getElementById('experienceForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Posting to API...";
+
+    const experienceId = generateUUID();
+
+    const questions = [];
+    document.querySelectorAll('.question-card').forEach(card => {
+      questions.push({
+        question_id: generateUUID(),
+        interview_id: experienceId,
+        question_text: card.querySelector('.q-text').value,
+        category: card.querySelector('.q-cat').value,
+        difficulty: card.querySelector('.q-diff').value
+      });
+    });
+
+    const payload = {
+      action: "INGEST",
+      experience_id: experienceId,
+      student_id: document.getElementById('student_id').value,
+      company_id: document.getElementById('company_id').value,
+      role: document.getElementById('role').value,
+      interview_date: document.getElementById('interview_date').value,
+      difficulty: document.getElementById('difficulty').value,
+      status: document.getElementById('status').value,
+      experience_text: document.getElementById('experience').value,
+      submitted_at: new Date().toISOString(),
+      questions_summary: document.getElementById('questions_summary').value,
+      tips: document.getElementById('tips').value,
+      questions: questions
+    };
+
+    try {
+      // POST request to backend ingest API
+      const response = await fetch(`${API_BASE_URL}/internal/ingest`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+      document.getElementById('jsonOutput').textContent = JSON.stringify(result, null, 2);
+
+      if (response.ok && result.experience_id) {
+        activeExperienceId = result.experience_id;
+        document.getElementById('statusContainer').style.display = 'block';
+        updateStatusBadge(result.status || "QUEUED");
+      }
+    } catch (err) {
+      document.getElementById('jsonOutput').textContent = `Error connecting to backend API: ${err.message}`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit & Ingest to Backend";
+    }
+  });
+
+  async function checkJobStatus() {
+    if (!activeExperienceId) return;
+
+    const badge = document.getElementById('statusBadge');
+    badge.textContent = "FETCHING...";
+
+    try {
+      // GET request to backend status API
+      const response = await fetch(`${API_BASE_URL}/internal/experiences/${activeExperienceId}`);
+      const result = await response.json();
+
+      document.getElementById('jsonOutput').textContent = JSON.stringify(result, null, 2);
+      if (result.status) {
+        updateStatusBadge(result.status);
+      }
+    } catch (err) {
+      document.getElementById('jsonOutput').textContent = `Error checking status: ${err.message}`;
+    }
+  }
+
+  function updateStatusBadge(statusText) {
+    const badge = document.getElementById('statusBadge');
+    badge.textContent = statusText;
+    badge.className = `status-badge status-${statusText}`;
+  }
+</script>
+</body>
+</html>
