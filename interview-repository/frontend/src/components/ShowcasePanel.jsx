@@ -56,10 +56,53 @@ export const ShowcasePanel = () => {
 
   return (
     <div className="showcase-container">
-      {/* Subtle radiant background accents */}
+      {/* Animated Anime Scenery Background */}
       <div className="ambient-mesh" aria-hidden="true" />
       <div className="ambient-orb orb-1" aria-hidden="true" />
       <div className="ambient-orb orb-2" aria-hidden="true" />
+
+      {/* Animated Tree with Character */}
+      <div className="anime-scenery-tree" aria-hidden="true">
+        <div className="tree-trunk" />
+        <div className="tree-canopy" />
+        <div className="tree-branches">
+          <div className="branch" />
+          <div className="branch" />
+          <div className="branch" />
+        </div>
+      </div>
+
+      {/* Anime Character Sitting Under Tree */}
+      <div className="anime-character" aria-hidden="true">
+        <div className="character-head" />
+        <div className="character-figure" />
+      </div>
+
+      {/* Falling Leaves Animation */}
+      <div className="leaves-container" aria-hidden="true">
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+        <div className="leaf" />
+      </div>
+
+      {/* Grass Elements */}
+      <div className="grass-elements" aria-hidden="true">
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+        <div className="grass-blade" />
+      </div>
 
       <div className="showcase-content">
         {/* Brand Header */}
