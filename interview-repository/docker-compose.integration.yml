@@ -24,6 +24,7 @@ services:
     restart: unless-stopped
 
   ai-api:
+    image: xrirv/placement-platform-ai-api:latest
     build:
       context: ../Placement_Intelligence_Platform
       dockerfile: Dockerfile
@@ -38,6 +39,7 @@ services:
     restart: unless-stopped
 
   ai-worker:
+    image: xrirv/placement-platform-ai-worker:latest
     build:
       context: ../Placement_Intelligence_Platform
       dockerfile: Dockerfile
@@ -56,6 +58,7 @@ services:
     restart: unless-stopped
 
   backend:
+    image: xrirv/placement-platform-backend:latest
     build: ./backend
     env_file: ./backend/.env
     environment:
@@ -69,6 +72,7 @@ services:
     restart: unless-stopped
 
   frontend:
+    image: xrirv/placement-platform-frontend:latest
     build:
       context: ./frontend
       args:

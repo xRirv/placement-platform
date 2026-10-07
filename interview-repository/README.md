@@ -1,5 +1,11 @@
 # Interview Repository
 
+> **This folder is part of the [Placement Platform](../README.md) monorepo.** To run the whole platform
+> (this app plus the AI service) use the root README. Per-part docs:
+> [frontend](frontend/README.md) · [backend](backend/README.md).
+> The backend `.env` also needs `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `AI_SERVICE_URL` and
+> `AI_SERVICE_API_KEY` (see `backend/.env.example`).
+
 Full-stack application for managing interview experiences, questions, study plans, student profiles, and mentor reviews. Built with a **Spring Boot 4 / Java 21** backend and a **React 19 / TypeScript / Vite** frontend, powered by **Supabase** for user authentication and PostgreSQL storage.
 
 ---

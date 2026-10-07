@@ -9,6 +9,11 @@ One repository for the full placement platform:
 
 Both teams' full git histories are preserved in this repo.
 
+More detail per part:
+[frontend](interview-repository/frontend/README.md) ·
+[backend](interview-repository/backend/README.md) ·
+[AI service](Placement_Intelligence_Platform/README.md)
+
 ## How it fits together
 
 ```
@@ -139,6 +144,26 @@ RabbitMQ, the Team B API and the Team B worker run only inside the Docker networ
 All containers use `restart: unless-stopped`. Once started, they come back automatically
 whenever Docker Desktop starts, until you run `docker compose down`.
 
+**Without building (prebuilt images from Docker Hub):** all four images are published:
+
+| Image | Service |
+|---|---|
+| [`xrirv/placement-platform-frontend`](https://hub.docker.com/r/xrirv/placement-platform-frontend) | React app served by nginx |
+| [`xrirv/placement-platform-backend`](https://hub.docker.com/r/xrirv/placement-platform-backend) | Spring Boot API |
+| [`xrirv/placement-platform-ai-api`](https://hub.docker.com/r/xrirv/placement-platform-ai-api) | Team B FastAPI service |
+| [`xrirv/placement-platform-ai-worker`](https://hub.docker.com/r/xrirv/placement-platform-ai-worker) | Team B ingestion worker |
+
+Each has a `latest` tag and a tag per git commit (e.g. `757ba4d`). No secrets are baked into the images;
+configuration comes from the `.env` files at run time. With the three `.env` files in place:
+
+```bash
+docker compose pull
+docker compose up -d --no-build
+```
+
+The prebuilt frontend is built against the maintainers' Supabase project and `http://localhost:8080`.
+If you use your own Supabase project, build it yourself instead (`docker compose up --build`).
+
 Useful commands:
 
 ```bash
@@ -224,7 +249,26 @@ A request with only `experience_id` re-queues an existing row.
 Only these fields are forwarded. Chat sessions are kept separate per user. If Team B is
 unreachable, these endpoints return `503`.
 
-## Student features (Team A backend)
+## Student workspace
+
+Students land on a workspace at `/student` with a left sidebar (a drawer on phones and tablets):
+
+| Section | Page | What it does |
+|---|---|---|
+| Workspace | **Overview** | Greeting, progress at a glance, "continue where you left off", recommended interviews, recent activity |
+| | **Interview Experiences** | Approved experiences with search and company / difficulty / outcome filters; each opens a detail page (process timeline, questions asked, what to prepare) |
+| | **Question Bank** | Every question from approved experiences, filterable; **Practice** opens the AI Assistant with the question |
+| | **My Submissions** | Your shared experiences with review status (All / Pending / Approved / Rejected), submit and edit |
+| Preparation | **Study Plan** | Generate an AI plan for a company, role and number of days; mark topics *Not started / In progress / Done*; today's focus and weekly progress |
+| | **AI Assistant** | Suggested actions based on your targets, chat, and knowledge-base search |
+| | **Candidate Profile** | Profile, education, skills and links with a completeness indicator |
+| Career | **Target Companies** | Companies with interview data and your preparation progress for each |
+| | **My Mentor** | Mentor assignment status and contact |
+
+Every page shows a loading skeleton, an error message with **Try again**, or an empty state with a next step,
+so no page is ever blank. See the [frontend README](interview-repository/frontend/README.md) for routes and the design system.
+
+## Student features (Team A backend API)
 
 All endpoints need `Authorization: Bearer <Supabase JWT>`.
 
@@ -239,7 +283,7 @@ All endpoints need `Authorization: Bearer <Supabase JWT>`.
 | `GET /api/interviews/my`, `PUT/DELETE /api/interviews/{id}` | A user's own submissions |
 | `POST /api/interviews/ai-resync` (admin) | Sends every approved experience to the AI service, e.g. ones approved before the integration |
 
-In the UI these are the **Study Plan** and **Question Bank** tabs on the student dashboard.
+In the UI these power the **Study Plan**, **Question Bank** and **My Submissions** pages.
 
 ## Troubleshooting
 
