@@ -257,7 +257,7 @@ public class AdminService {
         return AdminProfileResponse.builder()
                 .id(admin.getId())
                 .loginId(user.getId())
-                .name(user.getName())
+                .name(user.getName() != null && !user.getName().isBlank() ? user.getName() : admin.getName())
                 .email(user.getEmail())
                 .college(admin.getCollege())
                 .role(user.getRole())

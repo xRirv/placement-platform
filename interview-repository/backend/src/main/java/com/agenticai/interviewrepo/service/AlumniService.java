@@ -15,13 +15,33 @@ public class AlumniService {
 
     private final AlumniRepository alumniRepository;
     private final CurrentUserService currentUserService;
+    private final ProvisioningHelper provisioning;
 
     public AlumniService(
             AlumniRepository alumniRepository,
-            CurrentUserService currentUserService
+            CurrentUserService currentUserService,
+            ProvisioningHelper provisioning
     ) {
         this.alumniRepository = alumniRepository;
         this.currentUserService = currentUserService;
+        this.provisioning = provisioning;
+    }
+
+    /**
+     * The current user's alumni profile. An ALUMNI account without a profile row gets one on
+     * first use (race-safe); other roles without one get a clear 403 instead of a 500.
+     */
+    private PlacedAlumni currentAlumni(User user) {
+        if (user.getRole() != Role.ALUMNI)
+            return alumniRepository.findByLogin(user).orElseThrow(() ->
+                    new org.springframework.web.server.ResponseStatusException(
+                            org.springframework.http.HttpStatus.FORBIDDEN, "Only alumni have an alumni profile"));
+        return provisioning.getOrCreate(() -> alumniRepository.findByLogin(user), () -> {
+            PlacedAlumni alumni = new PlacedAlumni();
+            alumni.setLogin(user);
+            alumni.setName(MentorService.displayName(user));
+            return alumniRepository.save(alumni);
+        });
     }
 
     @Transactional(readOnly = true)
@@ -29,12 +49,7 @@ public class AlumniService {
 
         User user = currentUserService.getCurrentUser();
 
-        PlacedAlumni alumni = alumniRepository.findByLogin(user)
-                .orElseThrow(() ->
-                        new IllegalStateException(
-                                "Alumni profile not found"
-                        )
-                );
+        PlacedAlumni alumni = currentAlumni(user);
 
         return toResponse(alumni);
     }
@@ -54,7 +69,7 @@ public class AlumniService {
             );
         }
 
-        PlacedAlumni alumni=alumniRepository.findByLogin(user).orElseThrow(()->new IllegalStateException("Alumni Profile not found"));
+        PlacedAlumni alumni=currentAlumni(user);
 
         if (request.getName() != null) {
             alumni.setName(request.getName());

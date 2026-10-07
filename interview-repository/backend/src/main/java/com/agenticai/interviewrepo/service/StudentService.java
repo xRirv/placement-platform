@@ -89,7 +89,7 @@ public class StudentService {
         return toResponse(saved);
     }
 
-    private StudentProfileResponse toResponse(Student student) {
+    public StudentProfileResponse toResponse(Student student) {
         StudentProfileResponse response=new StudentProfileResponse();
 
         response.setId(student.getId());

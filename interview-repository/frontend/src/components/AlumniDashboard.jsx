@@ -88,7 +88,7 @@ export const AlumniDashboard = ({ user, session, userProfile }) => {
       });
       if (res.ok) {
         const data = await res.json();
-        setMyExperiences(data || []);
+        setMyExperiences(Array.isArray(data) ? data : Array.isArray(data?.content) ? data.content : []);
       }
     } catch {
       setMyExperiences([]);

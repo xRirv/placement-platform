@@ -2,11 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { getSupabaseClient, fetchCurrentUserProfile } from './lib/supabaseClient';
 import { AuthPage } from './components/AuthPage';
-import { AdminDashboard } from './components/AdminDashboard';
 import { StudentDashboard } from './components/StudentDashboard';
 import { MentorDashboard } from './components/MentorDashboard';
 import { AlumniDashboard } from './components/AlumniDashboard';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { ProtectedRoute, ProfileGate } from './components/ProtectedRoute';
 import { ToastContainer } from './components/Toast';
 import { DashboardPage } from './components/admin/DashboardPage';
 import { StudentsPage } from './components/admin/StudentsPage';
@@ -19,6 +18,7 @@ function AppContent() {
   const [user, setUser] = useState(null);
   const [session, setSession] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [profileError, setProfileError] = useState(null);
   const [initializing, setInitializing] = useState(true);
   const [toasts, setToasts] = useState([]);
   const navigate = useNavigate();
@@ -39,10 +39,33 @@ function AppContent() {
     if (!token) return;
     const res = await fetchCurrentUserProfile(token);
     if (res.success && res.data) {
+      setProfileError(null);
       setUserProfile(res.data);
       return res.data;
     }
+    setUserProfile(null);
+    setProfileError(res.error || 'Could not load your account.');
     return null;
+  };
+
+  const retryProfile = async () => {
+    setProfileError(null);
+    const client = getSupabaseClient();
+    const {
+      data: { session: current },
+    } = await client.auth.getSession();
+    if (current?.access_token) await loadUserProfile(current.access_token);
+    else navigate('/login', { replace: true });
+  };
+
+  const signOut = async () => {
+    try {
+      await getSupabaseClient().auth.signOut();
+    } finally {
+      setUserProfile(null);
+      setProfileError(null);
+      navigate('/login', { replace: true });
+    }
   };
 
   const getRoleDestination = (role) => {
@@ -99,6 +122,7 @@ function AppContent() {
           }
         } else {
           setUserProfile(null);
+          setProfileError(null);
         }
         setInitializing(false);
       });
@@ -118,11 +142,12 @@ function AppContent() {
   const handleLoginSuccess = async (newSession) => {
     if (!newSession?.access_token) return;
     const profile = await loadUserProfile(newSession.access_token);
-    const dest = getRoleDestination(profile?.role || 'STUDENT');
-    navigate(dest, { replace: true });
+    // Only route once the real role is known; on failure the ProfileGate shows the reason.
+    if (profile?.role) navigate(getRoleDestination(profile.role), { replace: true });
   };
 
-  const currentRole = userProfile?.role?.toUpperCase() || 'STUDENT';
+  const currentRole = userProfile?.role?.toUpperCase();
+  const gate = <ProfileGate profileError={profileError} onRetry={retryProfile} onSignOut={signOut} />;
 
   return (
     <>
@@ -132,7 +157,7 @@ function AppContent() {
           path="/login"
           element={
             user ? (
-              <Navigate to={getRoleDestination(currentRole)} replace />
+              currentRole ? <Navigate to={getRoleDestination(currentRole)} replace /> : gate
             ) : (
               <AuthPage
                 onShowToast={showToast}
@@ -147,7 +172,7 @@ function AppContent() {
           path="/"
           element={
             user ? (
-              <Navigate to={getRoleDestination(currentRole)} replace />
+              currentRole ? <Navigate to={getRoleDestination(currentRole)} replace /> : gate
             ) : (
               <Navigate to="/login" replace />
             )
@@ -164,6 +189,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ADMIN']}
             >
               <DashboardPage
@@ -182,6 +210,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ADMIN']}
             >
               <StudentsPage
@@ -200,6 +231,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ADMIN']}
             >
               <MentorsPage
@@ -218,6 +252,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ADMIN']}
             >
               <AlumniPage
@@ -236,6 +273,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ADMIN']}
             >
               <ModerationPage
@@ -254,6 +294,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['STUDENT']}
             >
               <StudentDashboard
@@ -272,6 +315,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['MENTOR']}
             >
               <MentorDashboard
@@ -290,6 +336,9 @@ function AppContent() {
               user={user}
               userProfile={userProfile}
               initializing={initializing}
+              profileError={profileError}
+              onRetryProfile={retryProfile}
+              onSignOut={signOut}
               allowedRoles={['ALUMNI']}
             >
               <AlumniDashboard

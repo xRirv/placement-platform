@@ -66,16 +66,15 @@ export const AlumniPage = ({ user, session, userProfile }) => {
         // Group alumni by graduation year
         const yearCounts = {};
         allAlumni.forEach(alumniItem => {
-          const year = alumniItem.graduationYear;
-          if (year) {
-            yearCounts[year] = (yearCounts[year] || 0) + 1;
-          }
+          // Alumni without a graduation year get their own group so admins can still manage them.
+          const year = alumniItem.graduationYear || 'none';
+          yearCounts[year] = (yearCounts[year] || 0) + 1;
         });
 
         // Convert to class array format
         const classData = Object.entries(yearCounts)
           .map(([year, count]) => ({ year: String(year), count }))
-          .sort((a, b) => b.year.localeCompare(a.year)); // Sort descending
+          .sort((a, b) => (a.year === 'none') - (b.year === 'none') || b.year.localeCompare(a.year));
 
         setGraduationClasses(classData);
 
@@ -105,8 +104,8 @@ export const AlumniPage = ({ user, session, userProfile }) => {
       if (res.ok) {
         const data = await res.json();
         // Filter by selected class
-        const filtered = (data.content || []).filter(
-          a => String(a.graduationYear) === String(selectedClass)
+        const filtered = (data.content || []).filter((a) =>
+          selectedClass === 'none' ? !a.graduationYear : String(a.graduationYear) === String(selectedClass)
         );
         setAlumni(filtered);
       }
@@ -390,7 +389,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
                   >
                     <span className="admin-sidebar-item-icon">📁</span>
                     <div className="admin-sidebar-item-content">
-                      <span className="admin-sidebar-item-title">Class of {cls.year}</span>
+                      <span className="admin-sidebar-item-title">{cls.year === 'none' ? 'No graduation year' : `Class of ${cls.year}`}</span>
                       <span className="admin-sidebar-item-subtitle">{cls.count} Alumni</span>
                     </div>
                   </button>
@@ -430,7 +429,7 @@ export const AlumniPage = ({ user, session, userProfile }) => {
           <div className="admin-card">
             <div className="admin-card-header">
               <h2 className="admin-card-title">
-                {selectedClass ? `Class of ${selectedClass} Alumni` : 'Alumni'}
+                {selectedClass === 'none' ? 'Alumni without a graduation year' : selectedClass ? `Class of ${selectedClass} Alumni` : 'Alumni'}
               </h2>
               <div className="admin-card-actions">
                 <div className="admin-search-input">

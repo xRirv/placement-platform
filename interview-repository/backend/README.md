@@ -49,7 +49,10 @@ All require `Authorization: Bearer <Supabase JWT>` unless noted.
 | Progress | `GET /api/progress/summary`, `GET /api/progress/plan/{planId}`, `POST /api/progress`, `PATCH/DELETE /api/progress/{id}` |
 | AI proxy | `POST /api/ai/search`, `POST /api/ai/chat` |
 | Student profile | `GET/PUT /api/student/profile` |
-| Admin, mentor, alumni, companies, applications | `/api/admin/**`, `/api/mentor/**`, `/api/alumni/**`, `/api/companies`, `/api/applications` |
+| Mentor | `GET/PUT /api/mentor/profile`, `GET /api/mentor/mentees`, `GET /api/mentor/available-students`, `POST /api/mentor/mentees/{studentId}/assign`, `GET /api/mentor/mentees/{studentId}/experiences` (own mentees only) |
+| Alumni | `GET/PUT /api/alumni/profile` (plus the interview-experience endpoints above for their submissions) |
+| Admin management | `/api/admin/management/{students,mentors,alumni}` (CRUD, batch upload, experiences), assign / unassign mentor, `/api/admin/management/moderation-logs`, `/api/admin/profile` |
+| Companies, applications | `/api/companies`, `/api/applications` |
 
 Behaviour worth knowing:
 
@@ -61,6 +64,9 @@ Behaviour worth knowing:
 - **First visit provisioning.** A valid Supabase user without an app record is created as a `STUDENT` on their
   first request, and a student profile is created on first use. Creation is race-safe (`ProvisioningHelper`)
   because the dashboard loads several endpoints in parallel.
+- **Roles** come from the `login` table (`STUDENT`, `MENTOR`, `ALUMNI`, `ADMIN`); `/api/admin/**`,
+  `/api/mentor/**`, `/api/alumni/**` and `/api/student/**` are restricted by role in `SecurityConfig`.
+  A mentor or alumni whose profile row is missing gets one created on first use. Deactivated accounts get 403.
 - **Errors** are returned as JSON with a readable `message` (`ApiExceptionHandler`).
 
 ## Database migrations

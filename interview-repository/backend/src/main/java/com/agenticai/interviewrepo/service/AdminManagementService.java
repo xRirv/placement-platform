@@ -445,6 +445,7 @@ public class AdminManagementService {
         moderationLogRepository.save(log);
     }
 
+    @Transactional(readOnly = true)
     public Page<AdminModerationLogResponse> getModerationLogs(String status, Pageable pageable) {
         Page<ModerationLog> logs;
 
@@ -695,6 +696,7 @@ public class AdminManagementService {
 
     // ==================== EXPERIENCE FETCHING ====================
 
+    @Transactional(readOnly = true) // rounds/questions are lazy; map inside the session
     public Page<InterviewExperienceResponse> getStudentExperiences(UUID studentId, Pageable pageable) {
         // Verify student exists
         studentRepository.findById(studentId)
@@ -704,6 +706,7 @@ public class AdminManagementService {
                 .map(InterviewExperienceResponse::from);
     }
 
+    @Transactional(readOnly = true) // rounds/questions are lazy; map inside the session
     public Page<InterviewExperienceResponse> getAlumniExperiences(UUID alumniId, Pageable pageable) {
         // Verify alumni exists
         alumniRepository.findById(alumniId)

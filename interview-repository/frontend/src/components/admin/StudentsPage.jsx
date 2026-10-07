@@ -69,10 +69,10 @@ export const StudentsPage = ({ user, session, userProfile }) => {
         });
 
         // Convert to batch array format
+        // Students without a graduation year get their own group so admins can still manage them.
         const batchData = Object.entries(yearCounts)
-          .filter(([year]) => year !== 'Unknown')
-          .map(([year, count]) => ({ year: String(year), count }))
-          .sort((a, b) => b.year.localeCompare(a.year)); // Sort descending
+          .map(([year, count]) => ({ year: year === 'Unknown' ? 'none' : String(year), count }))
+          .sort((a, b) => (a.year === 'none') - (b.year === 'none') || b.year.localeCompare(a.year));
 
         setBatches(batchData);
 
@@ -102,8 +102,8 @@ export const StudentsPage = ({ user, session, userProfile }) => {
       if (res.ok) {
         const data = await res.json();
         // Filter by selected batch
-        const filtered = (data.content || []).filter(
-          s => String(s.graduationYear) === String(selectedBatch)
+        const filtered = (data.content || []).filter((s) =>
+          selectedBatch === 'none' ? !s.graduationYear : String(s.graduationYear) === String(selectedBatch)
         );
         setStudents(filtered);
       }
@@ -470,7 +470,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
                   >
                     <span className="admin-sidebar-item-icon">📁</span>
                     <div className="admin-sidebar-item-content">
-                      <span className="admin-sidebar-item-title">Batch {batch.year}</span>
+                      <span className="admin-sidebar-item-title">{batch.year === 'none' ? 'No graduation year' : `Batch ${batch.year}`}</span>
                       <span className="admin-sidebar-item-subtitle">{batch.count} Students</span>
                     </div>
                   </button>
@@ -495,7 +495,7 @@ export const StudentsPage = ({ user, session, userProfile }) => {
 
           <div className="admin-card">
             <div className="admin-card-header">
-              <h2 className="admin-card-title">Batch {selectedBatch} Students</h2>
+              <h2 className="admin-card-title">{selectedBatch === 'none' ? 'Students without a graduation year' : `Batch ${selectedBatch} Students`}</h2>
               <div className="admin-card-actions">
                 <div className="admin-search-input">
                   <Search size={16} className="admin-search-icon" />

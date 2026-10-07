@@ -15,4 +15,5 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
     Page<Student> findByNameContainingIgnoreCaseOrLogin_EmailContainingIgnoreCase(String name, String email, Pageable pageable);
     Page<Student> findByLogin_IsActive(Boolean isActive, Pageable pageable);
     List<Student> findByMentor_Id(UUID mentorId);
+    List<Student> findByMentorIsNullAndLogin_IsActiveTrueOrderByNameAsc();
 }
