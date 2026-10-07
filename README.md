@@ -61,6 +61,11 @@ tables on startup. For production, apply the SQL files in
 
 (The other files in `sql/` are migrations for older databases; do not run them on a new one.)
 
+**Existing Team B database** (created with the older schema): run
+`Placement_Intelligence_Platform/sql/alter_add_occurrence_count_and_view.sql` once. It adds the
+`question_with_context` view, which lets search results show company and role names.
+Without it, search still works but falls back to plain question text.
+
 ## 2. Create the three `.env` files
 
 Each `.env` file is git-ignored. Copy the template next to it and fill in real values:
@@ -130,6 +135,9 @@ docker compose up --build
 | http://localhost:8080 | Team A backend API (Swagger: `/swagger-ui.html`) |
 
 RabbitMQ, the Team B API and the Team B worker run only inside the Docker network.
+
+All containers use `restart: unless-stopped`. Once started, they come back automatically
+whenever Docker Desktop starts, until you run `docker compose down`.
 
 Useful commands:
 
@@ -223,6 +231,8 @@ unreachable, these endpoints return `503`.
 | Backend build fails with `TypeTag :: UNKNOWN` | You're building with JDK 24/25. Use JDK 21. |
 | AI Assistant shows "currently unavailable" | Team B isn't running, `AI_SERVICE_URL` is wrong, or the shared secret differs (Team B returns 401). |
 | Approval works but nothing is processed | Check `docker compose logs ai-worker`; check the Team B `.env` (Supabase B key, `LLM_API_KEY`) and that the Team B SQL schema was applied. |
+| Search results have no company/role names | Team B's database is missing the `question_with_context` view; run `sql/alter_add_occurrence_count_and_view.sql` in Supabase B. |
+| `ai-worker` restarts a few times at first boot | It's waiting for RabbitMQ; compose already waits for RabbitMQ's port check, and the restart policy recovers. |
 | Admin can't create users | Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in the Team A backend `.env`. |
 | Browser CORS error | `FRONTEND_URL` in the Team A backend `.env` must include the frontend's address. |
 

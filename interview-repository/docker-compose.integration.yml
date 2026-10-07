@@ -15,11 +15,13 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      # check_port_connectivity passes only once the AMQP listener accepts connections
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 20s
+    restart: unless-stopped
 
   ai-api:
     build:
@@ -33,20 +35,25 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: on-failure
+    restart: unless-stopped
 
   ai-worker:
     build:
       context: ../Placement_Intelligence_Platform
       dockerfile: Dockerfile
     command: ["python", "-m", "app.mq.consumers.ingestion_worker"]
+    # The image's HTTP healthcheck targets the API; the worker serves no HTTP.
+    healthcheck:
+      disable: true
     env_file: ../Placement_Intelligence_Platform/.env
     environment:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672/
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: on-failure
+      ai-api:
+        condition: service_healthy
+    restart: unless-stopped
 
   backend:
     build: ./backend
@@ -59,7 +66,7 @@ services:
     # AI calls fail open, so the backend does not wait for ai-api to be healthy.
     depends_on:
       - ai-api
-    restart: on-failure
+    restart: unless-stopped
 
   frontend:
     build:
@@ -70,3 +77,4 @@ services:
       - "5173:80"
     depends_on:
       - backend
+    restart: unless-stopped
