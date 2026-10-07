@@ -16,17 +16,28 @@ const inputStyle = {
 
 // Minimal Markdown for AI answers: **bold**, #-headings and "- "/"* " bullets.
 const renderInline = (text) =>
-  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part
-  );
+  text
+    .split(/(\*\*[^*]+\*\*)/g)
+    .map((part, i) =>
+      part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part,
+    );
 
 const renderMarkdown = (text) =>
-  (text || '').split('
-').map((line, i) => {
+  (text || '').split('\n').map((line, i) => {
     const heading = line.match(/^#{1,6}\s+(.*)/);
-    if (heading) return <div key={i} style={{ fontWeight: 700, marginTop: '0.5rem' }}>{renderInline(heading[1])}</div>;
+    if (heading)
+      return (
+        <div key={i} style={{ fontWeight: 700, marginTop: '0.5rem' }}>
+          {renderInline(heading[1])}
+        </div>
+      );
     const bullet = line.match(/^\s*[-*]\s+(.*)/);
-    if (bullet) return <div key={i} style={{ paddingLeft: '1rem' }}>• {renderInline(bullet[1])}</div>;
+    if (bullet)
+      return (
+        <div key={i} style={{ paddingLeft: '1rem' }}>
+          • {renderInline(bullet[1])}
+        </div>
+      );
     return <div key={i}>{line ? renderInline(line) : ' '}</div>;
   });
 
