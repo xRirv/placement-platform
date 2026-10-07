@@ -59,7 +59,7 @@ const TopicRow = ({ item, onSave, onDelete }) => {
           </div>
           {item.category && <div style={{ color: '#64748b', fontSize: '0.8rem' }}>{item.category}</div>}
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+        <div className="inline-row" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
           <select
             className="text-input"
             value={item.status}
@@ -84,7 +84,7 @@ const TopicRow = ({ item, onSave, onDelete }) => {
       {item.sampleQuestions?.length > 0 && (
         <div style={{ color: '#475569', fontSize: '0.85rem' }}>Practice: {item.sampleQuestions.join(' · ')}</div>
       )}
-      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+      <div className="inline-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
         <input
           className="text-input"
           type="number"
@@ -93,7 +93,7 @@ const TopicRow = ({ item, onSave, onDelete }) => {
           placeholder="Score %"
           value={score}
           onChange={(e) => setScore(e.target.value)}
-          style={{ width: '110px' }}
+          style={{ width: '110px', paddingLeft: '1rem' }}
         />
         <input
           className="text-input"
@@ -101,7 +101,7 @@ const TopicRow = ({ item, onSave, onDelete }) => {
           placeholder="Notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          style={{ flex: 1, minWidth: '180px' }}
+          style={{ flex: 1, minWidth: '180px', paddingLeft: '1rem' }}
         />
         {dirty && (
           <button
@@ -245,14 +245,14 @@ export const StudyPlanPanel = ({ session, backendUrl }) => {
         <div className="card-heading">
           <span>Generate an AI Study Plan</span>
         </div>
-        <form onSubmit={handleGenerate} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+        <form className="inline-row" onSubmit={handleGenerate} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <input
             className="text-input"
             placeholder="Company (e.g. Amazon)"
             value={form.company}
             onChange={(e) => setForm({ ...form, company: e.target.value })}
             disabled={generating}
-            style={{ flex: 2, minWidth: '180px' }}
+            style={{ flex: 2, minWidth: '180px', paddingLeft: '1rem' }}
             required
           />
           <input
@@ -261,7 +261,7 @@ export const StudyPlanPanel = ({ session, backendUrl }) => {
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}
             disabled={generating}
-            style={{ flex: 2, minWidth: '140px' }}
+            style={{ flex: 2, minWidth: '140px', paddingLeft: '1rem' }}
           />
           <input
             className="text-input"
@@ -272,7 +272,7 @@ export const StudyPlanPanel = ({ session, backendUrl }) => {
             value={form.daysAvailable}
             onChange={(e) => setForm({ ...form, daysAvailable: e.target.value })}
             disabled={generating}
-            style={{ width: '100px' }}
+            style={{ width: '100px', paddingLeft: '1rem' }}
           />
           <button className="btn btn-primary" type="submit" disabled={generating || !form.company.trim()}>
             <Sparkles size={16} />
@@ -305,7 +305,7 @@ export const StudyPlanPanel = ({ session, backendUrl }) => {
       )}
 
       {plans.length > 0 && (
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div className="inline-row" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {plans.map((p) => (
             <button
               key={p.id}
@@ -355,13 +355,13 @@ export const StudyPlanPanel = ({ session, backendUrl }) => {
             {selected.progress.map((item) => (
               <TopicRow key={`${item.id}-${item.updatedAt}`} item={item} onSave={updateTopic} onDelete={deleteTopic} />
             ))}
-            <form onSubmit={addTopic} style={{ display: 'flex', gap: '0.5rem' }}>
+            <form className="inline-row" onSubmit={addTopic} style={{ display: 'flex', gap: '0.5rem' }}>
               <input
                 className="text-input"
                 placeholder="Add your own topic"
                 value={newTopic}
                 onChange={(e) => setNewTopic(e.target.value)}
-                style={{ flex: 1 }}
+                style={{ flex: '1 1 240px', width: 'auto', minWidth: '200px', paddingLeft: '1rem' }}
               />
               <button className="btn btn-secondary" type="submit" disabled={!newTopic.trim()}>
                 <Plus size={14} />

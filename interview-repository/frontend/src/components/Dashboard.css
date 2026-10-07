@@ -910,3 +910,11 @@
 .animate-spin {
   animation: spin 0.8s linear infinite;
 }
+
+/* Inline rows (AI Assistant, Study Plan, Question Bank): buttons size to content instead of
+   the global .btn width:100%, so inputs next to them keep their space. */
+.inline-row .btn {
+  width: auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}

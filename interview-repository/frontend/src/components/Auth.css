@@ -730,7 +730,7 @@
   background: #ffffff;
   border: 1px solid rgba(109, 61, 32, 0.18);
   font-size: 0.9rem;
-  color: var(--c-text-deep);
+  color: var(--c-text-deep, #152019);
   font-family: inherit;
   transition: all 0.2s ease;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);

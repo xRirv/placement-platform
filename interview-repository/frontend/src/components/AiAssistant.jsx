@@ -4,6 +4,32 @@ import { createApi } from '../lib/api';
 
 // Talks only to Team A's backend (/api/ai/*), which proxies to the internal AI service.
 
+// Explicit colors so typed text is always visible regardless of global theme variables.
+const inputStyle = {
+  flex: '1 1 240px',
+  width: 'auto',
+  minWidth: '200px',
+  color: '#0f172a',
+  background: '#ffffff',
+  paddingLeft: '1rem',
+};
+
+// Minimal Markdown for AI answers: **bold**, #-headings and "- "/"* " bullets.
+const renderInline = (text) =>
+  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part
+  );
+
+const renderMarkdown = (text) =>
+  (text || '').split('
+').map((line, i) => {
+    const heading = line.match(/^#{1,6}\s+(.*)/);
+    if (heading) return <div key={i} style={{ fontWeight: 700, marginTop: '0.5rem' }}>{renderInline(heading[1])}</div>;
+    const bullet = line.match(/^\s*[-*]\s+(.*)/);
+    if (bullet) return <div key={i} style={{ paddingLeft: '1rem' }}>• {renderInline(bullet[1])}</div>;
+    return <div key={i}>{line ? renderInline(line) : ' '}</div>;
+  });
+
 const bubbleStyle = (role) => ({
   alignSelf: role === 'user' ? 'flex-end' : 'flex-start',
   background: role === 'user' ? '#4f46e5' : '#f1f5f9',
@@ -79,7 +105,7 @@ export const AiAssistant = ({ session, backendUrl }) => {
         <div className="card-heading">
           <span>Search Interview Questions</span>
         </div>
-        <form onSubmit={handleSearch} style={{ display: 'flex', gap: '0.75rem' }}>
+        <form className="inline-row" onSubmit={handleSearch} style={{ display: 'flex', gap: '0.75rem' }}>
           <input
             className="text-input"
             type="text"
@@ -87,7 +113,7 @@ export const AiAssistant = ({ session, backendUrl }) => {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="e.g. DSA questions asked at Amazon"
             disabled={searching}
-            style={{ flex: 1 }}
+            style={inputStyle}
           />
           <button className="btn btn-primary" type="submit" disabled={searching || !query.trim()}>
             <Search size={16} />
@@ -148,13 +174,13 @@ export const AiAssistant = ({ session, backendUrl }) => {
           )}
           {messages.map((m, i) => (
             <div key={i} style={bubbleStyle(m.role)}>
-              {m.content}
+              {m.role === 'assistant' ? renderMarkdown(m.content) : m.content}
             </div>
           ))}
           {chatting && <div style={bubbleStyle('assistant')}>Thinking…</div>}
           <div ref={bottomRef} />
         </div>
-        <form onSubmit={handleSend} style={{ display: 'flex', gap: '0.75rem' }}>
+        <form className="inline-row" onSubmit={handleSend} style={{ display: 'flex', gap: '0.75rem' }}>
           <input
             className="text-input"
             type="text"
@@ -162,7 +188,7 @@ export const AiAssistant = ({ session, backendUrl }) => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="e.g. Prepare me for the TCS interview"
             disabled={chatting}
-            style={{ flex: 1 }}
+            style={inputStyle}
           />
           <button className="btn btn-primary" type="submit" disabled={chatting || !input.trim()}>
             <Send size={16} />

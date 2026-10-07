@@ -61,7 +61,7 @@ export const QuestionBank = ({ session, backendUrl }) => {
         <span>Question Bank</span>
       </div>
       <p style={{ color: '#64748b', marginTop: 0 }}>Questions from approved interview experiences.</p>
-      <form
+      <form className="inline-row"
         onSubmit={submit}
         style={{
           display: 'flex',
@@ -75,13 +75,13 @@ export const QuestionBank = ({ session, backendUrl }) => {
           placeholder="Search question text"
           value={filters.q}
           onChange={(e) => setFilters({ ...filters, q: e.target.value })}
-          style={{ flex: 2, minWidth: '180px' }}
+          style={{ flex: 2, minWidth: '180px', paddingLeft: '1rem' }}
         />
         <select
           className="text-input"
           value={filters.topic}
           onChange={(e) => setFilters({ ...filters, topic: e.target.value })}
-          style={{ flex: 1, minWidth: '140px' }}
+          style={{ flex: 1, minWidth: '140px', paddingLeft: '1rem' }}
         >
           <option value="">All topics</option>
           {topics.map((t) => (
@@ -94,7 +94,7 @@ export const QuestionBank = ({ session, backendUrl }) => {
           className="text-input"
           value={filters.difficulty}
           onChange={(e) => setFilters({ ...filters, difficulty: e.target.value })}
-          style={{ width: '140px' }}
+          style={{ width: '140px', paddingLeft: '1rem' }}
         >
           <option value="">Any difficulty</option>
           <option value="Easy">Easy</option>

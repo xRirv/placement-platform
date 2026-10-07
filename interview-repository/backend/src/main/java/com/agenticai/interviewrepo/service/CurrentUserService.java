@@ -61,6 +61,18 @@ public class CurrentUserService {
                     return Optional.of(user);
                 }
             }
+            // First request from a valid Supabase account with no app record yet (e.g. self sign-up):
+            // provision it like POST /api/auth/sync does, as a STUDENT.
+            Jwt jwt = jwtOpt.get();
+            String authUserId = authUserIdOpt.get();
+            String jwtEmail = jwt.getClaimAsString("email");
+            String newEmail = jwtEmail != null && !jwtEmail.isBlank() ? jwtEmail : authUserId + "@supabase.user";
+            Object metadata = jwt.getClaims().get("user_metadata");
+            String name = metadata instanceof java.util.Map<?, ?> m && m.get("name") instanceof String n && !n.isBlank()
+                    ? n : newEmail.split("@")[0];
+            User created = User.builder().authUserId(authUserId).email(newEmail).name(name)
+                    .role(Role.STUDENT).isActive(true).build();
+            return Optional.of(userRepository.save(created));
         }
         return Optional.empty();
     }
